@@ -9,4 +9,4 @@ En el equipo de trabajo se encuentran:
 - Mario Salas Ornelas
 - Omar Medrano Sarabia
 - Leonardo Sanchez Villalobos
-- Antionio Torres Ramires
+- Antionio Torres Ramirez
