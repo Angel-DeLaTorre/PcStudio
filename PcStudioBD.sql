@@ -64,9 +64,11 @@ CREATE TABLE cliente(
     idCliente INT NOT NULL AUTO_INCREMENT,
     codigoCliente VARCHAR(30) NOT NULL,
     estatus INT NOT NULL,
+    idTag INT NOT NULL,
     idPersona INT NOT NULL,
     idUsuario INT NOT NULL,
     CONSTRAINT Pk_idCliente PRIMARY KEY(idCliente),
+    CONSTRAINT Fk_idTag_Cliente FOREIGN KEY(idTag) REFERENCES tag(idTag),
     CONSTRAINT Fk_idPersona_Cliente FOREIGN KEY(idPersona) REFERENCES persona(idPersona),
     CONSTRAINT Fk_idUsuario_Cliente FOREIGN KEY(idUsuario) REFERENCES usuario(id)
 )
@@ -93,9 +95,11 @@ CREATE TABLE producto(
     cantidad INT NOT NULL,
     descuentoVenta FLOAT NOT NULL,
     estatus INT NOT NULL,
+    idTag INT NOT NULL,
     idCategoria INT NOT NULL,
     idProveedor INT NOT NULL,
     CONSTRAINT Pk_idProducto PRIMARY KEY(idProducto),
+    CONSTRAINT Fk_idTag_Cliente FOREIGN KEY(idTag) REFERENCES tag(idTag),
     CONSTRAINT Fk_idCategoria_producto FOREIGN KEY(idCategoria) REFERENCES categoria(idCategoria),
     CONSTRAINT Fk_idProveedor_producto FOREIGN KEY(idProveedor) REFERENCES proveedor(idProveedor)
 )
@@ -111,7 +115,12 @@ CREATE TABLE atributoProducto(
 )
 
 -- CATEGORIA
-CREATE TABLE categroia(
+    -- Laptops
+    -- Perifericos
+    -- pc de escritorio
+    -- Accesorios
+    -- Componentes de hardware
+CREATE TABLE categoria(
     idCategoria INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(100),
     descripcion VARCHAR(300)
@@ -192,18 +201,23 @@ CREATE TABLE rol(
     CONSTRAINT Pk_idRol PRIMARY KEY(idRol)
 )
 
+-- TAG
+    -- Alta (Entretenimiento, edicion de video, programas 18000)    --11 - 13
+    -- Medio (area de ciencia, 8000 a 15000)                        --7 - 10
+    -- Bajo1 (estandares de office 8000-10000)                      --4 - 6
+    -- Bajo2 (No sabe ni madres de computadora)                     --3
 CREATE TABLE tag(
     idTag INT not null,
     tag varchar(30) not null,
-    importancia int not null,
     CONSTRAINT Pk_idTag PRIMARY KEY(idTag)
 )
 
-CREATE TABLE tag_cliente(
+/*CREATE TABLE tag_cliente(
     idTag INT NOT NULL,
     idCliente INT NOT NULL,
+    importancia int not null,
     CONSTRAINT Fk_idTag_tagCliente FOREIGN KEY(idTag) REFERENCES tag(idTag),
     CONSTRAINT Fk_idCliente_tagCliente FOREIGN KEY(idCliente) REFERENCES tag(idCliente),
 )
-
+*/
 
