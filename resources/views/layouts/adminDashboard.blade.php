@@ -69,7 +69,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <!--Ruta del método-->
-                                <i class="material-icons" id="menu-icon" style="color: #e3342f">computer</i>
+                                <i class="material-icons"style="color: #e3342f">computer</i>
                                 <span class="nav-link-text">Productos</span>
                             </a>
                         </li>
