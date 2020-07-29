@@ -86,7 +86,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="{{ url('/Categorias') }}">
                                 <i class="material-icons" style="color: #3490dc">info</i>
                                 <span class="nav-link-text">Categoria de productos</span>
                             </a>
@@ -201,7 +201,7 @@
         </div>
     </div>
     <!-- Page content -->
-    <div class="py-6">
+    <div class="py-3">
         @yield('content')
     </div>
     </div>
