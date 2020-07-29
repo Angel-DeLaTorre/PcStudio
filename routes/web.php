@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Acciones de Proveedor
+Route::get('/Proveedores', 'ProveedorController@index')->name('indexProveedor');
+Route::get('/Proveedores/Create', 'ProveedorController@create')->name('createProveedor');
+Route::get('/Proveedores/Edit/{idProveedor}', 'ProveedorController@edit')->name('editProveedor');
+Route::post('/Proveedores/Store', 'ProveedorController@store')->name('storeProveedor');
+Route::put('/Proveedores/Update/{idProveedor}', 'ProveedorController@update')->name('updateProveedor');
+Route::get('/Proveedores/Delete/{idProveedor}', 'ProveedorController@destroy')->name('deleteProveedor');

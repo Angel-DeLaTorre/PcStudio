@@ -61,7 +61,7 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" href="dashboard.html">
+                            <a class="nav-link active" href="{{ url('/home') }}">
                                 <i class="material-icons" style="color: #3490dc">home</i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
@@ -92,7 +92,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">
+                            <a class="nav-link" href="{{ url('/Proveedores') }}">
                                 <i class="material-icons" style="color: #e3342f">home</i>
                                 <span class="nav-link-text">Proveedores</span>
                             </a>
@@ -129,7 +129,7 @@
                                 <!-- Dropdown header -->
                                 <!-- List group -->
                                 <div class="list-group list-group-flush">
-                                    <a href="#!" class="list-group-item list-group-item-action">
+                                    <a href="{{ url('/home') }}" class="list-group-item list-group-item-action">
                                         <h4 class="mb-0 text-sm" style="text-align:center;">Dashboard</h4>
                                     </a>
 
@@ -149,7 +149,7 @@
                                         <h4 class="mb-0 text-sm" style="text-align:center;">Categoría de productos</h4>
                                     </a>
 
-                                    <a href="#!" class="list-group-item list-group-item-action">
+                                    <a href="{{ url('/Proveedores') }}" class="list-group-item list-group-item-action">
                                         <h4 class="mb-0 text-sm" style="text-align:center;">Proveedores</h4>
                                     </a>
 
