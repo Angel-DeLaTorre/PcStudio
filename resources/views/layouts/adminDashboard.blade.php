@@ -61,7 +61,7 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" href="dashboard.html">
+                            <a class="nav-link active" href="{{ url('/home') }}">
                                 <i class="material-icons" style="color: #3490dc">home</i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
@@ -129,7 +129,7 @@
                                 <!-- Dropdown header -->
                                 <!-- List group -->
                                 <div class="list-group list-group-flush">
-                                    <a href="#!" class="list-group-item list-group-item-action">
+                                    <a href="{{ url('/home') }}" class="list-group-item list-group-item-action">
                                         <h4 class="mb-0 text-sm" style="text-align:center;">Dashboard</h4>
                                     </a>
 
