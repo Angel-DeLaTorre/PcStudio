@@ -1,6 +1,9 @@
 @extends('layouts.adminDashboard')
 <!--Contenido del dashboard-->
 <!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
+@section('module_name')
+    <h1 style="color: white; margin-top: 15px">Dashboard</h1>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
