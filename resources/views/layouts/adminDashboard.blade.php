@@ -35,6 +35,10 @@
             #menu-icon {
                 display: none;
             }
+
+            #module_text {
+                margin-left: 300px;
+            }
         }
 
     </style>
@@ -191,7 +195,7 @@
     <!-- Header -->
     <div class="header bg-primary pb-6">
         <div class="container-fluid">
-            <div class="header-body">
+            <div class="header-body" style="position: absolute; margin-top: 10px;">
                 @yield('module_name')
             </div>
         </div>
@@ -201,7 +205,7 @@
         @yield('content')
     </div>
     </div>
-    
+
 </body>
 
 </html>
