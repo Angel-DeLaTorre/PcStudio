@@ -9,4 +9,14 @@ En el equipo de trabajo se encuentran:
 - Mario Salas Ornelas
 - Omar Medrano Sarabia
 - Leonardo Sanchez Villalobos
-- Antionio Torres Ramirez
+- Antonio Torres Ramírez
+
+**Instalación**
+
+**Instalar Composer dentro del proyecto.**
+
+`composer install`
+
+**Ejecutar aplicación en servidor local.**
+
+`php artisan serve`
