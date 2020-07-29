@@ -7,6 +7,9 @@
 
     <title>PcStudio - Compra PC Online</title>
 
+    <!--Imagenes: 
+    https://www.pexels.com/
+    -->
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -14,17 +17,26 @@
     <style>
         html,
         body {
-            background-color: #fff;
+            background-color: #000;
             color: #636b6f;
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Nunito', sans-serif, 'Segoe UI';
             font-weight: 200;
             height: 100vh;
             margin: 0;
-           /* background-image: url({{ url('img/bg_welcome.jpg') }});*/
-            background: url({{ url('img/bg_welcome.jpg') }});
         }
+
+        .container{
+            height: 100vh;
+            width: 100%;
+            min-height: 100%;
+            background-size: cover;
+            overflow: hidden;
+            background-image: url({{ url('img/bg_welcome.jpg') }});  
+        }
+
         .full-height {
             height: 100vh;
+            
         }
 
         .flex-center {
@@ -70,32 +82,34 @@
 </head>
 
 <body>
-    <div class="flex-center position-ref full-height">
-        @if(Route::has('login'))
-            <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}">Iniciar Sesión</a>
+    <div class="container">
+        <div class="flex-center position-ref full-height">
+            @if(Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        <a href="{{ url('/home') }}">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}">Iniciar Sesión</a>
 
-                    @if(Route::has('register'))
-                        <a href="{{ route('register') }}">Registrarse</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
+                        @if(Route::has('register'))
+                            <a href="{{ route('register') }}">Registrarse</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
 
-        <div class="content">
-            <div class="title m-b-md" style="color: #fff;">
-                PcStudio
-            </div>
+            <div class="content">
+                <div class="title m-b-md" style="color: #fff;">
+                    PcStudio
+                </div>
 
-            <div class="links">
-                <!--AQUI IRA UN LINK AL INDEX DE LA PÁGINA DE CLIENTE-->
-                <a href="#">Página cliente</a>
+                <div class="links">
+                    <!--AQUI IRA UN LINK AL INDEX DE LA PÁGINA DE CLIENTE-->
+                    <a href="#">Página cliente</a>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
-    </html>
+</html>

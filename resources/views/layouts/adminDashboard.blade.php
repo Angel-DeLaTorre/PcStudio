@@ -35,6 +35,10 @@
             #menu-icon {
                 display: none;
             }
+
+            #module_text {
+                margin-left: 300px;
+            }
         }
 
     </style>
@@ -57,7 +61,7 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" href="dashboard.html">
+                            <a class="nav-link active" href="{{ url('/home') }}">
                                 <i class="material-icons" style="color: #3490dc">home</i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
@@ -65,7 +69,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <!--Ruta del método-->
-                                <i class="material-icons" id="menu-icon" style="color: #e3342f">computer</i>
+                                <i class="material-icons"style="color: #e3342f">computer</i>
                                 <span class="nav-link-text">Productos</span>
                             </a>
                         </li>
@@ -82,13 +86,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="{{ url('/Categorias') }}">
                                 <i class="material-icons" style="color: #3490dc">info</i>
                                 <span class="nav-link-text">Categoria de productos</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">
+                            <a class="nav-link" href="{{ url('/Proveedores') }}">
                                 <i class="material-icons" style="color: #e3342f">home</i>
                                 <span class="nav-link-text">Proveedores</span>
                             </a>
@@ -125,7 +129,7 @@
                                 <!-- Dropdown header -->
                                 <!-- List group -->
                                 <div class="list-group list-group-flush">
-                                    <a href="#!" class="list-group-item list-group-item-action">
+                                    <a href="{{ url('/home') }}" class="list-group-item list-group-item-action">
                                         <h4 class="mb-0 text-sm" style="text-align:center;">Dashboard</h4>
                                     </a>
 
@@ -145,7 +149,7 @@
                                         <h4 class="mb-0 text-sm" style="text-align:center;">Categoría de productos</h4>
                                     </a>
 
-                                    <a href="#!" class="list-group-item list-group-item-action">
+                                    <a href="{{ url('/Proveedores') }}" class="list-group-item list-group-item-action">
                                         <h4 class="mb-0 text-sm" style="text-align:center;">Proveedores</h4>
                                     </a>
 
@@ -191,17 +195,17 @@
     <!-- Header -->
     <div class="header bg-primary pb-6">
         <div class="container-fluid">
-            <div class="header-body">
+            <div class="header-body" style="position: absolute; margin-top: 10px;">
                 @yield('module_name')
             </div>
         </div>
     </div>
     <!-- Page content -->
-    <div class="py-6">
+    <div class="py-3">
         @yield('content')
     </div>
     </div>
-    
+
 </body>
 
 </html>
