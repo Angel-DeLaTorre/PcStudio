@@ -1,5 +1,6 @@
-@extends('layouts.app')
-
+@extends('layouts.adminDashboard')
+<!--Contenido del dashboard-->
+<!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -14,7 +15,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Estás logueado') }}
                 </div>
             </div>
         </div>

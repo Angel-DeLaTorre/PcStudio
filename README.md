@@ -10,3 +10,13 @@ En el equipo de trabajo se encuentran:
 - Omar Medrano Sarabia
 - Leonardo Sanchez Villalobos
 - Antonio Torres Ramírez
+
+**Instalación**
+
+**Instalar Composer dentro del proyecto.**
+
+`composer install`
+
+**Ejecutar aplicación en servidor local.**
+
+`php artisan serve`
