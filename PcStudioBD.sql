@@ -7,8 +7,8 @@ CREATE TABLE persona(
     fechaNacimiento DATE,
     telefono VARCHAR(20) NOT NULL,
     rfc VARCHAR(10),
-    tipo boolean not null,
-)
+    tipo boolean not null
+);
 
 --CONTACTO
 CREATE TABLE contacto(
