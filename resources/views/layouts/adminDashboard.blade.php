@@ -29,6 +29,15 @@
     <link rel="stylesheet" href="{{ asset('css/nucleo.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        @media only screen and (min-width: 700px) {
+            #menu-icon {
+                display: none;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
@@ -56,7 +65,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <!--Ruta del método-->
-                                <i class="material-icons" style="color: #e3342f">computer</i>
+                                <i class="material-icons" id="menu-icon" style="color: #e3342f">computer</i>
                                 <span class="nav-link-text">Productos</span>
                             </a>
                         </li>
@@ -101,56 +110,98 @@
         <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if(Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
-                                    style="color: whitesmoke">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar sesión') }}
+                    <!-- Navbar links -->
+                    <ul class="navbar-nav align-items-center  ml-md-auto ">
+                        <li class="nav-item d-xl-none">
+                            <!-- Sidenav toggler -->
+                            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                                data-target="#sidenav-main">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="material-icons" id="menu-icon" style="color: white">menu</i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+                                <!-- Dropdown header -->
+                                <!-- List group -->
+                                <div class="list-group list-group-flush">
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <h4 class="mb-0 text-sm" style="text-align:center;">Dashboard</h4>
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <h4 class="mb-0 text-sm" style="text-align:center;">Productos</h4>
+                                    </a>
+
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <h4 class="mb-0 text-sm" style="text-align:center;">Empleados</h4>
+                                    </a>
+
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <h4 class="mb-0 text-sm" style="text-align:center;">Clientes</h4>
+                                    </a>
+
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <h4 class="mb-0 text-sm" style="text-align:center;">Categoría de productos</h4>
+                                    </a>
+
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <h4 class="mb-0 text-sm" style="text-align:center;">Proveedores</h4>
+                                    </a>
+
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <h4 class="mb-0 text-sm" style="text-align:center;">Compras</h4>
+                                    </a>
                                 </div>
-                            </li>
-                        @endguest
-                    </ul>
+                                <!-- View all -->
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"
+                                    class="dropdown-item text-center text-primary font-weight-bold py-3">Cerrar
+                                    Sesión</a>
+                            </div>
+                        </li>
                 </div>
+                </li>
+                </ul>
+                <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <div class="media align-items-center">
+                                <div class="media-body  ml-2  d-none d-lg-block">
+                                    <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->name }}</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu  dropdown-menu-right ">
+                            <a href="href=" {{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();" class=" dropdown-item">
+                                <i class="material-icons">exit_to_app</i>
+                                <span>Cerrar Sesión</span>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        <!-- Header -->
-        <div class="header bg-primary pb-6">
-            <div class="container-fluid">
-                <div class="header-body" style="position: absolute;">
-                    @yield('module_name')
-                </div>
-            </div>
-        </div>
-        <!-- Page content -->
-        <div class="py-3">
-            @yield('content')
-        </div>
-    
     </div>
+    </nav>
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                @yield('module_name')
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="py-6">
+        @yield('content')
+    </div>
+    </div>
+    
 </body>
 
 </html>
