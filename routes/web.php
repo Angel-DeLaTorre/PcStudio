@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });
 */
-//Auth::routes();
+Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get ('/create','tagController@vista');
 Route::post ('/create','tagController@create');
-Auth::routes();
+Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
