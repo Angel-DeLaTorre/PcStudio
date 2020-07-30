@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
+
+
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
