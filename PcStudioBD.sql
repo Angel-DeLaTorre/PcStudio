@@ -131,8 +131,10 @@ CREATE TABLE atributoProducto(
 CREATE TABLE categoria(
     idCategoria INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(100),
-    descripcion VARCHAR(300)
-    CONSTRAINT Pk_idCategoria PRIMARY KEY (idCategoria)
+    descripcion VARCHAR(300),
+    updated_at timestamp null,
+    created_at timestamp null,
+    CONSTRAINT Pk_idCategoria PRIMARY KEY(idCategoria)
 )
 
 -- IMAGENPRODUCTO
@@ -149,6 +151,8 @@ CREATE TABLE proveedor(
     nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
     estatus INT NOT NULL,
+    updated_at timestamp null,
+    created_at timestamp null,
     CONSTRAINT Pk_idProveedor PRIMARY KEY(idProveedor)
 )
 
