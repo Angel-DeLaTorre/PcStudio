@@ -34,8 +34,6 @@ Route::patch('/update/{tag}','tagController@update')->name('update');
 Route::get('/eliminar/{tag}','tagController@eliminar')->name('eliminar');
 Route::delete('/delete/{tag}', 'tagController@delete')->name('delete');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 //Rutas de Proveedor
 Route::get('/Proveedores', 'ProveedorController@index')->name('indexProveedor');
 Route::get('/Proveedores/Create', 'ProveedorController@create')->name('createProveedor');
