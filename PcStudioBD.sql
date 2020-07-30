@@ -1,25 +1,33 @@
+use pcstudiodb;
+
+SELECT * FROM persona;
+
+select * from empleados;
+DESCRIBE PERSONA;
 -- PERSONA
 CREATE TABLE persona(
-    idPersona INT NOT NULL AUTO_INCREMENT,
+    idPersona INT  AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(150) NOT NULL,
     apellidoPaterno VARCHAR(150),
     apellidoMaterno VARCHAR(150),
     fechaNacimiento DATE,
     telefono VARCHAR(20) NOT NULL,
     rfc VARCHAR(10),
-    tipo boolean not null
+    tipo boolean not null,    
+    CONSTRAINT Pk_idPersona PRIMARY KEY(idPersona)
 );
 
---CONTACTO
+-- CONTACTO
 CREATE TABLE contacto(
-    idContacto INT NOT NULL AUTO_INCREMENT,
+    idContacto INT  AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(150) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     ext VARCHAR(5) NOT NULL,
     email VARCHAR(50) NOT NULL,
     idPersona INT NOT NULL,
-    CONSTRAINT Fk_idPersona_Contacto FOREIGN KEY(idPersona)
-)
+    CONSTRAINT Fk_idContacto PRIMARY KEY (idContacto),
+    CONSTRAINT Fk_idPersona_Contacto FOREIGN KEY(idPersona) REFERENCES persona(idPersona)
+);
 
 -- DIRECCION
 CREATE TABLE direccion(
@@ -34,20 +42,20 @@ CREATE TABLE direccion(
     numeroExterno VARCHAR(10) NOT NULL,
     idPersona INT NOT NULL,
     CONSTRAINT Pk_idDireccion PRIMARY KEY(idDireccion),
-    CONSTRAINT Fk_idPersona_Direccion FOREIGN KEY(idPersona)
-)
+    CONSTRAINT Fk_idPersona_Direccion FOREIGN KEY(idPersona) REFERENCES persona(idPersona)
+);
 
 -- EMPLEADO
-CREATE TABLE empleado(
+CREATE TABLE empleados(
     idEmpleado INT NOT NULL AUTO_INCREMENT,
     codigoEmpleado VARCHAR(30) NOT NULL, 
-    estatus INT NOT NULL
+    estatus INT NOT NULL,
     idPersona INT NOT NULL,
-    idUsuario INT NOT NULL,
+    idUsuario bigint NOT NULL,
     CONSTRAINT Pk_idEmpleado PRIMARY KEY(idEmpleado),
     CONSTRAINT Fk_idPersona_Empleado FOREIGN KEY(idPersona) REFERENCES persona(idPersona),
-    CONSTRAINT Fk_idUsuario_Empleado FOREIGN KEY(idUsuario) REFERENCES usuario(id)
-)
+    CONSTRAINT Fk_idUsuario_Empleado FOREIGN KEY(idUsuario) REFERENCES users(id)
+);
 
 -- BITACORAEMPLEADO
 CREATE TABLE bitacoraEmpleado(
@@ -57,7 +65,7 @@ CREATE TABLE bitacoraEmpleado(
     idEmpleado INT NOT NULL,
     CONSTRAINT Pk_idBitacoraEmpleado PRIMARY KEY(idBitacoraEmpleado),
     CONSTRAINT Fk_idEmpleado_bitacoraEmpleado FOREIGN KEY(idEmpleado) REFERENCES empleado(idEmpleado)
-)
+);
 
 -- CLIENTE
 CREATE TABLE cliente(
@@ -66,12 +74,12 @@ CREATE TABLE cliente(
     estatus INT NOT NULL,
     idTag INT NOT NULL,
     idPersona INT NOT NULL,
-    idUsuario INT NOT NULL,
+    idUsuario BIGINT NOT NULL,
     CONSTRAINT Pk_idCliente PRIMARY KEY(idCliente),
     CONSTRAINT Fk_idTag_Cliente FOREIGN KEY(idTag) REFERENCES tag(idTag),
     CONSTRAINT Fk_idPersona_Cliente FOREIGN KEY(idPersona) REFERENCES persona(idPersona),
-    CONSTRAINT Fk_idUsuario_Cliente FOREIGN KEY(idUsuario) REFERENCES usuario(id)
-)
+    CONSTRAINT Fk_idUsuario_Cliente FOREIGN KEY(idUsuario) REFERENCES users(id)
+);
 
 -- BITACORACLIENTE
 CREATE TABLE bitacoraCliente(
@@ -81,7 +89,7 @@ CREATE TABLE bitacoraCliente(
     idCliente INT NOT NULL,
     CONSTRAINT Pk_idBitacoraCliente PRIMARY KEY(idBitacoraCliente),
     CONSTRAINT Fk_idCliente_bitacoraCliente FOREIGN KEY(idCliente) REFERENCES cliente(idCliente)
-)
+);
 
 -- PRODUCTO
 CREATE TABLE producto(
@@ -102,17 +110,17 @@ CREATE TABLE producto(
     CONSTRAINT Fk_idTag_Cliente FOREIGN KEY(idTag) REFERENCES tag(idTag),
     CONSTRAINT Fk_idCategoria_producto FOREIGN KEY(idCategoria) REFERENCES categoria(idCategoria),
     CONSTRAINT Fk_idProveedor_producto FOREIGN KEY(idProveedor) REFERENCES proveedor(idProveedor)
-)
+);
 
 -- ATRIBUTOPRODUCTO
 CREATE TABLE atributoProducto(
-    idAtributoProducto INT NOT NULL AUTO_INCREMENT,
+    idAtributoProducto INT AUTO_INCREMENT NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     descripcion VARCHAR(300) NOT NULL,
     idProducto INT NOT NULL,
     CONSTRAINT Pk_idAtributoProducto PRIMARY KEY(idAtributoProducto),
     CONSTRAINT Fk_idProducto_atributoProducto FOREIGN KEY(idProducto) REFERENCES producto(idProducto)
-)
+);
 
 -- CATEGORIA
     -- Laptops
@@ -151,13 +159,13 @@ CREATE TABLE proveedor(
 -- CARRITO
 CREATE TABLE carrito(
     idCarrito INT NOT NULL AUTO_INCREMENT,
-    idUsuario INT NOT NULL,
+    idUsuario BIGINT NOT NULL,
     idProducto INT NOT NULL,
     cantidadProducto INT NOT NULL,
     estatus INT NOT NULL,
     CONSTRAINT Pk_idCarrito PRIMARY KEY(idCarrito),
     CONSTRAINT Fk_idProducto_carrito FOREIGN KEY(idProducto) REFERENCES producto(idProducto),
-    CONSTRAINT Fk_idUsuario_carrito FOREIGN KEY(idUsuario) REFERENCES usuario(id)
+    CONSTRAINT Fk_idUsuario_carrito FOREIGN KEY(idUsuario) REFERENCES users(id)
 )
 
 -- COMPRA
@@ -185,8 +193,8 @@ CREATE TABLE detalleCompra(
 
 
 -- USUARIO
-CREATE TABLE usuario(
-    id bigint(20) NOT NULL auto_increment,
+CREATE TABLE users(
+    id bigint(20) NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,	
     email varchar(255) NOT	NULL,
     email_verified_at timestamp,	
@@ -201,7 +209,7 @@ CREATE TABLE usuario(
 
 -- ROL
 CREATE TABLE rol(
-    idRol INT not null,
+    idRol INT AUTO_INCREMENT not null,
     rol varchar(30) not null,
     CONSTRAINT Pk_idRol PRIMARY KEY(idRol)
 )
@@ -212,17 +220,10 @@ CREATE TABLE rol(
     -- Bajo1 (estandares de office 8000-10000)                      --4 - 6
     -- Bajo2 (No sabe ni madres de computadora)                     --3
 CREATE TABLE tag(
-    idTag INT not null,
+    idTag INT AUTO_INCREMENT not null,
     tag varchar(30) not null,
     CONSTRAINT Pk_idTag PRIMARY KEY(idTag)
 )
 
-/*CREATE TABLE tag_cliente(
-    idTag INT NOT NULL,
-    idCliente INT NOT NULL,
-    importancia int not null,
-    CONSTRAINT Fk_idTag_tagCliente FOREIGN KEY(idTag) REFERENCES tag(idTag),
-    CONSTRAINT Fk_idCliente_tagCliente FOREIGN KEY(idCliente) REFERENCES tag(idCliente),
-)
-*/
+
 
