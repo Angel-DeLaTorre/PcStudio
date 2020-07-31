@@ -140,7 +140,7 @@
                 <div class="scrollbar-inner">
                     <!-- Brand -->
                     <div class="sidenav-header  align-items-center">
-                        <a class="navbar-brand" href="javascript:void(0)">
+                        <a class="navbar-brand" href="/">
                             <img src="{{ url('img/logo_h.png') }}" class="navbar-brand-img" alt="Inicio">
                         </a>
                     </div>
@@ -269,7 +269,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-menu  dropdown-menu-right ">
-                                    <a href="href=" {{ route('logout') }}" onclick="event.preventDefault();
+                                    <a href=" {{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" class=" dropdown-item">
                                         <i class="material-icons">exit_to_app</i>
                                         <span>Cerrar Sesión</span>
@@ -303,7 +303,7 @@
         <div class="content has-text-centered">
             <img src="{{ url('img/logo_vertical S.png') }}" class="navbar-brand-img" alt="Inicio" style="width: 50px">
             <p style="margin-top: 5px">
-                <strong>PcStudio</strong> by PixeLab. The source code is licensed by
+                <strong>PcStudio</strong> de PixeLab. Código fuente licenciado por
                 <a href="https://opensource.org/licenses/GPL-3.0">GPL-3.0</a>. 
             </p>
         </div>
