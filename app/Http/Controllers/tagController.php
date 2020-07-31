@@ -9,7 +9,6 @@ class tagController extends Controller
 {
     public function vista(){
         return view('agregarTag');
-        
     }
 
     public function create(Request $request){
