@@ -224,6 +224,3 @@ CREATE TABLE tag(
     tag varchar(30) not null,
     CONSTRAINT Pk_idTag PRIMARY KEY(idTag)
 )
-
-
-
