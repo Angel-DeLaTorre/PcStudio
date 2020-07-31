@@ -53,7 +53,6 @@ class tagController extends Controller
     public function delete(tag $tag){
         
         $tag->delete();
-
         return redirect()->route('listaTag');
     }
 }
