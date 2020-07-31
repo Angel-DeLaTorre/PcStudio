@@ -7,10 +7,11 @@ use App\tag;
 use App\Http\Requests;
 class tagController extends Controller
 {
-
     public function vista(){
         return view('agregarTag');
+        
     }
+
     public function create(Request $request){
         $tag = new tag();
 
