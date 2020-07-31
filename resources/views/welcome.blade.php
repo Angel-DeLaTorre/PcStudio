@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>PcStudio - Compra PC Online</title>
+    <title>PcStudio - Compra PC y Aceesorios Online</title>
 
     <!--Imagenes: 
     https://www.pexels.com/
@@ -17,7 +17,7 @@
     <style>
         html,
         body {
-            background-color: #000;
+            background-color: #fff;
             color: #636b6f;
             font-family: 'Nunito', sans-serif, 'Segoe UI';
             font-weight: 200;
