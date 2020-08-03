@@ -21,3 +21,7 @@ En el equipo de trabajo se encuentran:
 **Ejecutar aplicación en servidor local.**
 
 `php artisan serve`
+
+**Panel de administración**
+
+![Panel](https://user-images.githubusercontent.com/43243319/88997574-a822fc00-d2b5-11ea-8ea1-1535b84576cf.png)
