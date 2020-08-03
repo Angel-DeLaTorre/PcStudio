@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
@@ -53,3 +54,10 @@ Route::get('/Categorias/Edit/{idCategoria}', 'CategoriaController@edit')->name('
 Route::post('/Categorias/Store', 'CategoriaController@store')->name('storeCategoria');
 Route::put('/Categorias/Update/{idCategoria}', 'CategoriaController@update')->name('updateCategoria');
 Route::get('/Categorias/Delete/{idCategoria}', 'CategoriaController@destroy')->name('deleteCategoria');
+
+///Rutas de SnatchBot
+//Request::path();
+//$url = $request->path();
+if(Request::path() == 1 || Request::path() == 2){
+    Route::get (Request::path(),'SnatchBotController@index');
+}
