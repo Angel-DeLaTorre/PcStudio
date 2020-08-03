@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Empleado;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class EmpleadoController extends Controller
 {
