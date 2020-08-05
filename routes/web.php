@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
+
+
 //Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/show/{id}','tagController@show');
+
 Route::get ('/create','tagController@vista');
 Route::post ('/create','tagController@create');
+
 
 //Rutas de Empleados
 Route::resource('empleado', 'Empleado\EmpleadoController')->middleware('auth');
@@ -37,9 +49,18 @@ Route::resource('encuesta', 'Encuesta\EncuestaController');//->middleware('auth'
 
 
 
+Route::get ('/listaTag','tagController@read')->name('listaTag');
+
+Route::get('/editar/{tag}','tagController@edit')->name('editar');
+Route::patch('/update/{tag}','tagController@update')->name('update');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/homeAdministrativo', 'HomeAdministrativoController@index')->name('homeAdministrativo');
+
+Route::get('/eliminar/{tag}','tagController@eliminar')->name('eliminar');
+Route::delete('/delete/{tag}', 'tagController@delete')->name('delete');
+
 
 //Rutas de Proveedor
 Route::get('/Proveedores', 'ProveedorController@index')->name('indexProveedor');
@@ -56,3 +77,10 @@ Route::get('/Categorias/Edit/{idCategoria}', 'CategoriaController@edit')->name('
 Route::post('/Categorias/Store', 'CategoriaController@store')->name('storeCategoria');
 Route::put('/Categorias/Update/{idCategoria}', 'CategoriaController@update')->name('updateCategoria');
 Route::get('/Categorias/Delete/{idCategoria}', 'CategoriaController@destroy')->name('deleteCategoria');
+
+///Rutas de SnatchBot
+//Request::path();
+//$url = $request->path();
+if(Request::path() == 1 || Request::path() == 2){
+    Route::get (Request::path(),'SnatchBotController@index');
+}
