@@ -1,4 +1,8 @@
+CREATE DATABASE pcstudiodb;
+
 use pcstudiodb;
+
+DROP DATABASE IF EXISTS pcstudiodb;
 
 SELECT * FROM persona;
 
@@ -197,11 +201,11 @@ CREATE TABLE users(
     id bigint(20) NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,	
     email varchar(255) NOT	NULL,
-    email_verified_at timestamp,	
+    email_verified_at timestamp null,	
     password varchar(255) NOT NULL,	
     remember_token	varchar(100),
-    created_at	timestamp,
-    updated_at	timestamp,
+    created_at	timestamp null,
+    updated_at	timestamp null,
     idRol INT NOT NULL,
     CONSTRAINT Pk_idUsuario PRIMARY KEY(id),
     CONSTRAINT Fk_idRol_usuario FOREIGN KEY(idRol) REFERENCES rol(idRol)

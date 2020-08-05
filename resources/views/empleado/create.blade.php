@@ -7,11 +7,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-
                     <form class="form-group" method="POST" action="/empleado" enctype="multipart/form-data">
                         <!--CSRF Es una directiva de blade para la proteccion de la peticion
                         laravel genera un token -->  
                         @csrf
+                        
+                    
 
                     <div class="card">
                         <div class="col-lg-12 row">
@@ -54,59 +55,65 @@
 
                         <div class="col-lg-6">     
                             <label for="">Tipo de persona</label>
-                            <select name="tipoPersona" id="tipoPersona"  class="form-control">
+
+                           <div class="form-group">
+                            <select name="rol" id="rol"  class="form-control" required>
                                 <option value="2">Empleado</option>   
-                                <option value="1">Administrador</option>                                                             
+                                <option value="3">Administrador</option>                                                             
                               </select>
+                           </div>
                         </div>
                         </div>
                     </div>
-                    <br>
 
 
-                    <div class="card">
-                        <div class="col-lg-12 row">
+                    <div class="card form-group">
+                        <br>
+                        <div class="col-lg-12 row form-group">
                             
-                        <div class="col-lg-6">     
+                        <div class="col-lg-6 form-group">     
                             <label for="">Nombre</label>
-                            <input type="text" name="name" id="name" class="form-control">
+                            <input type="text" name="name" id="name" class="form-control" required>
                         </div>
 
-                        <div class="col-lg-6">     
+                        <div class="col-lg-6 form-group">     
                             <label for="">Apellido Paterno</label>
-                            <input type="text" name="apellidoP" id="apellidoP" class="form-control" >
+                            <input type="text" name="apellidoP" id="apellidoP" class="form-control"  required>
                         </div>
 
-                        <div class="col-lg-6">     
+                        <div class="col-lg-6 form-group">     
                             <label for="">Apellido Materno</label>
                             <input type="text" name="apellidoM" id="apellidoM" class="form-control" >
                         </div>
 
-                        <div class="col-lg-6">     
+                        <div class="col-lg-6 form-group">     
                             <label for="">Fecha de nacimiento</label>
                             <input type="date" name="fechaN" id="fechaN" class="form-control" >
                         </div>
                         
-                        <div class="col-lg-6">     
+                        <div class="col-lg-6 form-group">     
                             <label for="">Telefono</label>
-                            <input type="text" name="telefono" id="telefono" class="form-control" >
+                            <input type="text" name="telefono" id="telefono" class="form-control" required>
                         </div>
 
-                        <div class="col-lg-6">     
+                        <div class="col-lg-6 form-group">     
                             <label for="">RFC</label>
-                            <input type="text" name="rfc" id="rfc" class="form-control" >
+                            <input type="text" name="rfc" id="rfc" class="form-control" maxlength="10">
+                        </div>
+                        
+                        <div class="col-lg-6 row">
+                            <div class=" col-lg-3">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                            
+                            <div class="col-lg-3 ">
+                                <a href="/empleado" class="btn btn-primary">Regresar</a>
+                            </div>
                         </div>
 
-
-                        <br>
-                        <br>
-                        <br>
-                        <input type="hidden" name="estatus" id="estatus" class="form-control" value="1">
-                        
                         </div>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>                    
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Empleado;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Empleado;
 use DB;
 
 class EmpleadoController extends Controller
@@ -24,8 +25,7 @@ class EmpleadoController extends Controller
         ->where('estatus', '=', 1)
         ->get();
         
-        //print_r($empleado);
-        
+
         return view('empleado.index', ['empleado' => $empleado]);
     }
 
@@ -64,6 +64,8 @@ class EmpleadoController extends Controller
         array($nombre, $email, $password, $rol, $apellidoP, $apellidoM, $fecha, $tel, $rfc, $estatus));
 
         return redirect()->route('empleado.index')->with('status', 'Se a guardado el empleado');
+
+        //return $request->all();
     }
 
     /**
@@ -74,6 +76,7 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
+        return 'hola show';
         //
     }
 
@@ -118,7 +121,8 @@ class EmpleadoController extends Controller
         $data = DB::select('call  sp_actualizarEmpleado(?, ?, ?, ?, ?, ?, ?)',
         array($idEpleado, $nombre, $apellidoP, $apellidoM, $fecha, $tel, $rfc));
 
-        return redirect()->route('empleado.index')->with('status', 'Empleado Actualizado');
+        print_r($data);
+        //return redirect()->route('empleado.index')->with('status', 'El empleado Actualizado');
     }
 
     /**
@@ -129,6 +133,12 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-       
+        
+        $data = DB::select("UPDATE empleados SET estatus = 0 WHERE idEmpleado = $id");
+        
+        echo "<script>alert('se a actualizado');</script>";
+        
+        return redirect()->route('empleado.index')->with('status', 'El empleado se a Eliminado');
+        
     }
 }

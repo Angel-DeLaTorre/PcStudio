@@ -13,20 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
-*/
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get ('/create','tagController@vista');
 Route::post ('/create','tagController@create');
-Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
+
+//Rutas de Empleados
+Route::resource('empleado', 'Empleado\EmpleadoController')->middleware('auth');
+
+
+//Rutas de clientes
+Route::resource('cliente', 'Cliente\ClienteController');//->middleware('auth');
+
+
+//Rutas Cuestionario
+Route::resource('encuesta', 'Encuesta\EncuestaController');//->middleware('auth');
+
+
 
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/homeAdministrativo', 'HomeAdministrativoController@index')->name('homeAdministrativo');
 
 //Rutas de Proveedor
 Route::get('/Proveedores', 'ProveedorController@index')->name('indexProveedor');
