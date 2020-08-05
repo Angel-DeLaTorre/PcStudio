@@ -7,11 +7,11 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ url('/Categorias/Create') }}"><Button class="button is-primary">Agregar</Button></a>
+            <a href="{{ url('/Categorias/Create') }}"><Button class="button is-primary is-outlined">Agregar</Button></a>
             <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
         </div>
         <div class="card-body">
-            <table class="table table-striped" id="registros">
+            <table class="table is-striped" id="registros">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
@@ -23,11 +23,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($categorias as $item)
+                    @foreach ($categorias as $item)
                         <tr>
                             <th scope="row">{{ $item->idCategoria }}</th>
                             <td>{{ $item->nombre }}</td>
-                            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75ch;">
+                            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50ch;">
                                 {{ $item->descripcion }}
                             </td>
                             <td>{{ $item->updated_at }}</td>
@@ -44,6 +44,7 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 
