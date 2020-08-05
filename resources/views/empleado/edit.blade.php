@@ -4,7 +4,6 @@
 @section('module_name')
     <h1 style="color: white;" id="module_text">Editar empleado</h1>
 @endsection
-
 @section('content')
 
     @foreach ($empleado as $item)

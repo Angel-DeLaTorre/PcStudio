@@ -84,7 +84,7 @@ a {
     <label for="descripcion"><b>Descripción</b></label>
     <input type="textarea" placeholder="Descripción" name="descripcion" id="descripcion" value="{{ $tag->descripcion}}" required>
 
-    <button type="submit" class="registerbtn">+ Actualizar Tag</button>
+    <button type="submit" class="registerbtn" class="btn btn-outline-primary">Actualizar Tag</button>
   </div>
 </form>
     <!-- Optional JavaScript -->

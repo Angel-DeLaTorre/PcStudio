@@ -17,12 +17,7 @@ use Illuminate\Support\Facades\Request;
 Route::get('/', function () {
     return view('welcome');
 });
-
-
 Auth::routes();
-
-
-
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
 

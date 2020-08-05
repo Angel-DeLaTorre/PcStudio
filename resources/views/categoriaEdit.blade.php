@@ -27,7 +27,7 @@
                                     value="{{ $categoria->descripcion }}">
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary"> Guardar</button>
+                                <button type="submit" class="btn btn-outline-primary"> Guardar</button>
                             </div>
                         </div>
                     </div>

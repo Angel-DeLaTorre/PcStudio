@@ -110,6 +110,10 @@
             }
         }
 
+        .card-body {
+            overflow-x: auto;
+        }
+
     </style>
 
     <!-- JQuery -->
@@ -250,6 +254,7 @@
                                         </a>
                                     </div>
                                     <!-- View all -->
+
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();"
                                         class="dropdown-item text-center text-primary font-weight-bold py-3">Cerrar
@@ -263,12 +268,14 @@
                                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <div class="media align-items-center">
+                                        <i class="material-icons">person_outline</i>
                                         <div class="media-body  ml-2  d-none d-lg-block">
                                             <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->name }}</span>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="dropdown-menu  dropdown-menu-right ">
+
                                     <a href=" {{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" class=" dropdown-item">
                                         <i class="material-icons">exit_to_app</i>
@@ -291,7 +298,7 @@
                 </div>
             </div>
             <!-- Page content -->
-            <div class="container-fluid" id="module-content" style="margin-top: -5%; position: relative;">
+            <div class="container-fluid" id="module-content" style="margin-top: -10%; position: relative;">
                 @yield('content')
             </div>
         </div>
@@ -304,7 +311,7 @@
             <img src="{{ url('img/logo_vertical S.png') }}" class="navbar-brand-img" alt="Inicio" style="width: 50px">
             <p style="margin-top: 5px">
                 <strong>PcStudio</strong> de PixeLab. Código fuente licenciado por
-                <a href="https://opensource.org/licenses/GPL-3.0">GPL-3.0</a>. 
+                <a href="https://opensource.org/licenses/GPL-3.0">GPL-3.0</a>.
             </p>
         </div>
     </footer>

@@ -1,4 +1,5 @@
 @extends('layouts.adminDashboard')
+@section('title', 'Guardado de Empleado')
 <!--Contenido del dashboard-->
 <!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
 @section('module_name')
