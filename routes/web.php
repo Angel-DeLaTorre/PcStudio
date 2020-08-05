@@ -36,6 +36,7 @@ Route::post ('/create','tagController@create');
 
 
 //Rutas de Empleados
+Route::get('/empleado/Delete/{idEmpleado}', 'Empleado\EmpleadoController@destroy')->name('deleteEmpleado');
 Route::resource('empleado', 'Empleado\EmpleadoController')->middleware('auth');
 
 

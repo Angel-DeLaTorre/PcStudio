@@ -164,7 +164,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="map.html">
+                                    <a class="nav-link" href="{{ url('/empleado') }}">
                                         <i class="material-icons" style="color: #f6993f">business</i>
                                         <span class="nav-link-text">Empleados</span>
                                     </a>
@@ -227,7 +227,7 @@
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Productos</h4>
                                         </a>
 
-                                        <a href="#!" class="list-group-item list-group-item-action">
+                                        <a href="{{ url('/empleado') }}" class="list-group-item list-group-item-action">
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Empleados</h4>
                                         </a>
 
