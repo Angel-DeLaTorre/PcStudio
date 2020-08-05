@@ -20,7 +20,7 @@
                 <div class="card form-group">
                     <br>
                     <div class="col-md-10 form-group">
-                        <h3> ¿Tiempo aprpximado en el cual usas una computadora?</h3>
+                        <h3> ¿Tiempo aproximado en el cual usas una computadora?</h3>
                         
                         <div class="form-group">
                             <div class="form-check">
