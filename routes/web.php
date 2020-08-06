@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Auth::routes();
+Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
@@ -58,6 +58,16 @@ Route::get('/Categorias/Delete/{idCategoria}', 'CategoriaController@destroy')->n
 ///Rutas de SnatchBot
 //Request::path();
 //$url = $request->path();
-if(Request::path() == 1 || Request::path() == 2){
+if(Request::path() == 1 || Request::path() == 2 || Request::path() == 3 || Request::path() == 4 || 
+    Request::path() == 5 || Request::path() == 6 || Request::path() == 7 || Request::path() == 8 ||
+    Request::path() == 9 || Request::path() == 10 || Request::path() == 11 || Request::path() == 12 || 
+    Request::path() == 13 || Request::path() == 14 || Request::path() == 15 || Request::path() == 16 || 
+    Request::path() == 17 || Request::path() == 18 || Request::path() == 19 ||  Request::path() == 20){
+
     Route::get (Request::path(),'SnatchBotController@index');
 }
+
+Route::get ('/indexProducto','CarritoController@index');
+Route::post ('/indexProducto','CarritoController@agregarProductoCarrito');
+Route::get ('/indexCarrito','CarritoController@vistaProductosCarrito');
+Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');

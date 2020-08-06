@@ -199,15 +199,12 @@
     <!-- Contenedor principal de la página -->
     <section class="hero is-primary">
         <div class="hero-body">
-            <p class="title is-1">
-                Aqui va el contenido de la página del cliente
-            </p>
-            <p class="subtitle is-1">
-                Como lo son productos en general y algunas recomendaciones.
-            </p>
-            <p class="subtitle is-3">
-                Podemos mandar a llamar muchas vistas con el método yield y ponerlas aqui, desde el mismo controlador.
-            </p>
+            <div class="header-body">
+                @yield('module_name')
+            </div>
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
     </section> <!-- Fin contenedor principal de la página -->
 
@@ -225,5 +222,5 @@
     </footer>
     <!-- Fin Footer-->
 </body>
-
+<script src="https://account.snatchbot.me/script.js"></script><script>window.sntchChat.Init(124898)</script>
 </html>

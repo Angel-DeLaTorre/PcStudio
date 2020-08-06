@@ -1,40 +1,41 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layouts.adminDashboard')
+<!--Contenido del dashboard-->
+<!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
+@section('module_name')
+    <h1 style="color: white;" id="module_text">Tags</h1>
+@endsection
+@section('content')
+    <div class="card">
+        <div class="card-header">
+            <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-  <h2>Tags</h2>
-        <div class="container">
-            <div class="row">
-                <table>
-                    <thead>
-                        <th scope="col">ID</th>
-                        <th scope="col">Tag</th>
-                        <th>Descripción</th>
-                    </thead>
-                    @foreach($lista as $tag)
-                    <tr>
-                        <td scope="row">{{$tag->idTag}}</td>
-                        <td>{{$tag->tag}}</td>
-                        <td>{{$tag->descripcion}}</td>
-                        <td><a href="{{ route('editar', $tag) }}">Editar</a></td>
-                        <td><a href="{{ route('eliminar', $tag) }}">Eliminar</a></td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
         </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>
+        <div class="card-content">
+            <table class="table is-striped" id="registros">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Tag</th>
+                        <th scope="col">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($lista as $tag)
+                        <tr>
+                            <td scope="row">{{$tag->idTag}}</td>
+                            <td>{{$tag->tag}}</td>
+                            <td>{{$tag->descripcion}}</td>
+
+                            <td>
+                                <a href="{{ route('editar', $tag) }}"><i
+                                        class="material-icons">edit</i></a>
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    @endsection

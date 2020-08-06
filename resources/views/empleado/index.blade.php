@@ -28,7 +28,6 @@
                 <td>{{$item->telefono}}</td>
                 <td>{{$item->rfc}}</td>   
                 <td><a href="/empleado/{{$item->idEmpleado}}/edit" class="btn btn-primary">Editar</a></td>
-                
             </tr>                    
             @endforeach
             </tbody>

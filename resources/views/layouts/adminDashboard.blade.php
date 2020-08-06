@@ -37,7 +37,9 @@
             margin: 0 0 150px;
             /* bottom = footer height */
         }
-
+        .card-body{
+            overflow-x: auto;
+        }
         footer {
             position: absolute;
             left: 0;
@@ -188,6 +190,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/listaTag') }}">
+                                        <i class="material-icons" style="color: #e3342f">Tag</i>
+                                        <span class="nav-link-text">Tags</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="register.html">
                                         <i class="material-icons" style="color: #f6993f">shopping_cart</i>
                                         <span class="nav-link-text">Compras</span>
@@ -243,6 +251,11 @@
                                         <a href="{{ url('/Proveedores') }}"
                                             class="list-group-item list-group-item-action">
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Proveedores</h4>
+                                        </a>
+
+                                        <a href="{{ url('/listaTag') }}"
+                                            class="list-group-item list-group-item-action">
+                                            <h4 class="mb-0 text-sm" style="text-align:center;">Tags</h4>
                                         </a>
 
                                         <a href="#!" class="list-group-item list-group-item-action">
