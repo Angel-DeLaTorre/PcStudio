@@ -211,6 +211,15 @@
             </div>
         </div>
 
+    <!-- Contenedor principal de la página -->
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="header-body">
+                @yield('module_name')
+            </div>
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
     </nav>
     <!-- Fin navbar principal -->
@@ -262,5 +271,5 @@
     </footer>
     <!-- Fin Footer-->
 </body>
-
+<script src="https://account.snatchbot.me/script.js"></script><script>window.sntchChat.Init(124898)</script>
 </html>
