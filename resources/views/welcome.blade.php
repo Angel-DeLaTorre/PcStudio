@@ -14,15 +14,6 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/bulma-0.9.0/css/bulma.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bulma-0.9.0/css/bulma.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
-        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
-        integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous">
-    </script>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -31,9 +22,20 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
     </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
+    <!-- Styles -->
+    <link href="{{ asset('css/bulma-0.9.0/css/bulma.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/cards.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bulma-0.9.0/css/bulma.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- Iconos de materialize -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- JS -->
+
 
     <script>
         $(document).ready(function() {
@@ -48,67 +50,38 @@
             });
         });
 
+        $(document).ready(function() {
+            $('#autoWidth').lightSlider({
+                autoWidth: true,
+                loop: true,
+                onSliderLoad: function() {
+                    $('#autoWidth').removeClass('cS-hidden');
+                }
+            });
+        });
+
     </script>
 
     <style>
-        #searchbar {
-            border-color: #fff;
-            -webkit-box-shadow: 5px 5px 20px 1px rgba(0, 0, 0, 0.2);
-            -moz-box-shadow: 5px 5px 20px 1px rgba(0, 0, 0, 0.2);
-            box-shadow: 5px 5px 20px 1px rgba(0, 0, 0, 0.2);
-            margin-top: 15px;
-        }
-
-        #btnsearch {
-            margin-top: 15px;
-            border-color: #fff;
-            width: 20px;
-            right: 45px;
-        }
-
-        #searchbarcontainer {
-            margin-left: auto;
-            margin-right: auto;
-            -webkit-box-shadow: 5px 5px 20px 1px rgba(0, 0, 0, 0.2);
-            -moz-box-shadow: 5px 5px 20px 1px rgba(0, 0, 0, 0.2);
-            box-shadow: 5px 5px 20px 1px rgba(0, 0, 0, 0.2);
-            width: 70%;
-            border-radius: 8px;
-            margin-top: 1%;
-            margin-bottom: 1%;
-        }
-
-        form {
+        #searchForm {
             display: flex;
             flex-direction: row;
             padding: 2px;
             width: 100%
         }
 
-        input {
+        #busqueda {
             flex-grow: 2;
-            border-color: #fff;
-        }
-
-        input:focus {
-            /* removing the input focus blue box. Put this on the form if you like. */
-            outline: none;
-        }
-
-        #logo {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         html {
             position: relative;
             min-height: 100%;
+
         }
 
         body {
             margin: 0 0 250px;
-            /* bottom = footer height */
         }
 
         footer {
@@ -118,6 +91,10 @@
             height: 250px;
             width: 100%;
             overflow: hidden;
+        }
+
+        a {
+            text-decoration: none !important;
         }
 
     </style>
@@ -163,9 +140,9 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form class="form-inline my-2 my-lg-0" id="searchForm">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
-                    aria-label="Search">
+                    aria-label="Search" id="busqueda" name="busqueda">
                 <button class="button is-outlined" type="submit">
                     <i class="material-icons">search</i>
                 </button>
@@ -214,7 +191,7 @@
         </div>
     </nav>
     <!-- Fin navbar principal -->
-    <div class="container">
+    <div class="container" style="margin-top: 50px">
         <!-- Slider -->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -222,7 +199,7 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="">
                 <div class="carousel-item active">
                     <img src="{{ url('img/slider1.png') }}" class="d-block w-100" alt="...">
                 </div>
@@ -243,10 +220,196 @@
             </a>
         </div><!-- Slider -->
 
+
         <!-- Contenedor de productos nuevos -->
-        <div class="container-fluid" style="margin-top: 50px">
+        <div class="row" style="margin-top: 100px;">
             <h3 class="subtitle is-3">Nuevos productos</h3>
+            <div class="cards-container">
+                <ul id="autoWidth" class="cs-hidden">
+                    <!-- Los li se tienen que crear de forma dinámica a través del uso de PHP -->
+                    <li class="item-a">
+                        <!--slider-box-->
+                        <div class="box">
+                            <a href="">
+                                <img src="{{ url('img/slider1.png') }}" class="model">
+                                <hr>
+                                <div class="details">
+                                    <p class="title is-3 is-spaced">$4,999</p>
+                                    <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                                        núcleos y
+                                        3.6GHz de frecuencia con gráfica integrada</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="item-a">
+                        <!--slider-box-->
+                        <div class="box">
+                            <a href="">
+                                <img src="https://http2.mlstatic.com/alfombrilla-para-mouse-rgb-c7-efectos-luminosos-para-laptop-D_NQ_NP_901102-MLM40469770952_012020-F.webp"
+                                    class="model">
+                                <hr>
+                                <div class="details">
+                                    <p class="title is-3 is-spaced">$368.48</p>
+                                    <p class="subtitle is-5">Alfombrilla Para Mouse Rgb C/7 Efectos Luminosos Para
+                                        Laptop
+                                    </p>
+                                </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="item-a">
+                        <!--slider-box-->
+                        <div class="box">
+                            <a href="">
+                                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_931087-MLA40194584468_122019-F.webp"
+                                    class="model">
+                                <hr>
+                                <div class="details">
+                                    <p class="title is-3 is-spaced">$926.86</p>
+                                    <p class="subtitle is-5">Memoria RAM 8GB 1x8GB Adata ADDS1600W8G11-S</p>
+                                </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="item-a">
+                        <!--slider-box-->
+                        <div class="box">
+                            <a href="">
+                                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_839691-MLA42152911842_062020-F.webp"
+                                    class="model">
+                                <hr>
+                                <div class="details">
+                                    <p class="title is-3 is-spaced">$464</p>
+                                    <p class="subtitle is-5">Disco sólido interno Adata Ultimate SU650 ASU650SS-120GT-R
+                                        120GB negro</p>
+                                </div>
+                        </div>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
         </div>
+
+        <hr>
+
+        <!-- Aqui se van a cargar los productos recomendados -->
+        <div class="row">
+            <h1 class="title">Recomendados para ti</h1>
+        </div>
+        <div class="row">
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+            <div class="box">
+                <a href="">
+                    <img src="{{ url('img/slider1.png') }}" class="model">
+                    <hr>
+                    <div class="details">
+                        <p class="title is-3 is-spaced">$4,999</p>
+                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                            núcleos y
+                            3.6GHz de frecuencia con gráfica integrada</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
     </div>
     <!-- Inicio Footer-->
     <footer class="footer">
@@ -261,6 +424,19 @@
         </div>
     </footer>
     <!-- Fin Footer-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('js/lightslider.js') }}" defer></script>
 </body>
 
 </html>
