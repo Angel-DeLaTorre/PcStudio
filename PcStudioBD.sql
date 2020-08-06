@@ -1,4 +1,16 @@
+CREATE DATABASE pcstudiodb;
+
 use pcstudiodb;
+<<<<<<< HEAD
+=======
+
+DROP DATABASE IF EXISTS pcstudiodb;
+
+SELECT * FROM persona;
+
+select * from empleados;
+DESCRIBE PERSONA;
+>>>>>>> c3f8d17ba3392c0e1a8541dfbec95314ea9ccd0f
 -- PERSONA
 CREATE TABLE persona(
     idPersona INT  AUTO_INCREMENT NOT NULL,
@@ -192,11 +204,11 @@ CREATE TABLE users(
     id bigint(20) NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,	
     email varchar(255) NOT	NULL,
-    email_verified_at timestamp,	
+    email_verified_at timestamp null,	
     password varchar(255) NOT NULL,	
     remember_token	varchar(100),
-    created_at	timestamp,
-    updated_at	timestamp,
+    created_at	timestamp null,
+    updated_at	timestamp null,
     idRol INT NOT NULL,
     CONSTRAINT Pk_idUsuario PRIMARY KEY(id),
     CONSTRAINT Fk_idRol_usuario FOREIGN KEY(idRol) REFERENCES rol(idRol)
@@ -219,6 +231,3 @@ CREATE TABLE tag(
     tag varchar(30) not null,
     CONSTRAINT Pk_idTag PRIMARY KEY(idTag)
 )
-
-
-
