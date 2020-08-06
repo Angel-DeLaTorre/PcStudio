@@ -31,13 +31,34 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get ('/create','tagController@vista');
 Route::post ('/create','tagController@create');
 
+
+//Rutas de Empleados
+Route::get('/empleado/Delete/{idEmpleado}', 'Empleado\EmpleadoController@destroy')->name('deleteEmpleado');
+Route::resource('empleado', 'Empleado\EmpleadoController')->middleware('auth');
+
+
+//Rutas de clientes
+Route::resource('cliente', 'Cliente\ClienteController');//->middleware('auth');
+
+
+//Rutas Cuestionario
+Route::resource('encuesta', 'Encuesta\EncuestaController');//->middleware('auth');
+
+
+
+
 Route::get ('/listaTag','tagController@read')->name('listaTag');
 
 Route::get('/editar/{tag}','tagController@edit')->name('editar');
 Route::patch('/update/{tag}','tagController@update')->name('update');
 
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/homeAdministrativo', 'HomeAdministrativoController@index')->name('homeAdministrativo');
+
 Route::get('/eliminar/{tag}','tagController@eliminar')->name('eliminar');
 Route::delete('/delete/{tag}', 'tagController@delete')->name('delete');
+
 
 //Rutas de Proveedor
 Route::get('/Proveedores', 'ProveedorController@index')->name('indexProveedor');

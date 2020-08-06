@@ -17,12 +17,20 @@
     <!-- Styles -->
     <link href="{{ asset('css/bulma-0.9.0/css/bulma.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bulma-0.9.0/css/bulma.min.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
+        integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous">
+    </script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
     <!-- Iconos de materialize -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- JS -->
@@ -118,83 +126,90 @@
 <body>
 
     <!-- Barra de navegación principal-->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <!-- Contenedor del logo -->
-        <div class="navbar-brand" style="width: 25%;">
-            <a class="navbar-item" href="/">
-                <img src="{{ url('img/logo_h.png') }}" alt="PcStudio" id="logo">
-            </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url('img/logo_h.png') }}" alt="" width="180">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-        <div class="" style="width: 50%;">
-            <form>
-                <input class="input" name="searchbar" id="searchbar" placeholder="Buscar en toda la tienda" />
-                <button class="button" id="btnsearch"><i class="material-icons">search</i></button>
-            </form>
-        </div>
-        <!-- Botones de login y carrito -->
-        <div class="navbar-end" style="width: 25%;">
-            @if(Route::has('login'))
-                <div class=" navbar-item">
-                    <div class="buttons">
-                        @auth
-                            <!-- Aqui tenemos que validar si el usuario es cliente o empleado -->
-                            <!-- Esto para mandarlo a esta misma vista o mandarlo al dashboard -->
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">
-                                    <i class="material-icons">person_outline</i>
-                                </a>
-                                <div class="navbar-dropdown">
-                                    <a href="{{ route('logout') }}" class="navbar-item"
-                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
-                                        Sesión</a>
-                                </div>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                            <div class="navbar-item">
-                                <a href="" class="navbar-item is-hoverable">
-                                    <i class="material-icons">shopping_cart</i>
-                                </a>
-                            </div>
-                            <a href="{{ url('/home') }}" class="button">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="button is-light">Iniciar Sesión</a>
-                            @if(Route::has('register'))
-                                <a href="{{ route('register') }}" class="button is-primary">
-                                    <strong>Registrarse</strong>
-                                </a>
-                            @endif
-                        @endauth
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PC</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Laptop</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Más
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <p style="text-align: center">Periféricos</p>
+                        <a class="dropdown-item" href="#">Memorias USB</a>
+                        <a class="dropdown-item" href="#">Mouse</a>
+                        <a class="dropdown-item" href="#">Teclados</a>
+                        <div class="dropdown-divider"></div>
+                        <p style="text-align: center">Componentes</p>
+                        <a class="dropdown-item" href="#">Unidades de estado sólido SSD</a>
+                        <a class="dropdown-item" href="#">Discos duros HDD</a>
+                        <a class="dropdown-item" href="#">Memorias RAM</a>
+                        <a class="dropdown-item" href="#">Procesadores</a>
+                        <a class="dropdown-item" href="#">Gabinetes</a>
                     </div>
-                </div>
-            @endif
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
+                    aria-label="Search">
+                <button class="button is-outlined" type="submit">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
+            <div class="navbar-end" style="width: 25%;">
+                @if (Route::has('login'))
+                    <div class=" navbar-item">
+                        <div class="buttons">
+                            @auth
+                                <!-- Aqui tenemos que validar si el usuario es cliente o empleado -->
+                                <!-- Esto para mandarlo a esta misma vista o mandarlo al dashboard -->
+                                <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-link">
+                                        <i class="material-icons">person_outline</i>
+                                    </a>
+                                    <div class="navbar-dropdown">
+                                        <a href="{{ route('logout') }}" class="navbar-item"
+                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
+                                            Sesión</a>
+                                    </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                                <div class="navbar-item">
+                                    <a href="" class="navbar-item is-hoverable">
+                                        <i class="material-icons">shopping_cart</i>
+                                    </a>
+                                </div>
+                                <a href="{{ url('/home') }}" class="button">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="button is-outlined">Iniciar Sesión</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="button is-info is-outlined">
+                                        <strong>Registrarse</strong>
+                                    </a>
+                                @endif
+                            @endauth
+                        </div>
+                    </div>
+                @endif
+            </div>
         </div>
-    </nav> <!-- Fin navbar principal -->
-
-    <!-- Contenedor con las categorías -->
-    <div class="container" style="margin-top: 25px; margin-bottom: 25px;">
-        <div class="columns">
-            <div class="column" style="color: black">
-                <h4 class="title is-5" style="text-align: center">Computadoras de escritorio</h4>
-            </div>
-            <div class="column" style="color: black">
-                <h4 class="title is-5" style="text-align: center">Laptops</h4>
-            </div>
-            <div class="column" style="color: black">
-                <h4 class="title is-5" style="text-align: center">Componentes</h4>
-            </div>
-            <div class="column" style="color: black">
-                <h4 class="title is-5" style="text-align: center">Periféricos</h4>
-            </div>
-        </div>
-    </div> <!-- Fin container categorias -->
 
     <!-- Contenedor principal de la página -->
     <section class="hero is-primary">
@@ -206,8 +221,42 @@
                 @yield('content')
             </div>
         </div>
-    </section> <!-- Fin contenedor principal de la página -->
+    </nav>
+    <!-- Fin navbar principal -->
+    <div class="container">
+        <!-- Slider -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ url('img/slider1.png') }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url('img/slider2.png') }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url('img/slider3.png') }}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div><!-- Slider -->
 
+        <!-- Contenedor de productos nuevos -->
+        <div class="container-fluid" style="margin-top: 50px">
+            <h3 class="subtitle is-3">Nuevos productos</h3>
+        </div>
+    </div>
     <!-- Inicio Footer-->
     <footer class="footer">
         <div class="content has-text-centered">

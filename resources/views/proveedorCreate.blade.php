@@ -10,21 +10,17 @@
             <div class="card-body">
 
                 <div class="form-group">
-
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
                 <div class="form-group">
-                    {{ csrf_field() }}
                     <label for="descripcion">Descripción</label>
                     <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                 </div>
-
                 <div class="card-footer">
-
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary"> Guardar</button>
+                    <button type="submit" class="btn btn-outline-primary"> Guardar</button>
                     <a href="{{ url('/Proveedores') }}" class="text-primary font-weight-bold py-3"
                         style="right: 5%;">Regresar a la lista</a>
                 </div>
