@@ -24,7 +24,7 @@
                         value="{{ $proveedor->descripcion }}">
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary"> Guardar</button>
+                    <button type="submit" class="btn btn-outline-primary"> Guardar</button>
                     <a href="{{ url('/Proveedores') }}" class="text-primary font-weight-bold py-3">Regresar a la lista</a>
                 </div>
             </div>

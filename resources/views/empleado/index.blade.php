@@ -1,4 +1,5 @@
 @extends('layouts.adminDashboard')
+@section('title', 'tabla')
 <!--Contenido del dashboard-->
 <!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
 @section('module_name')
@@ -46,7 +47,5 @@
                     @endforeach
                 </tbody>
             </table>
-
-        </div>
     </div>
 @endsection

@@ -7,12 +7,12 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ url('/Proveedores/Create') }}"><Button class="button is-primary">Agregar</Button></a>
+            <a href="{{ url('/Proveedores/Create') }}"><Button class="button is-primary is-outlined">Agregar</Button></a>
 
             <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
 
         </div>
-        <div class="card-content">
+        <div class="card-body">
             <table class="table is-striped" id="registros">
                 <thead>
                     <tr>

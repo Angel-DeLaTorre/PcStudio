@@ -68,7 +68,7 @@ CREATE TABLE bitacoraEmpleado(
     descripcion VARCHAR(200) NOT NULL,
     idEmpleado INT NOT NULL,
     CONSTRAINT Pk_idBitacoraEmpleado PRIMARY KEY(idBitacoraEmpleado),
-    CONSTRAINT Fk_idEmpleado_bitacoraEmpleado FOREIGN KEY(idEmpleado) REFERENCES empleado(idEmpleado)
+    CONSTRAINT Fk_idEmpleado_bitacoraEmpleado FOREIGN KEY(idEmpleado) REFERENCES empleados(idEmpleado)
 );
 
 -- CLIENTE
@@ -179,7 +179,7 @@ CREATE TABLE compra(
     idEmpleado INT NOT NULL,
     idCliente INT NOT NULL,
     CONSTRAINT Pk_idCompra PRIMARY KEY(idCompra),
-    CONSTRAINT Fk_idEmpleado_compra FOREIGN KEY(idEmpleado) REFERENCES empleado(idEmpleado),
+    CONSTRAINT Fk_idEmpleado_compra FOREIGN KEY(idEmpleado) REFERENCES empleados(idEmpleado),
     CONSTRAINT Fk_idCliente_compra FOREIGN KEY(idCliente) REFERENCES cliente(idCliente)
 );
 
