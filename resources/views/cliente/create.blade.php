@@ -49,7 +49,7 @@
                             <label for="">Tipo de persona</label>
                             <select name="tipoPersona" id="tipoPersona"  class="form-control" required>
                                 <option value="1">Fisica</option>   
-                                <option value="1">Moral</option>                                                             
+                                <option value="2">Moral</option>                                                             
                               </select>
                         </div>
 

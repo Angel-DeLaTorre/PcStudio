@@ -41,11 +41,11 @@ Route::resource('empleado', 'Empleado\EmpleadoController')->middleware('auth');
 
 
 //Rutas de clientes
-Route::resource('cliente', 'Cliente\ClienteController');//->middleware('auth');
+Route::resource('cliente', 'Cliente\ClienteController')->middleware('auth');
 
 
 //Rutas Cuestionario
-Route::resource('encuesta', 'Encuesta\EncuestaController');//->middleware('auth');
+Route::resource('encuesta', 'Encuesta\EncuestaController')->middleware('auth');
 
 
 
