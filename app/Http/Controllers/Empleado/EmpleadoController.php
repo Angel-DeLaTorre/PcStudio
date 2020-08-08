@@ -98,7 +98,7 @@ class EmpleadoController extends Controller
                     ->get();
 
        
-        return view('empleado.edit', compact('empleado'));
+       return view('empleado.edit', ['empleado' => $empleado]);
     }
 
     /**
