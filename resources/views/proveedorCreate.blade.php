@@ -6,6 +6,7 @@
 @endsection
 @section('content')
     <form action="/Proveedores/Store" method="POST">
+        @csrf
         <div class="card">
             <div class="card-body">
 

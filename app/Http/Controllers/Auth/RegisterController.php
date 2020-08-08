@@ -9,8 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
-use DB;
 
 class RegisterController extends Controller
 {
@@ -32,7 +32,26 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
+    public function redirectTo()
+    {
+        /*Obtenemos el id del usuario logueado*/
+        $idUsuario = auth()->user()->id;
+        
+        /*Realizamos una consulta para obtener el rol del usuario logueado*/
+        $idCl= DB::select("select idCliente from cliente where idUsuario = $idUsuario");      
+       
+        /*Evaluamos que tipo de usuario es y lo redireccionamos */
+        if($idCl != null)
+        {
+            return '/home';
+        }
+        else
+        {
+            return '/encuesta';
+        }
+
+    }
 
 
 

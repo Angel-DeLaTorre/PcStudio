@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -53,11 +53,11 @@ class LoginController extends Controller
        /*Evaluamos que tipo de usuario es y lo redireccionamos*/
         if($rolValor == 'CLIENTE')
         {
-            return '/home';
+            return '/';
         }
         else if ($rolValor == 'EMPLEADO' || $rolValor == 'ADMIN')
         {
-            return '/homeAdministrativo';
+            return '/home';
         }
         else
         {

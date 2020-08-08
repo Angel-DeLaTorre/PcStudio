@@ -329,5 +329,5 @@
         </div>
     </footer>
 </body>
-
+@yield('script')
 </html>

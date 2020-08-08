@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,29 +21,37 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
-
+//Rutas de producto
+Route::resource('producto', 'Producto\ProductoController')->middleware('auth');
+Route::get('/producto/Delete/{idProducto}', 'Producto\ProductoController@destroy')->name('deleteProducto')->middleware('auth');
+Route::get('/producto/Show/{idProducto}', 'Producto\ProductoController@show')->name('showProducto')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/show/{id}','tagController@show');
+//Route::get('/home', 'HomeController@index')->name('home');
 
+//Route::get('/show/{id}','tagController@show');
 Route::get ('/create','tagController@vista');
 Route::post ('/create','tagController@create');
 
+//Rutas de Usuarios
+Route::resource('usuario', 'Usuario\UsuarioController')->middleware('auth');
+
+//Rutas de Usuarios
+Route::resource('clienteMoral', 'ClienteMoral\clienteMoralController');//->middleware('auth');
+
 
 //Rutas de Empleados
-Route::get('/empleado/Delete/{idEmpleado}', 'Empleado\EmpleadoController@destroy')->name('deleteEmpleado');
+Route::get('/empleado/Delete/{idEmpleado}', 'Empleado\EmpleadoController@destroy')->name('deleteEmpleado')->middleware('auth');
 Route::resource('empleado', 'Empleado\EmpleadoController')->middleware('auth');
 
 
 //Rutas de clientes
-Route::resource('cliente', 'Cliente\ClienteController');//->middleware('auth');
+Route::resource('cliente', 'Cliente\ClienteController')->middleware('auth')->middleware('auth');
 
 
 //Rutas Cuestionario
-Route::resource('encuesta', 'Encuesta\EncuestaController');//->middleware('auth');
+Route::resource('encuesta', 'Encuesta\EncuestaController')->middleware('auth')->middleware('auth');
 
 
 
