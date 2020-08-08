@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
+namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
+use App\Rol;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-class ClienteController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +18,12 @@ class ClienteController extends Controller
      */
     public function index()
     {
-       
+        $user =  DB::table('users')
+        ->join('rol', 'users.idRol', '=', 'rol.idRol')
+        ->select('users.id','users.name','users.email','rol.rol')
+        ->get();
+
+        return view('usuario.index', ['usuarios' => $user]);
     }
 
     /**
@@ -25,7 +33,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('cliente.create');
+        //
     }
 
     /**
@@ -36,33 +44,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $idUsuario = auth()->user()->id;
-
-        $tortalRespuestas = $request->R1 + $request->R2 + $request->R3 + $request->R4;
-
-        if($tortalRespuestas >= 11){
-          
-            $tag = 'Experto';
-                    
-            }else if($tortalRespuestas >= 7 && $tortalRespuestas <= 10 ){
-        
-            $tag = 'Avanzado';
-            
-            }else if($tortalRespuestas >= 4 && $tortalRespuestas <= 6){            
-            $tag = 'Principiante';
-            
-        }else{                
-           $tag = 'Elemental';
-                
-        }
-        
-        
-        $data = DB::select('call  sp_insertarCliente(?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        array($request->name, $request->apellidoP, $request->apellidoM, 
-              $request->fechaN, $request->telefono, $request->rfc, $request->tipoPersona, 
-              $idUsuario, $tag));
-
-        return view('home');
+        //
     }
 
     /**
@@ -73,7 +55,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -84,7 +66,13 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user =  DB::table('users')
+        ->join('rol', 'users.idRol', '=', 'rol.idRol')
+        ->select('users.id','users.name','users.email','rol.rol')
+        ->where('users.id','=', $id)
+        ->get();
+
+        return view('usuario.edit', ['usuario' => $user]);
     }
 
     /**
@@ -96,7 +84,23 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $nombre = $request->name;
+        $email = $request->email;       
+        $rol = strtoupper($request->rol);
+        $contraseña = $request->password;
+
+        if($contraseña != null)
+        {
+            $contraseña = Hash::make($request->password);
+        }
+
+        //eturn $request->all();
+        $data = DB::select('call  sp_actualizarUsuario(?, ?, ?, ?, ?)',
+        array($id, $nombre, $email, $contraseña, $rol));
+
+        
+        return redirect()->route('usuario.index')->with('status', 'Se a actualizado el Usuario');
+    
     }
 
     /**
@@ -109,6 +113,4 @@ class ClienteController extends Controller
     {
         //
     }
-
-
 }

@@ -17,20 +17,19 @@
             <table class="table is-striped" id="registros">
                 <thead>
                     <tr>
-                        <th>Id</th>                
-                        <th>Codigo Empleado</th>
-                        <th>Nombre</th>
-                        <th>Apellidos</th> 
-                        <th>Fecha nacimiento</th>
-                        <th>Telefono</th>
+                        <th>Institucion</th>                
+                        <th>Tel institucional</th>
+                        <th>Nombre contacto</th>
+                        <th>Telefono</th> 
+                        <th>Ext</th>
+                        <th>Email</th>
                         <th>RFC</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($empleado as $item)
+                    @foreach($institucion as $item)
                         <tr>
-                            <td>{{$item->idEmpleado}}</td>
+                            <td>{{$item->}}</td>
                             <td>{{$item->codigoEmpleado}}</td>
                             <td>{{$item->nombre}}</td>
                             <td>{{$item->apellidoPaterno.' '.$item->apellidoMaterno}}</td>

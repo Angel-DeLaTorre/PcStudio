@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,8 @@ use Illuminate\Support\Facades\Request;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Auth::routes();
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
 
 //Rutas de producto
 Route::resource('producto', 'Producto\ProductoController')->middleware('auth');
@@ -28,22 +28,30 @@ Route::get('/producto/Show/{idProducto}', 'Producto\ProductoController@show')->n
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Route::get('/home', 'HomeController@index')->name('home');
+
 //Route::get('/show/{id}','tagController@show');
 Route::get ('/create','tagController@vista');
 Route::post ('/create','tagController@create');
 
+//Rutas de Usuarios
+Route::resource('usuario', 'Usuario\UsuarioController')->middleware('auth');
+
+//Rutas de Usuarios
+Route::resource('clienteMoral', 'ClienteMoral\clienteMoralController');//->middleware('auth');
+
 
 //Rutas de Empleados
-Route::get('/empleado/Delete/{idEmpleado}', 'Empleado\EmpleadoController@destroy')->name('deleteEmpleado');
+Route::get('/empleado/Delete/{idEmpleado}', 'Empleado\EmpleadoController@destroy')->name('deleteEmpleado')->middleware('auth');
 Route::resource('empleado', 'Empleado\EmpleadoController')->middleware('auth');
 
 
 //Rutas de clientes
-Route::resource('cliente', 'Cliente\ClienteController');//->middleware('auth');
+Route::resource('cliente', 'Cliente\ClienteController')->middleware('auth')->middleware('auth');
 
 
 //Rutas Cuestionario
-Route::resource('encuesta', 'Encuesta\EncuestaController');//->middleware('auth');
+Route::resource('encuesta', 'Encuesta\EncuestaController')->middleware('auth')->middleware('auth');
 
 
 
@@ -80,6 +88,16 @@ Route::get('/Categorias/Delete/{idCategoria}', 'CategoriaController@destroy')->n
 ///Rutas de SnatchBot
 //Request::path();
 //$url = $request->path();
-if(Request::path() == 1 || Request::path() == 2){
+if(Request::path() == 1 || Request::path() == 2 || Request::path() == 3 || Request::path() == 4 || 
+    Request::path() == 5 || Request::path() == 6 || Request::path() == 7 || Request::path() == 8 ||
+    Request::path() == 9 || Request::path() == 10 || Request::path() == 11 || Request::path() == 12 || 
+    Request::path() == 13 || Request::path() == 14 || Request::path() == 15 || Request::path() == 16 || 
+    Request::path() == 17 || Request::path() == 18 || Request::path() == 19 ||  Request::path() == 20){
+
     Route::get (Request::path(),'SnatchBotController@index');
 }
+
+Route::get ('/indexProducto','CarritoController@index');
+Route::post ('/indexProducto','CarritoController@agregarProductoCarrito');
+Route::get ('/indexCarrito','CarritoController@vistaProductosCarrito');
+Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');

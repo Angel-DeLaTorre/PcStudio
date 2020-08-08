@@ -98,7 +98,7 @@ class EmpleadoController extends Controller
                     ->get();
 
        
-        return view('empleado.edit', compact('empleado'));
+       return view('empleado.edit', ['empleado' => $empleado]);
     }
 
     /**
@@ -122,8 +122,8 @@ class EmpleadoController extends Controller
         $data = DB::select('call  sp_actualizarEmpleado(?, ?, ?, ?, ?, ?, ?)',
         array($idEpleado, $nombre, $apellidoP, $apellidoM, $fecha, $tel, $rfc));
 
-        print_r($data);
-        //return redirect()->route('empleado.index')->with('status', 'El empleado Actualizado');
+        //print_r($data);
+        return redirect()->route('empleado.index')->with('status', 'El empleado Actualizado');
     }
 
     /**

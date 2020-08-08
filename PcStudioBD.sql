@@ -132,7 +132,7 @@ CREATE TABLE categoria(
     updated_at timestamp null,
     created_at timestamp null,
     CONSTRAINT Pk_idCategoria PRIMARY KEY(idCategoria)
-)
+);
 
 -- IMAGENPRODUCTO
 CREATE TABLE imagenProducto(
@@ -141,7 +141,7 @@ CREATE TABLE imagenProducto(
     idProducto INT NOT NULL,
     CONSTRAINT Pk_idImagenProducto PRIMARY KEY(idImagenProducto),
     CONSTRAINT Fk_idProducto_imagenProducto FOREIGN KEY(idProducto) REFERENCES producto(idProducto)
-)
+);
 
 CREATE TABLE proveedor(
     idProveedor INT NOT NULL AUTO_INCREMENT,
@@ -151,7 +151,7 @@ CREATE TABLE proveedor(
     updated_at timestamp null,
     created_at timestamp null,
     CONSTRAINT Pk_idProveedor PRIMARY KEY(idProveedor)
-)
+);
 
 -- CARRITO
 CREATE TABLE carrito(
@@ -163,7 +163,7 @@ CREATE TABLE carrito(
     CONSTRAINT Pk_idCarrito PRIMARY KEY(idCarrito),
     CONSTRAINT Fk_idProducto_carrito FOREIGN KEY(idProducto) REFERENCES producto(idProducto),
     CONSTRAINT Fk_idUsuario_carrito FOREIGN KEY(idUsuario) REFERENCES users(id)
-)
+);
 
 -- COMPRA
 CREATE TABLE compra(
@@ -174,7 +174,7 @@ CREATE TABLE compra(
     CONSTRAINT Pk_idCompra PRIMARY KEY(idCompra),
     CONSTRAINT Fk_idEmpleado_compra FOREIGN KEY(idEmpleado) REFERENCES empleado(idEmpleado),
     CONSTRAINT Fk_idCliente_compra FOREIGN KEY(idCliente) REFERENCES cliente(idCliente)
-)
+);
 
 -- DETALLE COMPRA
 CREATE TABLE detalleCompra(
@@ -186,7 +186,7 @@ CREATE TABLE detalleCompra(
     CONSTRAINT Pk_idDetalleCompra PRIMARY KEY(idDetalleCompra),
     CONSTRAINT Fk_idProducto_detalleCompra FOREIGN KEY(idProducto) REFERENCES producto(idProducto),
     CONSTRAINT Fk_idCompra_detalleCompra FOREIGN KEY(idCompra) REFERENCES compra(idCompra)
-)
+);
 
 
 -- USUARIO
@@ -202,14 +202,14 @@ CREATE TABLE users(
     idRol INT NOT NULL,
     CONSTRAINT Pk_idUsuario PRIMARY KEY(id),
     CONSTRAINT Fk_idRol_usuario FOREIGN KEY(idRol) REFERENCES rol(idRol)
-)
+);
 
 -- ROL
 CREATE TABLE rol(
     idRol INT AUTO_INCREMENT not null,
     rol varchar(30) not null,
     CONSTRAINT Pk_idRol PRIMARY KEY(idRol)
-)
+);
 
 -- TAG
     -- Alta (Entretenimiento, edicion de video, programas 18000)    --11 - 13
@@ -219,5 +219,8 @@ CREATE TABLE rol(
 CREATE TABLE tag(
     idTag INT AUTO_INCREMENT not null,
     tag varchar(30) not null,
+    descripcion VARCHAR(500) NOT NULL,
+    created_at timestamp null,
+    updated_at timestamp null,
     CONSTRAINT Pk_idTag PRIMARY KEY(idTag)
 )

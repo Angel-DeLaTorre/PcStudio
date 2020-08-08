@@ -53,16 +53,6 @@
                 </div>
             </div>
 
-            <div class="col-md-6">     
-                <label for="">Tipo de persona</label>
-
-               <div class="form-group">
-                <select name="rol" id="rol"  class="form-control" required>
-                    <option value="2">Empleado</option>   
-                    <option value="3">Administrador</option>                                                             
-                  </select>
-               </div>
-            </div>
             </div>
         </div>
 
@@ -70,34 +60,40 @@
         <div class="card form-group">
             
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos del Empleado</h2></label>
+                <label for=""><h2>Datos del la institucion</h2></label>
             </div>
 
             <div class="col-md-12 row form-group">
                 
             <div class="col-md-6 form-group">     
-                <label for="">Nombre</label>
-                <input type="text" name="name" id="name" class="form-control" required>
+                <label for="">Nombre de la Institucion</label>
+                <input type="text" name="nameInstitucion" id="nameInstitucion" class="form-control" required>
             </div>
 
             <div class="col-md-6 form-group">     
-                <label for="">Apellido Paterno</label>
-                <input type="text" name="apellidoP" id="apellidoP" class="form-control"  required>
+                <label for="">Nombr del contacto</label>
+                <input type="date" name="nombreContacto" id="nombreContacto" class="form-control" >
             </div>
 
             <div class="col-md-6 form-group">     
-                <label for="">Apellido Materno</label>
-                <input type="text" name="apellidoM" id="apellidoM" class="form-control" >
+                <label for="">Telefono institucional</label>
+                <input type="text" name="telInstitucion" id="telInstitucion" class="form-control"  required>
             </div>
 
             <div class="col-md-6 form-group">     
-                <label for="">Fecha de nacimiento</label>
-                <input type="date" name="fechaN" id="fechaN" class="form-control" >
+                <label for="">Extencion</label>
+                <input type="text" name="ext" id="ext" class="form-control" >
             </div>
+
             
             <div class="col-md-6 form-group">     
-                <label for="">Telefono</label>
-                <input type="text" name="telefono" id="telefono" class="form-control" required>
+                <label for="">Telefono contacto</label>
+                <input type="text" name="telContacto" id="telContacto" class="form-control" required>
+            </div>
+
+            <div class="col-md-6 form-group">     
+                <label for="">Email</label>
+                <input type="text" name="emailContacto" id="emailContacto" class="form-control" >
             </div>
 
             <div class="col-md-6 form-group">     

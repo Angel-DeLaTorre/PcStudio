@@ -12,7 +12,7 @@
             <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
 
         </div>
-        <div class="card-content">
+        <div class="card-body">
             <table class="table is-striped" id="registros">
                 <thead>
                     <tr>
