@@ -1,16 +1,6 @@
 CREATE DATABASE pcstudiodb;
 
 use pcstudiodb;
-<<<<<<< HEAD
-=======
-
-DROP DATABASE IF EXISTS pcstudiodb;
-
-SELECT * FROM persona;
-
-select * from empleados;
-DESCRIBE PERSONA;
->>>>>>> c3f8d17ba3392c0e1a8541dfbec95314ea9ccd0f
 -- PERSONA
 CREATE TABLE persona(
     idPersona INT  AUTO_INCREMENT NOT NULL,

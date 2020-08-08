@@ -98,10 +98,35 @@
                     </div>
                 </div>
 
-                <div class="card card pt-4 pb-4 pl-2 pr-2" id="cardAtrib">
-                    <h2 class="ml-2">Categorias</h2>
-                    <div class="" id="newlinktpl">
+                <div class="card card pt-4 pb-4 pl-2 pr-2" >
+                    <div class="row ml-3 mb-3">
+                        <h2 class="ml-2 mt-1">Imagenes</h2>
+                        <a href="javascript:new_img()" class="btn btn-outline-primary ml-5">Agregar</a>
                     </div>
+                    <div class="row ml-3 mb-4" id="cardImg">
+                        <div class="" id="newImg"></div>
+                        <?php $title = 10001 ?>
+                        @foreach ($imagenes as $img)
+                            <div id="<?php echo $title ?>" class="col-lg-4 col-md-6 col-sm-8 col mb-2">
+                                <div class="col-12  mb-1 ">
+                                    <img src="{{asset('img/productos/'.$img->imagenUrl)}}" alt="qwert">
+                                    <input hidden type="text" name="descripcionC[]" id="descripcionC" class="form-control" value="{{$img->imagenUrl}}">
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-outline-danger" href="javascript:delImg(<?php echo $title ?>)">Eliminar</a>
+                                </div>
+                            </div>
+                            <?php $title++ ?>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="card card pt-4 pb-4 pl-2 pr-2" id="cardAtrib">
+                    <div class="row ml-3 mb-3">
+                        <h2 class="ml-2 mt-1">Categorias</h2>
+                        <a href="javascript:new_link()" class="btn btn-outline-primary ml-5">Agregar</a>
+                    </div>
+                    <div class="" id="newlinktpl"></div>
                     <?php $title = 10001 ?>
                     @foreach ($atributos as $item)
                         <div id="<?php echo $title ?>" class="col-lg-12 row">
@@ -116,7 +141,7 @@
                                 <input hidden type="text" name="idC[]" id="idC" class="form-control" value="{{$item->idAtributoProducto}}">
                             </div>
                             <div class="col-lg-2 mb-3 pt-4">
-                                <a class="btn btn-primary" href="javascript:delIt(<?php echo $title ?>)">Eliminar</a>
+                                <a class="btn btn-outline-danger" href="javascript:delIt(<?php echo $title ?>)">Eliminar</a>
                             </div>
                         </div>
                         <?php $title++ ?>
@@ -124,18 +149,17 @@
                     
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="javascript:new_link()">Add</a>
+                <button type="submit" class="btn btn-primary ml-3">Guardar</button>
             </form>               
             </div>
         </div>
     </div>  
 @endsection 
-
 @section('script')
 
     <script>
         var ct = 1;
+        var ci = 1;
         function new_link()
         {
             ct++;
@@ -145,16 +169,15 @@
             var delLink = '<div class="col-lg-12 row">'
                 +'<div class="col-lg-5 mb-3">'
                     +'<label for="">Nombre</label>'
-                    +'<input type="text" name="nombreC[]" id="nombreC" class="form-control">'
+                    +'<input type="text" name="nombreC[]" id="nombreC" required class="form-control">'
                 +'</div>'
                 +'<div class="col-lg-5 mb-3">'
                     +'<label for="">Descripcion</label>'
-                    +'<input type="text" name="descripcionC[]" id="descripcionC" class="form-control" >'
+                    +'<input type="text" name="descripcionC[]" id="descripcionC" required class="form-control" >'
                 +'</div>'
                 +'<div class="col-lg-2 mb-3 pt-4">'
-                    +'<a class="btn btn-primary" href="javascript:delIt('+ ct +')">Eliminar</a>'
-                +'</div>';
-            +'</div>'
+                    +'<a class="btn btn-outline-danger" href="javascript:delIt('+ ct +')">Eliminar</a></div>';
+                +'</div>'
             div1.innerHTML = document.getElementById('newlinktpl').innerHTML + delLink;
             document.getElementById('cardAtrib').appendChild(div1);
         }
@@ -167,7 +190,32 @@
             parentEle.removeChild(ele);
         }
 
-
+        function new_img()
+        {
+            ci++;
+            var div1 = document.createElement('div');
+            div1.className = "col-lg-6 col-md-6 col-sm-8";
+            div1.id = ci;
+            // link to delete extended form elements
+            var img = '<div class="row ml-4 mb-2">'
+                    +'<div class="">'
+                        +'<input type="file" name="imagenes[]" required class="form-control" accept="image/x-png,image/jpeg">'
+                    +'</div>'
+                    +'<div class="ml-3">'
+                        +'<a class="btn btn-outline-danger" href="javascript:delImg('+ ci +')">Eliminar</a>'
+                    +'</div>'
+                +'</div>';
+            div1.innerHTML = document.getElementById('newImg').innerHTML + img;
+            document.getElementById('cardImg').appendChild(div1);
+        }
+        // function to delete the newly added set of elements
+        function delImg(id)
+        {
+            d = document;
+            var ele = d.getElementById(id);
+            var parentEle = d.getElementById('cardImg');
+            parentEle.removeChild(ele);
+        }
 
     </script>
 

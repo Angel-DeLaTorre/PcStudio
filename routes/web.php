@@ -20,12 +20,15 @@ Route::get('/', function () {
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('empleado', 'Empleado\EmpleadoController');//->middleware('auth');
+
+//Rutas de producto
 Route::resource('producto', 'Producto\ProductoController')->middleware('auth');
+Route::get('/producto/Delete/{idProducto}', 'Producto\ProductoController@destroy')->name('deleteProducto')->middleware('auth');
+Route::get('/producto/Show/{idProducto}', 'Producto\ProductoController@show')->name('showProducto')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/show/{id}','tagController@show');
-
 Route::get ('/create','tagController@vista');
 Route::post ('/create','tagController@create');
 

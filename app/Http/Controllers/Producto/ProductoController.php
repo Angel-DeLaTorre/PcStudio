@@ -64,18 +64,28 @@ class ProductoController extends Controller
         $estatus       = $request['estatus'];
         $nombreC       = $request['nombreC'];
         $descripcionC  = $request['descripcionC'];
+        $imagenes      = $request['imagenes'];
 
         $atributos = '';
 
         for($i = 0; $i < count($nombreC);$i++){
             $atributos = $atributos . $nombreC[$i] . '*' . $descripcionC[$i] . '-';
         }
+        $con = 1;
+        $listaImg = '';
+        foreach($imagenes as $imagen){
+            $imageName = time().'_'.sprintf("%'03d", $con).'.'.$imagen->extension();
+            $imagen->move(public_path('img/productos'), $imageName);
+            $listaImg = $listaImg .$imageName . ',';
+            $con++;
+        }
 
-        $data = DB::select('call  sp_InsertarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,@id)', 
-            array($titulo, $descripcion, $marca,$precioC, $precioV,$cantidad,$descuento,$estatus,$fechaA,$tag,$categoria,$proveedor,$atributos));
+
+        $data = DB::select('call  sp_InsertarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)', 
+            array($titulo, $descripcion, $marca,$precioC, $precioV,$cantidad,$descuento,$estatus,$fechaA,$tag,$categoria,$proveedor,$atributos,$listaImg));
         $id = DB::select('select @id as id');
 
-        return redirect()->route('producto.index')->with('status', 'Se a guardado el empleado');
+        //return redirect()->route('producto.index')->with('status', 'Se a guardado el empleado');
     }
 
     /**
@@ -86,7 +96,27 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        //
+        $producto = DB::table('producto')
+            ->join('proveedor', 'proveedor.idProveedor', '=', 'producto.idProveedor')
+            ->join('categoria', 'categoria.idCategoria', '=', 'producto.idCategoria')
+            ->join('tag', 'tag.idTag', '=', 'producto.idTag')
+            ->select('producto.idProducto','producto.titulo','producto.descripcion','producto.marca','producto.precioCompra', 
+                    'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta','producto.estatus',
+                    'producto.created_at', 'tag.tag','proveedor.nombre as proveedor',
+                    'categoria.nombre as categoria')
+            ->where('producto.idProducto', '=', $id)
+            ->get();
+        $atributos = DB::table('atributoproducto')
+            ->join('producto', 'producto.idProducto', '=', 'atributoproducto.idProducto')
+            ->select('atributoproducto.titulo','atributoproducto.descripcion','atributoproducto.idAtributoProducto')
+            ->where('atributoproducto.idProducto', '=', $id)
+            ->get();
+        $imagenes = DB::table('imagenproducto')
+            ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->select('imagenproducto.imagenUrl')
+            ->where('imagenproducto.idProducto', '=', $id)
+            ->get();
+        return view('producto.show', compact('producto','atributos','imagenes'));
     }
 
     /**
@@ -106,7 +136,12 @@ class ProductoController extends Controller
         $atributos = DB::table('atributoproducto')
             ->join('producto', 'producto.idProducto', '=', 'atributoproducto.idProducto')
             ->select('atributoproducto.titulo','atributoproducto.descripcion','atributoproducto.idAtributoProducto')
-            ->where('producto.idProducto', '=', $id)
+            ->where('atributoproducto.idProducto', '=', $id)
+            ->get();
+        $imagenes = DB::table('imagenproducto')
+            ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->select('imagenproducto.imagenUrl')
+            ->where('imagenproducto.idProducto', '=', $id)
             ->get();
         $tags = DB::table('tag')
             ->select('tag.idTag','tag.tag')
@@ -117,10 +152,10 @@ class ProductoController extends Controller
         $proveedores = DB::table('proveedor')
             ->select('proveedor.idProveedor','proveedor.nombre')
             ->where('estatus','=',1)
-            ->get();        
+            ->get();      
 
        
-        return view('producto.edit', compact('producto','atributos','tags','categorias','proveedores'));
+        return view('producto.edit', compact('producto','atributos','tags','categorias','proveedores','imagenes'));
     }
 
     /**
@@ -169,6 +204,10 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-       
+        $data = DB::select("UPDATE producto SET estatus = 0 WHERE idProducto = $id");
+        
+        echo "<script>alert('se a actualizado');</script>";
+        
+        return redirect()->route('producto.index')->with('status', 'El producto se a Eliminado');
     }
 }

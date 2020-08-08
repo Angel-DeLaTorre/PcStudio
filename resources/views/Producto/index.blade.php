@@ -22,7 +22,7 @@
                 <th>Precio Compra</th>
                 <th>Precio Venta</th>
                 <th>Cantidad</th>
-                <th>Editar</th>
+                <th>Acciones</th>
             </thead>
             <tbody>
             @foreach ($producto as $item)
@@ -34,7 +34,12 @@
                 <td>{{$item->precioCompra}}</td>
                 <td>{{$item->precioVenta}}</td>
                 <td>{{$item->cantidad}}</td>   
-                <td><a href="/producto/{{$item->idProducto}}/edit" class="btn btn-primary">Editar</a></td>
+                <td>
+                    <a href="/producto/{{$item->idProducto}}/edit"><i
+                        class="material-icons">edit</i></a>
+                    <a href="{{ route('deleteProducto', $item->idProducto) }}"><i class="material-icons"
+                        style="color: #e3342f; margin-left: 15px;">delete_forever</i></a>
+                </td>
             </tr>                    
             @endforeach
             </tbody>

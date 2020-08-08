@@ -22,44 +22,44 @@
                             
                         <div class="col-lg-6 mb-3">     
                             <label for="">Titulo</label>
-                            <input type="text" name="titulo" id="titulo" class="form-control">
+                            <input type="text" name="titulo" required id="titulo" class="form-control">
                         </div>
 
                         <div class="col-lg-6 mb-3">     
                             <label for="">Descripcion</label>
-                            <input type="text" name="descripcion" id="descripcion" class="form-control" >
+                            <input type="text" name="descripcion" required id="descripcion" class="form-control" >
                         </div>
 
                         <div class="col-lg-6 mb-3">     
                             <label for="">Marca</label>
-                            <input type="text" name="marca" id="marca" class="form-control" >
+                            <input type="text" name="marca" id="marca" required class="form-control" >
                         </div>
 
                         <div class="col-lg-6 mb-3">     
                             <label for="">Cantidad</label>
-                            <input type="number" name="cantidad" id="cantidad" class="form-control" >
+                            <input type="number" name="cantidad" id="cantidad" required class="form-control" >
                         </div>
 
                         <div class="col-lg-6 mb-3">     
                             <label for="">Precio Compra</label>
-                            <input type="number" name="precioC" id="precioC" class="form-control" >
+                            <input type="number" name="precioC" id="precioC" required class="form-control" >
                         </div>
                         
                         <div class="col-lg-6 mb-3">     
                             <label for="">Precio venta</label>
-                            <input type="number" name="precioV" id="precioV" class="form-control" >
+                            <input type="number" name="precioV" id="precioV" required class="form-control" >
                         </div>
 
                         <div class="col-lg-6 mb-3">     
                             <label for="">Descuento</label>
-                            <input type="number" name="descuento" id="descuento" class="form-control" >
+                            <input type="number" name="descuento" required id="descuento" class="form-control" >
                         </div>
                         <!-- Debe de ser un select -->
                         <div class="col-lg-6 mb-3">     
                             <label for="">Proveedor</label>
                             <select name="proveedor" id="proveedor" class="form-control">
                                 @foreach ($proveedores as $item)
-                                    <option value="{{$item->idProveedor}}">{{$item->nombre}}</option>        
+                                    <option required value="{{$item->idProveedor}}">{{$item->nombre}}</option>        
                                 @endforeach
                             </select>
                         </div>
@@ -68,7 +68,7 @@
                             <label for="tag">Tag</label>
                             <select name="tag" id="tag" class="form-control">
                                 @foreach ($tags as $item)
-                                    <option value="{{$item->idTag}}">{{$item->tag}}</option>        
+                                    <option required value="{{$item->idTag}}">{{$item->tag}}</option>        
                                 @endforeach
                             </select>
                         </div>
@@ -76,7 +76,7 @@
                             <label for="">Categoria</label>
                             <select name="categoria" id="categoria" class="form-control">
                                 @foreach ($categorias as $item)
-                                    <option value="{{$item->idCategoria}}">{{$item->nombre}}</option>        
+                                    <option required value="{{$item->idCategoria}}">{{$item->nombre}}</option>        
                                 @endforeach
                             </select>
                         </div>
@@ -86,19 +86,35 @@
                         </div>
                     </div>
 
-                
+                    <div class="card card pt-4 pb-4 pl-2 pr-2" id="cardImg">
+                        <div class="row ml-3 mb-3">
+                            <h2 class="ml-2 mt-1">Imagenes</h2>
+                            <a href="javascript:new_img()" class="btn btn-outline-primary ml-5">Agregar</a>
+                        </div>
+                        
+                        <div class="col-lg-6 row mb-3">
+                            <div class="col-lg-8 col-mg-5">
+                                <input type="file" name="imagenes[]" required class="form-control" accept="image/x-png,image/jpeg">
+                            </div>
+                        </div>
+                        <div class="" id="newImg"></div>
+                    </div>
 
                     <div class="card card pt-4 pb-4 pl-2 pr-2" id="cardAtrib">
-                        <h2 class="ml-2">Categorias</h2>
+                        <div class="row ml-3 mb-3">
+                            <h2 class="ml-2 mt-1">Categorias</h2>
+                            <a href="javascript:new_link()" class="btn btn-outline-primary ml-5">Agregar</a>
+                        </div>
+                        
                         <div class="col-lg-12 row">
                             <div class="col-lg-5 mb-3">     
                                 <label for="">Nombre</label>
-                                <input type="text" name="nombreC[]" id="nombreC" class="form-control">
+                                <input type="text" name="nombreC[]" id="nombreC" required class="form-control">
                             </div>
 
                             <div class="col-lg-5 mb-3">     
                                 <label for="">Descripcion</label>
-                                <input type="text" name="descripcionC[]" id="descripcionC" class="form-control" >
+                                <input type="text" name="descripcionC[]" id="descripcionC" required class="form-control" >
                             </div>
                         </div>
                         <div class="" id="newlinktpl">
@@ -108,7 +124,7 @@
 
                     <br>
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="javascript:new_link()">Add</a>
+                    
                 </form>                    
                 </div>
             </div>
@@ -119,6 +135,7 @@
 
     <script>
         var ct = 1;
+        var ci = 1;
         function new_link()
         {
             ct++;
@@ -128,11 +145,11 @@
             var delLink = '<div class="col-lg-12 row">'
                 +'<div class="col-lg-5 mb-3">'
                     +'<label for="">Nombre</label>'
-                    +'<input type="text" name="nombreC[]" id="nombreC" class="form-control">'
+                    +'<input type="text" name="nombreC[]" id="nombreC" required class="form-control">'
                 +'</div>'
                 +'<div class="col-lg-5 mb-3">'
                     +'<label for="">Descripcion</label>'
-                    +'<input type="text" name="descripcionC[]" id="descripcionC" class="form-control" >'
+                    +'<input type="text" name="descripcionC[]" id="descripcionC" required class="form-control" >'
                 +'</div>'
                 +'<div class="col-lg-2 mb-3 pt-4">'
                     +'<a class="btn btn-primary" href="javascript:delIt('+ ct +')">Eliminar</a></div>';
@@ -146,6 +163,33 @@
             d = document;
             var ele = d.getElementById(eleId);
             var parentEle = d.getElementById('cardAtrib');
+            parentEle.removeChild(ele);
+        }
+
+        function new_img()
+        {
+            ci++;
+            var div1 = document.createElement('div');
+            div1.id = ci;
+            // link to delete extended form elements
+            var img = 
+                '<div class="col-lg-6 col-md-6 row">'
+                    +'<div class="col-lg-8 col-mg-5">'
+                        +'<input type="file" name="imagenes[]" required class="form-control" accept="image/x-png,image/jpeg">'
+                    +'</div>'
+                    +'<div class="col-lg-2 mb-3">'
+                        +'<a class="btn btn-primary" href="javascript:delImg('+ ci +')">Eliminar</a>'
+                    +'</div>'
+                +'</div>';
+            div1.innerHTML = document.getElementById('newImg').innerHTML + img;
+            document.getElementById('cardImg').appendChild(div1);
+        }
+        // function to delete the newly added set of elements
+        function delImg(id)
+        {
+            d = document;
+            var ele = d.getElementById(id);
+            var parentEle = d.getElementById('cardImg');
             parentEle.removeChild(ele);
         }
 
