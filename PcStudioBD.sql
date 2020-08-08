@@ -198,7 +198,6 @@ DROP TABLE IF EXISTS `producto`;
 
 CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL AUTO_INCREMENT,
-  `codigoProducto` varchar(60) NOT NULL,
   `titulo` varchar(100) NOT NULL,
   `descripcion` varchar(400) NOT NULL,
   `marca` varchar(200) NOT NULL,
