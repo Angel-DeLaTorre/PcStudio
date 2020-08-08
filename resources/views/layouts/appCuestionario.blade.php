@@ -21,6 +21,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bulma-0.9.0/css/bulma.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bulma-0.9.0/css/bulma.min.css') }}" rel="stylesheet">
 
     <!--Argon CSS-->
     <link rel="stylesheet" href="{{ asset('css/argon.css?v=1.2.0') }}">

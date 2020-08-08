@@ -13,6 +13,15 @@ class User extends Authenticatable
     protected $table = 'users';
 
     /**
+     * Get the rol record associated with the user.
+     */
+    public function rolUser()
+    {
+        return $this->belongsTo('App\Rol', 'idRol', 'idRol');
+    }
+
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
