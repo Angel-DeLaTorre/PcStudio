@@ -53,11 +53,11 @@ class LoginController extends Controller
        /*Evaluamos que tipo de usuario es y lo redireccionamos*/
         if($rolValor == 'CLIENTE')
         {
-            return '/home';
+            return '/';
         }
         else if ($rolValor == 'EMPLEADO' || $rolValor == 'ADMIN')
         {
-            return '/homeAdministrativo';
+            return '/home';
         }
         else
         {
