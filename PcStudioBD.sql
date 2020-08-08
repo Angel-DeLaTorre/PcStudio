@@ -207,6 +207,7 @@ CREATE TABLE `producto` (
   `descuentoVenta` float NOT NULL,
   `estatus` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   `idTag` int(11) NOT NULL,
   `idCategoria` int(11) NOT NULL,
   `idProveedor` int(11) NOT NULL,
