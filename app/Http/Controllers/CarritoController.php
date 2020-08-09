@@ -39,7 +39,7 @@ class CarritoController extends Controller
 
             $carrito->save();
 
-            return redirect('/indexProducto');
+            return redirect($request->ruta);
         }
         else{
             return "Hola, no te salio";

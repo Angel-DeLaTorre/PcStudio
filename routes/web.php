@@ -21,13 +21,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Rutas de producto
+Route::resource('producto', 'Producto\ProductoController')->middleware('auth');
+Route::get('/producto/Delete/{idProducto}', 'Producto\ProductoController@destroy')->name('deleteProducto')->middleware('auth');
+Route::get('/producto/detail/{idProducto}', 'Producto\ProductoController@detail')->name('showProducto')->middleware('auth');
+Route::get('/producto/lista', 'Producto\ProductoController@busqueda')->name('listaProducto')->middleware('auth');
 
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/show/{id}','tagController@show');
-
 Route::get ('/create','tagController@vista');
 Route::post ('/create','tagController@create');
 
