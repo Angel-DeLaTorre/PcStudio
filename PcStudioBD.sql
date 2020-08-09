@@ -19,7 +19,7 @@ CREATE TABLE `rol` (
 DROP TABLE IF EXISTS `tag`;
 
 CREATE TABLE `tag` (
-  `idTag` int(11) NOT NULL,
+  `idTag` int(11) NOT NULL AUTO_INCREMENT,
   `tag` varchar(30) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -253,7 +253,7 @@ CREATE TABLE `imagenProducto` (
 DROP TABLE IF EXISTS `carrito`;
 
 CREATE TABLE `carrito` (
-  `idCarrito` int(11) NOT NULL,
+  `idCarrito` int(11) NOT NULL AUTO_INCREMENT,
   `idUsuario` bigint(20) NOT NULL,
   `idProducto` int(11) NOT NULL,
   `cantidadProducto` int(11) NOT NULL,
