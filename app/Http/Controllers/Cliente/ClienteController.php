@@ -84,7 +84,13 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empleado = DB::table('cliente')
+                    ->join('persona', 'cliente.idCliente', '=', 'persona.idCliente')
+                    ->select('cliente.idCliente','cliente.codigoEmpleado','cliente.estatus','persona.nombre', 
+                            'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                            'persona.telefono', 'persona.rfc', 'persona.tipo')
+                    ->where('cliente.idUsuario', '=', $id)
+                    ->get();
     }
 
     /**
