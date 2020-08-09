@@ -12,29 +12,27 @@
         <a href="{{ url('/producto/create') }}"><Button class="button is-primary is-outlined">Agregar</Button></a>
         <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
     </div>
-    <div class="card-body">
-        <table class="table is-striped">
+    <div class="card-body container-fluid">
+        <table class="table is-striped" id="productSizes">
             <thead>
-                <th>Id Producto</th>                
-                <th>Titulo</th>
-                <th>Descripcion</th>
-                <th>Marca</th> 
-                <th>Precio Compra</th>
-                <th>Precio Venta</th>
-                <th>Cantidad</th>
-                <th>Acciones</th>
+                <tr class="d-flex">
+                    <th class="col-1">Id Producto</th>                
+                    <th class="col-5">Titulo</th>
+                    <th class="col-2">Marca</th> 
+                    <th class="col-1">Precio Venta</th>
+                    <th class="col-1">Cantidad</th>
+                    <th class="col-2">Acciones</th>
+                </tr>
             </thead>
             <tbody>
             @foreach ($producto as $item)
-            <tr>
-                <td>{{$item->idProducto}}</td>
-                <td>{{$item->titulo}}</td>
-                <td>{{$item->descripcion}}</td>
-                <td>{{$item->marca}}</td>
-                <td>{{$item->precioCompra}}</td>
-                <td>{{$item->precioVenta}}</td>
-                <td>{{$item->cantidad}}</td>   
-                <td>
+            <tr class="d-flex">
+                <td class="col-1">{{$item->idProducto}}</td>
+                <td class="col-5">{{$item->titulo}}</td>
+                <td class="col-2">{{$item->marca}}</td>
+                <td class="col-1">${{$item->precioVenta}}</td>
+                <td class="col-1">{{$item->cantidad}}</td>   
+                <td class="col-2">
                     <a href="/producto/{{$item->idProducto}}/edit"><i
                         class="material-icons">edit</i></a>
                     <a href="{{ route('deleteProducto', $item->idProducto) }}"><i class="material-icons"
@@ -46,4 +44,13 @@
         </table>
     </div>
 </div>
+
+<style>
+    td {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+</style>
 @endsection 

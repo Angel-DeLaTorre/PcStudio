@@ -109,8 +109,8 @@
                         @foreach ($imagenes as $img)
                             <div id="<?php echo $title ?>" class="col-lg-4 col-md-6 col-sm-8 col mb-2">
                                 <div class="col-12  mb-1 ">
-                                    <img src="{{asset('img/productos/'.$img->imagenUrl)}}" alt="qwert">
-                                    <input hidden type="text" name="descripcionC[]" id="descripcionC" class="form-control" value="{{$img->imagenUrl}}">
+                                    <img src="{{asset('img/productos/'.$img->imagenUrl)}}" alt="Imagen producto">
+                                    <input hidden type="text" name="oldImg[]" id="oldImg" class="form-control" value="{{$img->imagenUrl}}">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <a class="btn btn-outline-danger" href="javascript:delImg(<?php echo $title ?>)">Eliminar</a>
@@ -199,7 +199,7 @@
             // link to delete extended form elements
             var img = '<div class="row ml-4 mb-2">'
                     +'<div class="">'
-                        +'<input type="file" name="imagenes[]" required class="form-control" accept="image/x-png,image/jpeg">'
+                        +'<input type="file" name="imagenes[]" required class="form-control" accept="image/x-png,image/jpeg,image/webp">'
                     +'</div>'
                     +'<div class="ml-3">'
                         +'<a class="btn btn-outline-danger" href="javascript:delImg('+ ci +')">Eliminar</a>'
