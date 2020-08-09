@@ -43,6 +43,39 @@ class ProductoController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function busqueda()
+    {
+        $productos = DB::table('producto')
+        ->select('producto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
+                'producto.precioCompra', 'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta',
+                'producto.estatus', 'producto.created_at')
+        ->where('estatus', '=', 1)
+        ->get();
+        
+        return view('producto.busqueda',compact('productos'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        $productos = DB::table('imagenproducto')
+            ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
+             'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta')
+            ->get();
+
+        return view('producto.busqueda',compact('productos'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -94,7 +127,7 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function detail($id)
     {
         $producto = DB::table('producto')
             ->join('proveedor', 'proveedor.idProveedor', '=', 'producto.idProveedor')
@@ -116,7 +149,7 @@ class ProductoController extends Controller
             ->select('imagenproducto.imagenUrl')
             ->where('imagenproducto.idProducto', '=', $id)
             ->get();
-        return view('producto.show', compact('producto','atributos','imagenes'));
+        return view('producto.detail', compact('producto','atributos','imagenes'));
     }
 
     /**
@@ -183,15 +216,35 @@ class ProductoController extends Controller
         $estatus       = $request['estatus'];
         $nombreC       = $request['nombreC'];
         $descripcionC  = $request['descripcionC'];
+        $imagenes      = $request['imagenes'];
+        $oldImagenes   = $request['oldImagenes'];
 
         $atributos = '';
 
         for($i = 0; $i < count($nombreC);$i++){
             $atributos = $atributos . $nombreC[$i] . '*' . $descripcionC[$i] . '-';
         }
+        $con = 1;
+        $listaImg = '';
 
-        $data = DB::select('call  sp_ActualizarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
-            array($idProducto,$titulo, $descripcion, $marca,$precioC, $precioV,$cantidad,$descuento,$estatus,$fechaA,$tag,$categoria,$proveedor,$atributos));
+        if(is_array($oldImagenes)){
+            foreach($oldImagenes as $imagenURL)
+            $listaImg = $listaImg .$imagenURL . ',';
+        }
+
+        if(is_array($imagenes)){
+            foreach($imagenes as $imagen){
+                $imageName = sprintf("%'03d", rand(00,999)).'_'. time().'_'.sprintf("%'03d", $con).'.'.$imagen->extension();
+                //$imagen->move(public_path('img/productos'), $imageName);
+                $listaImg = $listaImg .$imageName . ',';
+                $con++;
+            }
+        }
+        echo $listaImg;
+        
+
+        //$data = DB::select('call  sp_ActualizarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
+        //    array($idProducto,$titulo, $descripcion, $marca,$precioC, $precioV,$cantidad,$descuento,$estatus,$fechaA,$tag,$categoria,$proveedor,$atributos,$listaImg));
 
         return redirect()->route('producto.index')->with('status', 'Producto Actualizado');
     }
