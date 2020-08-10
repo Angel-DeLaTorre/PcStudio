@@ -11,8 +11,17 @@
     <title>{{ config('app.name', 'PcStudio') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <!-- Core -->
+    <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/js-cookie/js.cookie.js') }}"></script>
+    <script src="{{ asset('vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <!-- Optional JS -->
+    <script src="{{ asset('vendor/chart.js/dist/Chart.min.js') }}"></script>
+    <!-- Argon JS -->
+    <script src="{{ asset('js/argon.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -22,10 +31,14 @@
     <link href="{{ asset('css/bulma-0.9.0/css/bulma.min.css') }}" rel="stylesheet">
 
     <!--Argon CSS-->
-    <link rel="stylesheet" href="{{ asset('css/argon.css?v=1.2.0') }}">
+    <link rel="stylesheet" href="{{ asset('css/argon.css') }}">
 
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    
+
+    @yield('head')
 
     <style>
         html {
