@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Producto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
