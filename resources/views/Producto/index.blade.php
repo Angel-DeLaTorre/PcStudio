@@ -28,12 +28,11 @@
         <table class="table is-striped">
             <thead>
                 <tr>
-                    <th>Id Producto</th>                
-                    <th>Titulo</th>
-                    <th>Marca</th> 
-                    <th>Precio Venta</th>
-                    <th>Cantidad</th>
-                    <th>Acciones</th>
+                    <th scope="col">Id Producto</th>                
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Precio Venta</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody id="registros">
@@ -41,7 +40,6 @@
             <tr>
                 <td>{{$item->idProducto}}</td>
                 <td>{{$item->titulo}}</td>
-                <td>{{$item->marca}}</td>
                 <td>${{$item->precioVenta}}</td>
                 <td>{{$item->cantidad}}</td>   
                 <td>

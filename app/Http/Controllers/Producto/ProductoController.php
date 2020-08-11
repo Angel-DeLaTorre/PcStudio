@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Producto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Auth;
-use DB;
 
 class ProductoController extends Controller
 {

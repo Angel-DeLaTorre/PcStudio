@@ -12,13 +12,15 @@ class SnatchBotController extends Controller
     {
         $url = $request->path();
         
-        $bot = DB::table('producto') 
-                    ->join('imagenProducto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
-                    ->select('producto.idProducto','producto.titulo','producto.descripcion','producto.marca','producto.precioVenta', 
-                            'imagenProducto.imagenUrl')
-                    ->where('producto.idCategoria', '=', $url)
-                    ->get();
+        $bot = DB::table('imagenproducto')
+        ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+        ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo',
+                    'producto.descripcion', 'producto.marca','producto.precioVenta', 
+                    'producto.cantidad', 'producto.descuentoVenta')
+        ->where('idCategoria', '=', $url)
+        ->get();
         
-        return view('VistaSnatchBot', compact('bot'));
+        return view('producto.busqueda', compact('bot'));
+        //print_r($bot);
     }
 }
