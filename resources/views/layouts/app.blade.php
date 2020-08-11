@@ -97,6 +97,8 @@
         }
     </style>
 
+    @yield('style')
+    
  </head>
 
  <body>
@@ -192,7 +194,7 @@
         </nav>
          
          <main class="py-4">
-             @yield('content')
+            @yield('content')
          </main>
      </div>
  </body>
