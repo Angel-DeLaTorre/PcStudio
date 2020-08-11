@@ -103,5 +103,6 @@ Route::get ('/indexProducto','CarritoController@index');
 Route::post ('/indexProducto','CarritoController@agregarProductoCarrito');
 Route::get ('/indexCarrito','CarritoController@vistaProductosCarrito');
 Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');
+Route::post ('/indexCarrito','CarritoController@confirmarCompra');
 
 Route::get('tipo/{type}', 'SweetController@notification');
