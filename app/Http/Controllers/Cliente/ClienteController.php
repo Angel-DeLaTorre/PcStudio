@@ -57,12 +57,12 @@ class ClienteController extends Controller
         }
         
         
-        $data = DB::select('call  sp_insertarCliente(?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        $data = DB::select('call  sp_insertarCliente(?, ?, ?, ?, ?, ?, ?, ?)',
         array($request->name, $request->apellidoP, $request->apellidoM, 
-              $request->fechaN, $request->telefono, $request->rfc, $request->tipoPersona, 
+              $request->fechaN, $request->telefono, $request->rfc, 
               $idUsuario, $tag));
 
-        return view('home');
+        return redirect("/");
     }
 
     /**
