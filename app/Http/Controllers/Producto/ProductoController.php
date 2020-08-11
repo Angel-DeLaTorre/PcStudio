@@ -76,7 +76,7 @@ class ProductoController extends Controller
             ->get();
         
 
-        //return view('producto.busqueda',compact('productos'));
+        return view('producto.busqueda',compact('productos'));
     }
 
     /**
@@ -122,7 +122,7 @@ class ProductoController extends Controller
             array($titulo, $descripcion, $marca,$precioC, $precioV,$cantidad,$descuento,$estatus,$fechaA,$tag,$categoria,$proveedor,$atributos,$listaImg));
         $id = DB::select('select @id as id');
 
-        //return redirect()->route('producto.index')->with('status', 'Se a guardado el empleado');
+        return redirect()->route('producto.index')->with('status', 'Se a guardado el empleado');
     }
 
     /**

@@ -31,6 +31,7 @@ class CarritoController extends Controller
 
             $cantidadDisponible = $value->cantidad;
         }
+        
         if($request->cantidad <= $cantidadDisponible){
             $carrito->idUsuario = auth()->user()->id;
             $carrito->idProducto = $request->idProducto;
@@ -48,16 +49,17 @@ class CarritoController extends Controller
 
     public function vistaProductosCarrito(){
         $listaProductoCarrito = DB::table('carrito')
-                        ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
-                        ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
-                                'producto.descripcion','producto.marca', 'producto.precioVenta',
-                                'carrito.cantidadProducto')
-                        ->where(function($query)
-                        {
-                            $query->where('carrito.idUsuario', '=', auth()->user()->id)
-                                  ->where('carrito.estatus', '=', 1);
-                        })
-                        ->get();
+            ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
+            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
+                    'producto.descripcion','producto.marca', 'producto.precioVenta',
+                    'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
+            ->where(function($query)
+            {
+                $query->where('carrito.idUsuario', '=', auth()->user()->id)
+                        ->where('carrito.estatus', '=', 1);
+            })
+            ->get();
         
         //print_r(auth()->user()->id);
         return view('Carrito', ['listaProductoCarrito' => $listaProductoCarrito]);

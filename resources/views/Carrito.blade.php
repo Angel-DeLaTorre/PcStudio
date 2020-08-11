@@ -1,50 +1,114 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Carrito</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layouts.app')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-  <?php
-    $subtotal = 0;
-    $total = 0.0;
-  ?>
-      <table class="table tab-content">
-          <tr>
-              <th>Nombre del producto</th>
-              <th>Descripcion</th>
-              <th>Marca</th>
-              <th>precioVenta</th>
-              <th>Cantidad deseada</th>
-              <th>subtotal</th>
-          </tr>
-          @foreach ($listaProductoCarrito as $item)
-          <tr>
-            <td>{{$item->titulo}}</td>
-              <td>{{$item->descripcion}}</td>
-              <td>{{$item->marca}}</td>
-              <td>${{$item->precioVenta}}</td>
-              <td>{{$item->cantidadProducto}}</td>
-              <td>${{$subtotal = ($item->precioVenta * $item->cantidadProducto)}}</td>
-              <input type="hidden" value="{{$total += $subtotal}}" />
-              <td>
-              <a href="{{ route('deleteProducto', $item->idCarrito) }}"><i class="material-icons"
-                                        style="color: #e3342f; margin-left: 15px;">Quitar de carrito</i></a>
-              </td>
-          </tr>
-          @endforeach
-      </table>      
-      <h1>Total = ${{$total}}</h1>  
-  <a href="{{ url('/indexProducto') }}" class="btn btn-primary">Volver a la vista</a>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>
+@section('module_name')
+    <h1 style="color: white;" class="ml-5" id="module_text">Productos</h1>
+@endsection
+
+@section('content')
+	<div class="container">
+		<?php
+		$subtotal = 0;
+		$total = 0.0;
+		?>
+
+		<form action="">
+			<input type="submit" class="btn btn-outline-primary mb-3" value="comprar" >
+			@foreach ($listaProductoCarrito as $producto)
+			<div class="row shadow bg-white rounded">
+				<div class="col-lg-2">
+					<a href="detail/{{$producto->idProducto}}">
+						<img src="{{asset('img/productos/'.$producto->imagenUrl)}}" alt="">
+					</a>
+				</div>
+				<div class="col-lg-8">
+					<a href="detail/{{$producto->idProducto}}"><p>{{$producto->titulo}}</p></a>
+					<p>{{$producto->descripcion}}</p>
+					<p>{{$producto->marca}}</p>
+					<div class="row ml-1">
+						<?php 
+							if ($producto->descuentoVenta > 0){
+								$nuevoCosto = ($producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) / 100);
+								echo '<p><del>$'.$producto->precioVenta.'</del></p>'.
+									'<p class="text-danger ml-2"> $'.$nuevoCosto.' ¡Precio de oferta!</p>';
+							}else{
+								echo '<p>$'.$producto->precioVenta.'</p>';        
+							} 
+							if ($producto->cantidad <= 0){
+								echo '<p class="ml-4 text-danger">Agotado</p>';
+							}
+						?>
+					</div>
+					<div>
+						<div class="form-group">
+							<input hidden type="idProducto" value="{{$producto->idProducto}}">
+							<label for="cantidad">Cantidad: </label>
+							<select name="cantidad" id="cantidad" class="form-control col-lg-6">
+								@for($i = 1; $i < 10; $i++)
+									<option value="{{$i}}">{{$i}}</option>
+								@endfor
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2">
+					<a href="{{ route('deleteProducto', $producto->idCarrito) }}"><p class="btn btn-outline-danger">Quitar de carrito</p></a>
+					<a href="{{ route('deleteProducto', $producto->idCarrito) }}"><p class="btn btn-outline-primary">Guadar para mas tarde</p></a>
+				</div>
+			</div>
+			<?php $subtotal = ($producto->precioVenta * $producto->cantidadProducto) ?>
+			<input type="hidden" value="{{$total += $subtotal}}" />
+			<hr>
+			@endforeach
+		</form>
+		<h1>Total = ${{ $total}}</h1>  
+
+		<hr>
+
+		@foreach ($listaProductoCarrito as $producto)
+			<div class="row shadow bg-white rounded">
+				<div class="col-lg-2">
+					<a href="detail/{{$producto->idProducto}}">
+						<img src="{{asset('img/productos/'.$producto->imagenUrl)}}" alt="">
+					</a>
+				</div>
+				<div class="col-lg-8">
+					<a href="detail/{{$producto->idProducto}}"><p>{{$producto->titulo}}</p></a>
+					<p>{{$producto->descripcion}}</p>
+					<p>{{$producto->marca}}</p>
+					<div class="row ml-1">
+						<?php 
+							if ($producto->descuentoVenta > 0){
+								$nuevoCosto = ($producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) / 100);
+								echo '<p><del>$'.$producto->precioVenta.'</del></p>'.
+									'<p class="text-danger ml-2"> $'.$nuevoCosto.' ¡Precio de oferta!</p>';
+							}else{
+								echo '<p>$'.$producto->precioVenta.'</p>';        
+							} 
+							if ($producto->cantidad <= 0){
+								echo '<p class="ml-4 text-danger">Agotado</p>';
+							}
+						?>
+					</div>
+					<div>
+						<div class="form-group">
+							<input hidden type="idProducto" value="{{$producto->idProducto}}">
+							<label for="cantidad">Cantidad: </label>
+							<select name="cantidad" id="cantidad" class="form-control col-lg-6">
+								@for($i = 1; $i < 10; $i++)
+									<option value="{{$i}}">{{$i}}</option>
+								@endfor
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2">
+					<a href="{{ route('deleteProducto', $producto->idCarrito) }}"><p class="btn btn-outline-danger">Quitar de carrito</p></a>
+					<a href="{{ route('deleteProducto', $producto->idCarrito) }}"><p class="btn btn-outline-primary">Agregar a compra</p></a>
+				</div>
+			</div>
+			<?php $subtotal = ($producto->precioVenta * $producto->cantidadProducto) ?>
+			<input type="hidden" value="{{$total += $subtotal}}" />
+			<hr>
+			@endforeach
+	</div>
+@endsection 
