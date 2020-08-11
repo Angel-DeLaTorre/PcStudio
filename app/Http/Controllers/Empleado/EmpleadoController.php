@@ -90,6 +90,7 @@ class EmpleadoController extends Controller
     public function edit($id)
     {
         $empleado = DB::table('empleado')
+
                     ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
                     ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus','persona.nombre', 
                             'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
@@ -135,7 +136,7 @@ class EmpleadoController extends Controller
     public function destroy($id)
     {
         
-        $data = DB::select("UPDATE empleados SET estatus = 0 WHERE idEmpleado = $id");
+        $data = DB::select("UPDATE empleado SET estatus = 0 WHERE idEmpleado = $id");
         
         echo "<script>alert('se a actualizado');</script>";
         

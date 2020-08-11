@@ -61,7 +61,8 @@ class ClienteController extends Controller
         array($request->name, $request->apellidoP, $request->apellidoM, 
               $request->fechaN, $request->telefono, $request->rfc, $idUsuario, $tag));
 
-        return view('home');
+
+        return redirect("/");
     }
 
     /**

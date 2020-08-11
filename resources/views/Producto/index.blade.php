@@ -2,37 +2,47 @@
 
 <!--Contenido del dashboard-->
 <!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
+
+@section('head')
+    
+@endsection
+
 @section('module_name')
     <h1 style="color: white;" class="ml-5" id="module_text">Productos</h1>
 @endsection
 @section('content')
 
 <div class="card">
+    @include('common.success')
+    @include('common.alert')
+
+    <button type="button" class="btn btn-primary col-lg-2" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
     <div class="card-header">
         <a href="{{ url('/producto/create') }}"><Button class="button is-primary is-outlined">Agregar</Button></a>
         <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
     </div>
-    <div class="card-body container-fluid">
-        <table class="table is-striped" id="productSizes">
+    <div class="card-content col-md-12">
+        <table class="table is-striped">
             <thead>
-                <tr class="d-flex">
-                    <th class="col-1">Id Producto</th>                
-                    <th class="col-5">Titulo</th>
-                    <th class="col-2">Marca</th> 
-                    <th class="col-1">Precio Venta</th>
-                    <th class="col-1">Cantidad</th>
-                    <th class="col-2">Acciones</th>
+                <tr>
+                    <th scope="col">Id Producto</th>                
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Precio Venta</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="registros">
             @foreach ($producto as $item)
-            <tr class="d-flex">
-                <td class="col-1">{{$item->idProducto}}</td>
-                <td class="col-5">{{$item->titulo}}</td>
-                <td class="col-2">{{$item->marca}}</td>
-                <td class="col-1">${{$item->precioVenta}}</td>
-                <td class="col-1">{{$item->cantidad}}</td>   
-                <td class="col-2">
+            <tr>
+                <td>{{$item->idProducto}}</td>
+                <td>{{$item->titulo}}</td>
+                <td>${{$item->precioVenta}}</td>
+                <td>{{$item->cantidad}}</td>   
+                <td>
                     <a href="/producto/{{$item->idProducto}}/edit"><i
                         class="material-icons">edit</i></a>
                     <a href="{{ route('deleteProducto', $item->idProducto) }}"><i class="material-icons"
@@ -44,13 +54,20 @@
         </table>
     </div>
 </div>
-
-<style>
-    td {
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-</style>
 @endsection 
+
+@section('script')
+    <script>
+    $(document).ready(function() {
+        $("#exampleModal").modal('show');
+        
+        $("#mInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            console.log(value);
+            $("#registros tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    </script>
+@stop
