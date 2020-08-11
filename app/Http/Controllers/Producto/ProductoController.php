@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class ProductoController extends Controller
 {
@@ -66,13 +67,16 @@ class ProductoController extends Controller
      */
     public function show()
     {
+        $user = Auth::user();
+
         $productos = DB::table('imagenproducto')
             ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
             ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
              'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta')
             ->get();
+        
 
-        return view('producto.busqueda',compact('productos'));
+        //return view('producto.busqueda',compact('productos'));
     }
 
     /**
@@ -217,7 +221,7 @@ class ProductoController extends Controller
         $nombreC       = $request['nombreC'];
         $descripcionC  = $request['descripcionC'];
         $imagenes      = $request['imagenes'];
-        $oldImagenes   = $request['oldImagenes'];
+        $oldImagenes   = $request['oldImg'];
 
         $atributos = '';
 
@@ -233,9 +237,10 @@ class ProductoController extends Controller
         }
 
         if(is_array($imagenes)){
+            $val = rand(00,999);
             foreach($imagenes as $imagen){
-                $imageName = sprintf("%'03d", rand(00,999)).'_'. time().'_'.sprintf("%'03d", $con).'.'.$imagen->extension();
-                //$imagen->move(public_path('img/productos'), $imageName);
+                $imageName = sprintf("%'03d", $val).'_'. time().'_'.sprintf("%'03d", $con).'.'.$imagen->extension();
+                $imagen->move(public_path('img/productos'), $imageName);
                 $listaImg = $listaImg .$imageName . ',';
                 $con++;
             }
@@ -243,8 +248,8 @@ class ProductoController extends Controller
         echo $listaImg;
         
 
-        //$data = DB::select('call  sp_ActualizarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
-        //    array($idProducto,$titulo, $descripcion, $marca,$precioC, $precioV,$cantidad,$descuento,$estatus,$fechaA,$tag,$categoria,$proveedor,$atributos,$listaImg));
+        $data = DB::select('call  sp_ActualizarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
+            array($idProducto,$titulo, $descripcion, $marca,$precioC, $precioV,$cantidad,$descuento,$estatus,$fechaA,$tag,$categoria,$proveedor,$atributos,$listaImg));
 
         return redirect()->route('producto.index')->with('status', 'Producto Actualizado');
     }
