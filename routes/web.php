@@ -40,6 +40,7 @@ Route::post ('/create','tagController@create');
 Route::resource('usuario', 'Usuario\UsuarioController')->middleware('auth');
 
 //Rutas de Usuarios
+Route::get('/clienteMoral/Delete/{idCliente}', 'ClienteMoral\ClienteMoralController@destroy')->name('deleteCliente')->middleware('auth');
 Route::resource('clienteMoral', 'ClienteMoral\clienteMoralController');//->middleware('auth');
 
 

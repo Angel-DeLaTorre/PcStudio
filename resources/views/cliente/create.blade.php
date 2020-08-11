@@ -44,15 +44,6 @@
                             <input type="text" name="rfc" id="rfc" class="form-control" maxlength="10">
                         </div>
 
-
-                        <div class="col-md-6 form-group">
-                            <label for="">Tipo de persona</label>
-                            <select name="tipoPersona" id="tipoPersona"  class="form-control" required>
-                                <option value="1">Fisica</option>   
-                                <option value="2">Moral</option>                                                             
-                              </select>
-                        </div>
-
                             <div class="col-md-12">
                                 <div class=" col-lg-3">
                                     <button type="submit" class="btn btn-primary">Guardar</button>

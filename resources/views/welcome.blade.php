@@ -258,7 +258,7 @@
                                     </p>
                                 </div>
                         </div>
-                        </a>
+                            </a>
                     </li>
                     <li class="item-a">
                         <!--slider-box-->
