@@ -18,9 +18,9 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $empleado = DB::table('empleados')
-        ->join('persona', 'empleados.idEmpleado', '=', 'persona.idPersona')
-        ->select('empleados.idEmpleado','empleados.codigoEmpleado','empleados.estatus', 'persona.idPersona',
+        $empleado = DB::table('empleado')
+        ->join('persona', 'empleado.idEmpleado', '=', 'persona.idPersona')
+        ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
                 'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
                 'persona.telefono', 'persona.rfc')
         ->where('estatus', '=', 1)
@@ -61,7 +61,7 @@ class EmpleadoController extends Controller
 
         //return $request->all();
 
-        $data = DB::select('call  sp_empleado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        $data = DB::select('call  sp_insertarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         array($nombre, $email, $password, $rol, $apellidoP, $apellidoM, $fecha, $tel, $rfc, $estatus));
 
         return redirect()->route('empleado.index')->with('status', 'Se a guardado el empleado');
@@ -89,12 +89,12 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        $empleado = DB::table('empleados')
-                    ->join('persona', 'empleados.idEmpleado', '=', 'persona.idPersona')
-                    ->select('empleados.idEmpleado','empleados.codigoEmpleado','empleados.estatus','persona.nombre', 
+        $empleado = DB::table('empleado')
+                    ->join('persona', 'empleado.idEmpleado', '=', 'persona.idPersona')
+                    ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus','persona.nombre', 
                             'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
                             'persona.telefono', 'persona.rfc', 'persona.tipo')
-                    ->where('empleados.idEmpleado', '=', $id)
+                    ->where('empleado.idEmpleado', '=', $id)
                     ->get();
 
        
@@ -135,7 +135,7 @@ class EmpleadoController extends Controller
     public function destroy($id)
     {
         
-        $data = DB::select("UPDATE empleados SET estatus = 0 WHERE idEmpleado = $id");
+        $data = DB::select("UPDATE empleado SET estatus = 0 WHERE idEmpleado = $id");
         
         echo "<script>alert('se a actualizado');</script>";
         
