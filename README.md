@@ -22,6 +22,15 @@ En el equipo de trabajo se encuentran:
 
 `php artisan serve`
 
+**Asegúrese de ejecutar los siguientes archivos de base de datos primero:**
+
+1. PcStudioBD.sql
+2. Procedures.sql
+3. Registros.sql (opcional)
+
 **Panel de administración**
 
 ![Panel](https://user-images.githubusercontent.com/43243319/88997574-a822fc00-d2b5-11ea-8ea1-1535b84576cf.png)
+
+**Página principal del cliente**
+![Página principal](https://user-images.githubusercontent.com/43243319/89861263-f617e980-db6a-11ea-936c-bd4a0cbc0b26.png)
