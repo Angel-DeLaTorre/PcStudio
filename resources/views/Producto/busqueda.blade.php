@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="card">
-    <div class="card-body container" >
+    <div class="card-body container" > 
         <h1>Nuestros de productos</h1>
         @foreach ($productos as $producto)
         <div class="row shadow p-3 mb-5 bg-white rounded">
