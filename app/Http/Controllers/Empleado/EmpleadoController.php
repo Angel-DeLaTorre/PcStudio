@@ -23,7 +23,7 @@ class EmpleadoController extends Controller
         ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
                 'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
                 'persona.telefono', 'persona.rfc')
-        ->where('estatus', '=', 1)
+        ->where('empleado.estatus', '=', 1)
         ->get();
         
 
@@ -90,7 +90,8 @@ class EmpleadoController extends Controller
     public function edit($id)
     {
         $empleado = DB::table('empleado')
-                    ->join('persona', 'empleado.idEmpleado', '=', 'persona.idPersona')
+
+                    ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
                     ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus','persona.nombre', 
                             'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
                             'persona.telefono', 'persona.rfc', 'persona.tipo')

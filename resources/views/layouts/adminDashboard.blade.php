@@ -219,6 +219,18 @@
                                         <span class="nav-link-text">Compras</span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/usuario') }}">
+                                        <i class="material-icons" style="color: #3490dc">assignment_ind</i>
+                                        <span class="nav-link-text">Usuarios</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/clienteMoral') }}">
+                                        <i class="material-icons" style="color: #38c172">directions_walk</i>
+                                        <span class="nav-link-text">Cliente Moral</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -278,6 +290,14 @@
 
                                         <a href="#!" class="list-group-item list-group-item-action">
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Compras</h4>
+                                        </a>
+
+                                        <a href="{{ url('/usuario') }}" class="list-group-item list-group-item-action">
+                                            <h4 class="mb-0 text-sm" style="text-align:center;">Usuarios</h4>
+                                        </a>
+
+                                        <a href="{{ url('/clienteMoral') }}" class="list-group-item list-group-item-action">
+                                            <h4 class="mb-0 text-sm" style="text-align:center;">Cliente Moral</h4>
                                         </a>
                                     </div>
                                     <!-- View all -->
