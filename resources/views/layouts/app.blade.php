@@ -24,11 +24,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/argon.js') }}"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/bulma-0.9.0/css/bulma.css') }}" rel="stylesheet">
     <link href="{{ asset('css/cards.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bulma-0.9.0/css/bulma.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/argon.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- Iconos de materialize -->
@@ -97,6 +99,8 @@
         }
     </style>
 
+    @yield('style')
+    
  </head>
 
  <body>
@@ -167,7 +171,7 @@
                                         </form>
                                     </div>
                                     <div class="navbar-item">
-                                        <a href="" class="navbar-item is-hoverable">
+                                        <a href="/indexCarrito" class="navbar-item is-hoverable">
                                             <i class="material-icons">shopping_cart</i>
                                         </a>
                                     </div>
@@ -192,7 +196,7 @@
         </nav>
          
          <main class="py-4">
-             @yield('content')
+            @yield('content')
          </main>
      </div>
  </body>
