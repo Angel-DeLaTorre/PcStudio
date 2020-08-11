@@ -140,14 +140,14 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" id="searchForm">
+            <form class="form-inline col-lg-6 col-md-3 my-2 my-lg-0" id="searchForm">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
                     aria-label="Search" id="busqueda" name="busqueda">
                 <button class="button is-outlined" type="submit">
                     <i class="material-icons">search</i>
                 </button>
             </form>
-            <div class="navbar-end" style="width: 25%;">
+            <div class="navbar-end col-lg-3 col-md-2">
                 @if (Route::has('login'))
                     <div class=" navbar-item">
                         <div class="buttons">
@@ -173,7 +173,11 @@
                                         <i class="material-icons">shopping_cart</i>
                                     </a>
                                 </div>
-                                <a href="{{ url('/home') }}" class="button">Dashboard</a>
+                                <div class="navbar-item" data-toggle="tooltip" data-placement="top" title="Dashboard">
+                                    <a href="{{ url('/home') }}" class="navbar-item is-hoverable">
+                                        <i class="material-icons">dashboard</i>
+                                    </a>
+                                </div>
                             @else
                                 <a href="{{ route('login') }}" class="button is-outlined">Iniciar Sesión</a>
                                 @if (Route::has('register'))
@@ -186,8 +190,6 @@
                     </div>
                 @endif
             </div>
-        </div>
-
         </div>
     </nav>
     <!-- Fin navbar principal -->
@@ -438,5 +440,5 @@
     </script>
     <script src="{{ asset('js/lightslider.js') }}" defer></script>
 </body>
-
+<script src="https://account.snatchbot.me/script.js"></script><script>window.sntchChat.Init(124898)</script>
 </html>

@@ -49,7 +49,7 @@
                             <label for="">Tipo de persona</label>
                             <select name="tipoPersona" id="tipoPersona"  class="form-control" required>
                                 <option value="1">Fisica</option>   
-                                <option value="1">Moral</option>                                                             
+                                <option value="2">Moral</option>                                                             
                               </select>
                         </div>
 
@@ -65,6 +65,7 @@
                      <input type="hidden" name="R2" id="R2" value="{{$respuestas['R2']}}">
                      <input type="hidden" name="R3" id="R3" value="{{$respuestas['R3']}}">
                      <input type="hidden" name="R4" id="R4" value="{{$respuestas['R4']}}">
+                    
                     
                 </div> 
                 </form>                   

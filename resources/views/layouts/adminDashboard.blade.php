@@ -11,8 +11,17 @@
     <title>{{ config('app.name', 'PcStudio') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <!-- Core -->
+    <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/js-cookie/js.cookie.js') }}"></script>
+    <script src="{{ asset('vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <!-- Optional JS -->
+    <script src="{{ asset('vendor/chart.js/dist/Chart.min.js') }}"></script>
+    <!-- Argon JS -->
+    <script src="{{ asset('js/argon.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -22,10 +31,14 @@
     <link href="{{ asset('css/bulma-0.9.0/css/bulma.min.css') }}" rel="stylesheet">
 
     <!--Argon CSS-->
-    <link rel="stylesheet" href="{{ asset('css/argon.css?v=1.2.0') }}">
+    <link rel="stylesheet" href="{{ asset('css/argon.css') }}">
 
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    
+
+    @yield('head')
 
     <style>
         html {
@@ -37,7 +50,9 @@
             margin: 0 0 150px;
             /* bottom = footer height */
         }
-
+        .card-body{
+            overflow-x: auto;
+        }
         footer {
             position: absolute;
             left: 0;
@@ -192,6 +207,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/listaTag') }}">
+                                        <i class="material-icons" style="color: #e3342f">Tag</i>
+                                        <span class="nav-link-text">Tags</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="register.html">
                                         <i class="material-icons" style="color: #f6993f">shopping_cart</i>
                                         <span class="nav-link-text">Compras</span>
@@ -247,6 +268,11 @@
                                         <a href="{{ url('/Proveedores') }}"
                                             class="list-group-item list-group-item-action">
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Proveedores</h4>
+                                        </a>
+
+                                        <a href="{{ url('/listaTag') }}"
+                                            class="list-group-item list-group-item-action">
+                                            <h4 class="mb-0 text-sm" style="text-align:center;">Tags</h4>
                                         </a>
 
                                         <a href="#!" class="list-group-item list-group-item-action">
@@ -316,5 +342,5 @@
         </div>
     </footer>
 </body>
-
+@yield('script')
 </html>

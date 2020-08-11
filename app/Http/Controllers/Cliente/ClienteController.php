@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cliente;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -14,7 +15,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        
+       
     }
 
     /**
@@ -35,7 +36,33 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $idUsuario = auth()->user()->id;
+
+        $tortalRespuestas = $request->R1 + $request->R2 + $request->R3 + $request->R4;
+
+        if($tortalRespuestas >= 11){
+          
+            $tag = 'Experto';
+                    
+            }else if($tortalRespuestas >= 7 && $tortalRespuestas <= 10 ){
+        
+            $tag = 'Avanzado';
+            
+            }else if($tortalRespuestas >= 4 && $tortalRespuestas <= 6){            
+            $tag = 'Principiante';
+            
+        }else{                
+           $tag = 'Elemental';
+                
+        }
+        
+        
+        $data = DB::select('call  sp_insertarCliente(?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        array($request->name, $request->apellidoP, $request->apellidoM, 
+              $request->fechaN, $request->telefono, $request->rfc, $request->tipoPersona, 
+              $idUsuario, $tag));
+
+        return view('home');
     }
 
     /**
@@ -57,7 +84,13 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empleado = DB::table('cliente')
+                    ->join('persona', 'cliente.idCliente', '=', 'persona.idCliente')
+                    ->select('cliente.idCliente','cliente.codigoEmpleado','cliente.estatus','persona.nombre', 
+                            'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                            'persona.telefono', 'persona.rfc', 'persona.tipo')
+                    ->where('cliente.idUsuario', '=', $id)
+                    ->get();
     }
 
     /**
