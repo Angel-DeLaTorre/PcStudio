@@ -283,7 +283,6 @@ CREATE TABLE `compra` (
   CONSTRAINT `Fk_idEmpleado_compra` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
 -- detalleCompra
 DROP TABLE IF EXISTS `detalleCompra`;
 
