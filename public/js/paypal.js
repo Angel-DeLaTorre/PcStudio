@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     amount = $('#costo').val();
     console.log(amount);
 

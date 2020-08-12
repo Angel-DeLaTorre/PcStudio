@@ -69,14 +69,18 @@ class ProductoController extends Controller
     {
         $user = Auth::user();
 
-        $productos = DB::table('imagenproducto')
+        if($user->idRol == 1){
+            $productos = DB::table('imagenproducto')
             ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
             ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
              'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta')
             ->get();
         
 
-        return view('producto.busqueda',compact('productos'));
+            return view('producto.busqueda',compact('productos'));
+        }else{
+            abort(401, 'Esta Accion no esta autorizada');
+        }
     }
 
     /**
