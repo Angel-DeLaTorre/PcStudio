@@ -11,9 +11,9 @@
         laravel genera un token -->  
         @csrf
        
+        <label for=""><h2>Datos de usuario</h2></label>
         <div class="card">
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos de usuario</h2></label>
             </div>
             <div class="col-md-12 row">
                 
@@ -57,10 +57,10 @@
         </div>
 
         
+        <label for=""><h2>Datos del la institucion</h2></label>
         <div class="card form-group">
             
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos del la institucion</h2></label>
             </div>
 
             <div class="col-md-12 row form-group">
@@ -87,10 +87,11 @@
 
              </div>
         </div>
+        
+        <label for=""><h2>Datos del Representante</h2></label>
         <div class="card form-group">
             
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos del Representante</h2></label>
             </div>
 
             <div class="col-md-12 row form-group">

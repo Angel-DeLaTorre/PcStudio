@@ -14,10 +14,11 @@
         @method('PUT')
         @csrf
        
+        
+        <label for=""><h2>Datos del la institucion</h2></label>
         <div class="card form-group">
             
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos del la institucion</h2></label>
             </div>
 
             <div class="col-md-12 row form-group">
@@ -44,10 +45,12 @@
 
              </div>
         </div>
+
+        
+        <label for=""><h2>Datos del Representante</h2></label>
         <div class="card form-group">
             
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos del Representante</h2></label>
             </div>
 
             <div class="col-md-12 row form-group">

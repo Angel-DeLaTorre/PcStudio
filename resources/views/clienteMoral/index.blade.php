@@ -18,8 +18,7 @@
                 <thead>
                     <tr>
                         <th>Institucion</th>  
-                        <th>Codigo</th>                        
-                        <th>RFC</th>
+                        <th>Codigo</th>   
                         <th>Contacto</th>
                         <th>Telefono</th> 
                         <th>Email</th>
@@ -31,7 +30,6 @@
                         <tr>    
                             <td>{{$item->nombre}}</td>
                             <td>{{$item->codigoCliente}}</td>
-                            <td>{{$item->rfc}}</td>
                             <td>{{$item->nombreContacto}}</td>
                             <td>{{$item->telefonoContacto}}</td>
                             <td>{{$item->email}}</td>   
@@ -39,7 +37,8 @@
                                 <a href="/clienteMoral/{{$item->idPersona}}/edit"><i class="material-icons">edit</i></a>
                                 <a href="{{ route('deleteCliente', $item->idCliente) }}"><i class="material-icons"
                                     style="color: #e3342f; margin-left: 15px;">delete_forever</i></a>
-                                <!--<a href="/clienteMoral/{{$item->idPersona}}"><i class="material-icons">show</i></a>-->
+                                <a href="/clienteMoral/{{$item->idPersona}}"><i class="material-icons"
+                                    style="color: #ABC120; margin-left: 15px;">content_paste</i></a>
                                
                             </td>                          
                         </tr>
