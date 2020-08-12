@@ -23,7 +23,7 @@ class ClienteMoralController extends Controller
         ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
                 'persona.nombre', 'persona.rfc', 'contacto.nombre AS nombreContacto',
                 'contacto.telefono AS telefonoContacto', 'contacto.email')
-        ->where('cliente.estatus', '=', 1)
+        ->where('cliente.estatus', '=', 1, 'and' , 'persona.tipo', '=', 2)
         ->get();
 
         //return $institucion;
@@ -58,7 +58,6 @@ class ClienteMoralController extends Controller
                   $request->nombreContacto, $request->telContacto, $request->ext, 
                   $request->emailContacto, $email, $password));
 
-       
 
         return redirect()->route('clienteMoral.index')->with('status', 'Se a guardado el empleado');
     }
@@ -71,7 +70,7 @@ class ClienteMoralController extends Controller
      */
     public function show($id)
     {
-        /*$institucion = DB::table('persona')
+        $institucion = DB::table('persona')
         ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
         ->join('contacto', 'persona.idPersona', '=', 'contacto.idPersona')
         ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
@@ -81,7 +80,7 @@ class ClienteMoralController extends Controller
         ->where('cliente.idPersona', '=', $id)
         ->get();
 
-        return $institucion;*/
+        return view('clienteMoral.show', ['institucion' => $institucion]);
     }
 
     /**
@@ -103,7 +102,8 @@ class ClienteMoralController extends Controller
         ->get();
 
         //return $institucion;
-
+        
+        
         return view('clienteMoral.edit', ['institucion' => $institucion]);
     }
 
@@ -123,7 +123,8 @@ class ClienteMoralController extends Controller
                 $request->emailContacto));        
  
          $resultado = $data[0];
-
+         
+        
          return redirect()->route('clienteMoral.index')->with('status', $resultado);         
      
     }
