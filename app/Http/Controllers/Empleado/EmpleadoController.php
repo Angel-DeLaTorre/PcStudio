@@ -80,8 +80,16 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        return 'hola show';
-        //
+        $empleado = DB::table('empleado')
+        ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
+        ->join('users', 'empleado.idUsuario', '=', 'users.id')
+        ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
+                'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                'persona.telefono', 'persona.rfc', 'users.email')
+        ->where('empleado.idEmpleado', '=', $id)
+        ->get();
+
+        return view('empleado.show', ['empleado' => $empleado]);
     }
 
     /**

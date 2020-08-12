@@ -20,8 +20,7 @@
         <div class="card-content col-md-12">
             <table class="table is-striped" id="registros">
                 <thead>
-                    <tr>
-                        <th>Id</th>                
+                    <tr>           
                         <th>Codigo Empleado</th>
                         <th>Nombre</th>
                         <th>Apellidos</th> 
@@ -34,7 +33,6 @@
                 <tbody>
                     @foreach($empleado as $item)
                         <tr>
-                            <td>{{$item->idEmpleado}}</td>
                             <td>{{$item->codigoEmpleado}}</td>
                             <td>{{$item->nombre}}</td>
                             <td>{{$item->apellidoPaterno.' '.$item->apellidoMaterno}}</td>
@@ -46,6 +44,8 @@
                                     class="material-icons">edit</i></a>
                                 <a href="{{ route('deleteEmpleado', $item->idEmpleado) }}"><i class="material-icons"
                                     style="color: #e3342f; margin-left: 15px;">delete_forever</i></a>
+                                <a href="/empleado/{{$item->idEmpleado}}"><i class="material-icons" 
+                                    style="color: #ABC120; margin-left: 15px;">content_paste</i></a>
                             </td>                          
                         </tr>
                     @endforeach
