@@ -19,7 +19,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         $empleado = DB::table('empleado')
-        ->join('persona', 'empleado.idEmpleado', '=', 'persona.idPersona')
+        ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
         ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
                 'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
                 'persona.telefono', 'persona.rfc')
@@ -57,13 +57,13 @@ class EmpleadoController extends Controller
        $fecha = $request->fechaN;
        $tel = $request->telefono;
        $rfc = $request->rfc;
-       $estatus = 1;
+
 
         //return $request->all();
 
-        $data = DB::select('call  sp_insertarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        array($nombre, $email, $password, $rol, $apellidoP, $apellidoM, $fecha, $tel, $rfc, $estatus));
-
+        $data = DB::select('call  sp_insertarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        array($nombre, $email, $password, $rol, $apellidoP, $apellidoM, $fecha, $tel, $rfc));
+        
         return redirect()->route('empleado.index')->with('status', 'Se a guardado el empleado');
 
         //return $request->all();

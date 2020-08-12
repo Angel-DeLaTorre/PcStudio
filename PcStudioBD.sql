@@ -274,8 +274,9 @@ DROP TABLE IF EXISTS `compra`;
 CREATE TABLE `compra` (
   `idCompra` int(11) NOT NULL AUTO_INCREMENT,
   `fechaCompra` datetime NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
+  `idEmpleado` int(11) NULL DEFAULT NULL,
   `idCliente` int(11) NOT NULL,
+  `estatus` INT NOT NULL,
   PRIMARY KEY (`idCompra`),
   KEY `Fk_idEmpleado_compra` (`idEmpleado`),
   KEY `Fk_idCliente_compra` (`idCliente`),
