@@ -3,7 +3,7 @@
 <!--Contenido del dashboard-->
 <!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
 @section('module_name')
-    <h1 style="color: white;" id="module_text">Agregar Cliente Moral</h1>
+    <h1 style="color: white;" id="module_text">Agregar Institucion</h1>
 @endsection
 @section('content')
     <form class="form-group" method="POST" action="/clienteMoral" enctype="multipart/form-data">

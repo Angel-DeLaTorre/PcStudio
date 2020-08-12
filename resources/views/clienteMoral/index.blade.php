@@ -1,12 +1,13 @@
 @extends('layouts.adminDashboard')
 
 @section('module_name')
-    <h1 style="color: white;" id="module_text">Cliente Moral</h1>
+    <h1 style="color: white;" id="module_text">Institucion</h1>
 @endsection
 
 @section('content')
     <div class="card">
         <div class="card-header">
+            
             <a href="{{ url('/clienteMoral/create') }}"><Button class="btn btn-outline-primary btn-block">Agregar</Button></a>
 
             <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">

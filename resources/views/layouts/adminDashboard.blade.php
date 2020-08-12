@@ -230,7 +230,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/clienteMoral') }}">
                                         <i class="material-icons" style="color: #38c172">directions_walk</i>
-                                        <span class="nav-link-text">Cliente Moral</span>
+                                        <span class="nav-link-text">Institución</span>
                                     </a>
                                 </li>
 
@@ -304,9 +304,10 @@
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Usuarios</h4>
                                         </a>
 
-                                        <a href="{{ url('/clienteMoral') }}"
-                                            class="list-group-item list-group-item-action">
-                                            <h4 class="mb-0 text-sm" style="text-align:center;">Cliente Moral</h4>
+
+                                        <a href="{{ url('/clienteMoral') }}" class="list-group-item list-group-item-action">
+                                            <h4 class="mb-0 text-sm" style="text-align:center;">Institución</h4>
+
                                         </a>
                                         <a href="{{ url('/Envios') }}"
                                             class="list-group-item list-group-item-action">

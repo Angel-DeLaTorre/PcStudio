@@ -58,7 +58,6 @@ class ClienteMoralController extends Controller
                   $request->nombreContacto, $request->telContacto, $request->ext, 
                   $request->emailContacto, $email, $password));
 
-       
 
         return redirect()->route('clienteMoral.index')->with('status', 'Se a guardado el empleado');
     }
@@ -103,7 +102,8 @@ class ClienteMoralController extends Controller
         ->get();
 
         //return $institucion;
-
+        
+        
         return view('clienteMoral.edit', ['institucion' => $institucion]);
     }
 
@@ -123,7 +123,8 @@ class ClienteMoralController extends Controller
                 $request->emailContacto));        
  
          $resultado = $data[0];
-
+         
+        
          return redirect()->route('clienteMoral.index')->with('status', $resultado);         
      
     }
