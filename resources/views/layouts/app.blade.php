@@ -37,7 +37,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- JS -->
 
-
     <script>
         $(document).ready(function() {
 
@@ -62,6 +61,8 @@
         });
 
     </script>
+
+    @yield('script')
 
     <style>
         #searchForm {

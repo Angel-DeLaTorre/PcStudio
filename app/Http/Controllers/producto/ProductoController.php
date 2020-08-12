@@ -20,7 +20,7 @@ class ProductoController extends Controller
         ->where('estatus', '=', 1)
         ->get();
         
-        return view('producto.index', ['producto' => $productos]);
+        return view('Producto.index', ['producto' => $productos]);
     }
 
     /**

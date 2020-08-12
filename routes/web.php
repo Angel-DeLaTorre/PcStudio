@@ -113,3 +113,9 @@ Route::get ('/indexCarrito','CarritoController@vistaProductosCarrito');
 Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');
 
 Route::get('tipo/{type}', 'SweetController@notification');
+
+//Envios
+Route::get('/Envios', 'EnviosController@index')->name('indexEnvios');
+Route::get('/Envios/Detalle/{idCompra}', 'EnviosController@Detalle')->name('detalleEnvios');
+Route::get('/Envios/Edit/{idCompra}', 'EnviosController@edit')->name('editEnvio');
+Route::put('/Envios/Update/{idCompra}', 'EnviosController@update')->name('updateEnvio');
