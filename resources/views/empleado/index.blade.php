@@ -4,9 +4,14 @@
 @section('module_name')
     <h1 style="color: white;" id="module_text">Empleados</h1>
 @endsection
+
+
 @section('content')
     <div class="card">
-        <div class="card-header">
+        
+        @include('common.success')
+        <div class="card-header">       
+            
             <a href="{{ url('/empleado/create') }}"><Button class="btn btn-outline-primary btn-block">Agregar</Button></a>
 
             <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
@@ -47,6 +52,5 @@
                 </tbody>
             </table>
     </div>
-
-    
+         
 @endsection
