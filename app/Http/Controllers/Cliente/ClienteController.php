@@ -86,12 +86,13 @@ class ClienteController extends Controller
     {
         $cliente = DB::table('cliente')
                     ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
-                    ->select('cliente.idCliente','cliente.codigoCliente','cliente.estatus','persona.nombre', 
+                    ->select('cliente.idCliente','persona.nombre', 
                             'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
-                            'persona.telefono', 'persona.rfc', 'persona.tipo')
+                            'persona.telefono', 'persona.rfc')
                     ->where('cliente.idUsuario', '=', $id)
                     ->get();
 
+        //return $cliente->all();
         return view('cliente.edit', ['cliente' => $cliente]);
     }
 
