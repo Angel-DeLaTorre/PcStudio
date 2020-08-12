@@ -37,8 +37,8 @@ $(document).ready(function(){
                         .then(status)
                         .then(function(response){
                             // redirect to the completed page if paid
-                            window.location.href = '/pay-success';
                             console.log('realizado');
+                            window.location.href = '/pay-success';
                         })
                         .catch(function(error) {
                             // redirect to failed page if internal error occurs
