@@ -666,6 +666,7 @@ BEGIN
             END IF;
         END WHILE;
     DELETE FROM imagenproducto where idProducto = id;
+<<<<<<< HEAD
     SET v = 1;
     WHILE v = 1
         DO
@@ -682,3 +683,105 @@ BEGIN
             END IF;
         END WHILE;
 END;
+=======
+    SET v = 0;
+    WHILE v = 0 DO
+        SET ruta = SUBSTRING_INDEX(imagenes,',',1);
+
+        INSERT INTO imagenproducto (imagenUrl, idProducto) values (ruta,id);
+
+        SET pos = (LENGTH(ruta) +2);
+        SET lon = (LENGTH(imagenes) - 1);
+        SET imagenes = (SELECT SUBSTRING(imagenes,pos,lon));
+        SET pos = (SELECT POSITION(',' IN imagenes));
+        IF pos <= 0 THEN
+            SET v = 1;
+        END IF;
+    END WHILE;
+END;
+
+-- INSERTAR COMPRA --
+drop PROCEDURE if exists sp_InsertarCompra;
+delimiter //
+CREATE PROCEDURE sp_InsertarCompra(
+-- CLIENTE --
+	IN var_nombre VARCHAR(150),
+    IN var_apellidoPaterno VARCHAR(150),
+    IN var_apellidoMaterno VARCHAR(150),
+    IN var_telefono VARCHAR(20),
+    IN var_codigoPostal INT(11),
+    IN var_colonia VARCHAR(200),
+    IN var_calle VARCHAR(200),
+    IN var_municipio VARCHAR(200),
+    IN var_descripcion VARCHAR(200),
+    IN var_numero VARCHAR(10),
+    IN var_numeroExterno VARCHAR(10),
+-- COMPRA --
+    IN var_fechaCompra DATETIME,
+    IN var_idEmpleado INT(11),
+    IN var_idCliente INT(11),
+-- DETALLE COMPRA --
+	IN var_detalle TEXT,
+-- DATOS DE SALIDA --
+    OUT var_idPersonaPedido INT,
+    OUT var_idDireccionPedido INT,
+    OUT var_idCompra INT,
+    OUT var_idDetalleCompra INT
+)
+BEGIN
+    DECLARE items TEXT DEFAULT '';
+    DECLARE idProd TEXT DEFAULT '';
+    DECLARE canti TEXT DEFAULT '';
+    DECLARE preci TEXT DEFAULT '';
+    DECLARE lon INT DEFAULT 0;
+    DECLARE pos INT DEFAULT 0;
+    DECLARE pos2 INT DEFAULT 0;
+    DECLARE v INT DEFAULT 0;
+
+    INSERT INTO personapedido (nombre, apellidoPaterno, apellidoMaterno, telefono) 
+    VALUES (var_nombre, var_apellidoPaterno, var_apellidoMaterno, var_telefono);
+	SET var_idPersonaPedido = LAST_INSERT_ID();
+    
+    INSERT INTO direccionpedido (codigoPostal, colonia, calle, municipio, descripcion, numero, numeroExterno, idPersonaPedido) 
+    VALUES (var_codigoPostal, var_colonia, var_calle, var_municipio, var_descripcion, var_numero, var_numeroExterno, var_idPersonaPedido);
+	SET var_idDireccionPedido = LAST_INSERT_ID();
+    
+	INSERT INTO compra (fechaCompra, idEmpleado, idCliente, estatus) 
+    VALUES (var_fechaCompra, var_idEmpleado, var_idCliente, 1);
+    SET var_idCompra = LAST_INSERT_ID();
+
+    -- SET pos = (SELECT POSITION('-' IN var_detalle)); -- (pos=30)
+    WHILE v = 0 DO
+		SET items = SUBSTRING_INDEX(var_detalle,'-',1);
+        
+        SET pos = (SELECT POSITION('<' IN items)); -- (pos=12)
+        SET pos2 = (SELECT POSITION('*' IN items)); -- (pos=22)
+        SET lon = (LENGTH(items)); -- (pos=29)
+
+       
+        SET idProd = SUBSTRING_INDEX(items,'*',1);
+		Set canti = SUBSTRING_INDEX(SUBSTRING_INDEX(items,'*',-2),'*',1);
+		SET preci = SUBSTRING_INDEX(items,'*',-1);
+
+        INSERT INTO detalleCompra (idCompra, idProducto, cantidad, costo) 
+        VALUES (var_idCompra, idProd, canti, preci);
+        
+        SET lon = (LENGTH(var_detalle));
+        SET pos = (SELECT POSITION('-' IN var_detalle));
+        SET var_detalle = (SELECT SUBSTRING(var_detalle, pos+1, lon-1));
+        SET pos = (SELECT POSITION('-' IN var_detalle));
+        IF pos <= 0 THEN
+            SET v = 1;
+        END IF;
+    END WHILE;
+END //
+delimiter ;
+
+Call sp_InsertarCompra('Paola','Lopez','','4771234567',37804,'Leon II','Josefina Camarena #404','Leon','Muy bonita la casa'
+						,null,'404','2020-08-03',null,1,'1*4*171156-1*4*171156-'
+                        ,@var_idPersonaPedido, @var_idDireccionPedido, @var_idCompra, @var_idDetalleCompra);
+SELECT @var_idPersonaPedido as idPersonaPedido;
+SELECT @var_idDireccionPedido as idDireccionPedido;
+SELECT @var_idCompra as idCompra;
+SELECT @var_idDetalleCompra as idDetalleCompra;
+>>>>>>> a4a18dae66a031b53388296e78942ff854d38f74

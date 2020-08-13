@@ -59,12 +59,14 @@ class EmpleadoController extends Controller
        $rfc = $request->rfc;
 
 
-        //return $request->all();
-
         $data = DB::select('call  sp_insertarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?)',
         array($nombre, $email, $password, $rol, $apellidoP, $apellidoM, $fecha, $tel, $rfc));
-        
-        return redirect()->route('empleado.index')->with('status', 'Se a guardado el empleado');
+
+        //dd($data);
+
+        $validacion = $data[0];
+
+        return redirect()->route('empleado.index')->with('status', $validacion);
 
         //return $request->all();
     }
@@ -77,8 +79,16 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        return 'hola show';
-        //
+        $empleado = DB::table('empleado')
+        ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
+        ->join('users', 'empleado.idUsuario', '=', 'users.id')
+        ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
+                'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                'persona.telefono', 'persona.rfc', 'users.email')
+        ->where('empleado.idEmpleado', '=', $id)
+        ->get();
+
+        return view('empleado.show', ['empleado' => $empleado]);
     }
 
     /**
@@ -123,7 +133,9 @@ class EmpleadoController extends Controller
         $data = DB::select('call  sp_actualizarEmpleado(?, ?, ?, ?, ?, ?, ?)',
         array($idEpleado, $nombre, $apellidoP, $apellidoM, $fecha, $tel, $rfc));
 
+        //dd($data);
         //print_r($data);
+
         return redirect()->route('empleado.index')->with('status', 'El empleado Actualizado');
     }
 

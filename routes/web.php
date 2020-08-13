@@ -40,8 +40,11 @@ Route::post ('/create','tagController@create');
 Route::resource('usuario', 'Usuario\UsuarioController')->middleware('auth');
 
 //Rutas de Usuarios
+Route::resource('direccion', 'Direccion\DireccionController');
+
+//Rutas de Usuarios
 Route::get('/clienteMoral/Delete/{idCliente}', 'ClienteMoral\ClienteMoralController@destroy')->name('deleteCliente')->middleware('auth');
-Route::resource('clienteMoral', 'ClienteMoral\clienteMoralController');//->middleware('auth');
+Route::resource('clienteMoral', 'ClienteMoral\clienteMoralController')->middleware('auth');
 
 
 //Rutas de Empleados
@@ -49,12 +52,16 @@ Route::get('/empleado/Delete/{idEmpleado}', 'Empleado\EmpleadoController@destroy
 Route::resource('empleado', 'Empleado\EmpleadoController')->middleware('auth');
 
 
+//Rutas de ClienteAdministrativo
+Route::resource('clienteAdministrativo', 'ClienteAdministrativo\ClienteAdministrativoController');
+
+
 //Rutas de clientes
-Route::resource('cliente', 'Cliente\ClienteController')->middleware('auth')->middleware('auth');
+Route::resource('cliente', 'Cliente\ClienteController')->middleware('auth');
 
 
 //Rutas Cuestionario
-Route::resource('encuesta', 'Encuesta\EncuestaController')->middleware('auth')->middleware('auth');
+Route::resource('encuesta', 'Encuesta\EncuestaController')->middleware('auth');
 
 
 
@@ -100,9 +107,21 @@ if(Request::path() == 1 || Request::path() == 2 || Request::path() == 3 || Reque
     Route::get (Request::path(),'SnatchBotController@index');
 }
 
-Route::get ('/indexProducto','CarritoController@index');
-Route::post ('/indexProducto','CarritoController@agregarProductoCarrito');
-Route::get ('/indexCarrito','CarritoController@vistaProductosCarrito');
+Route::get('/indexProducto','CarritoController@index');
+Route::post('/indexProducto','CarritoController@agregarProductoCarrito');
+Route::get('/indexCarrito','CarritoController@vistaProductosCarrito');
 Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');
+Route::get('/Guardar/{idCarrito}', 'CarritoController@guardar')->name('guardarProducto');
+Route::get('/asignarCompra/{idCarrito}', 'CarritoController@asignarCompra')->name('asignarCompra');
+
+Route::get ('/datosDestino','ComprasController@indexCuestionarioDestino')->name('datosDestino');
+Route::post ('/datosDestino','ComprasController@guardarDetalle')->name('datosDestino');
+Route::post ('/insertarCompra','ComprasController@insertarCompra')->name('datosDestino');
 
 Route::get('tipo/{type}', 'SweetController@notification');
+
+//Envios
+Route::get('/Envios', 'EnviosController@index')->name('indexEnvios');
+Route::get('/Envios/Detalle/{idCompra}', 'EnviosController@Detalle')->name('detalleEnvios');
+Route::get('/Envios/Edit/{idCompra}', 'EnviosController@edit')->name('editEnvio');
+Route::put('/Envios/Update/{idCompra}', 'EnviosController@update')->name('updateEnvio');

@@ -3,7 +3,7 @@
 <!--Contenido del dashboard-->
 <!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
 @section('module_name')
-    <h1 style="color: white;" id="module_text">Agregar Cliente Moral</h1>
+    <h1 style="color: white;" id="module_text">Agregar Institucion</h1>
 @endsection
 @section('content')
     <form class="form-group" method="POST" action="/clienteMoral" enctype="multipart/form-data">
@@ -11,9 +11,9 @@
         laravel genera un token -->  
         @csrf
        
+        <label for=""><h2>Datos de usuario</h2></label>
         <div class="card">
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos de usuario</h2></label>
             </div>
             <div class="col-md-12 row">
                 
@@ -57,10 +57,10 @@
         </div>
 
         
+        <label for=""><h2>Datos del la institucion</h2></label>
         <div class="card form-group">
             
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos del la institucion</h2></label>
             </div>
 
             <div class="col-md-12 row form-group">
@@ -87,10 +87,11 @@
 
              </div>
         </div>
+        
+        <label for=""><h2>Datos del Representante</h2></label>
         <div class="card form-group">
             
             <div class="col-md-6 form-group">     
-                <label for=""><h2>Datos del Representante</h2></label>
             </div>
 
             <div class="col-md-12 row form-group">
