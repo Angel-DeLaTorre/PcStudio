@@ -5,14 +5,34 @@
 @endsection
 
 @section('content')
-    <div>
-        <div id="paypal-button-container"></div>
-        <input type="number" id="costo" value="50">
-        <?php 
-            if(isset($_GET['reason'])){
-                echo $_GET['reason'];
-            }
-        ?>
+    <div class="mx-5">
+        <div class="col-lg-12">
+            <?php 
+                if(isset($_GET['reason'])){
+                    echo $_GET['reason'];
+                }else {
+                    
+                    echo 'hola';
+                }
+            ?>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <h2>Detalles del pedido </h2>
+                <div >
+                    
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h2 class="mb-5">Realizar pago</h2>
+                <div class="col-lg-10 col-md-12 col-sm-7">
+                    <div id="paypal-button-container"></div>
+                </div>
+                <input type="number" hidden id="costo" value="1">
+            </div>
+        </div>
+        
+        
     </div>
 @endsection 
 

@@ -14,7 +14,7 @@
 		<form action="">
 			<input type="submit" class="btn btn-outline-primary mb-3" value="comprar" >
 			@foreach ($listaProductoCarrito as $producto)
-			<div class="row shadow bg-white rounded">
+			<div class="row ">
 				<div class="col-lg-2">
 					<a href="detail/{{$producto->idProducto}}">
 						<img src="{{asset('img/productos/'.$producto->imagenUrl)}}" alt="">
@@ -22,33 +22,33 @@
 				</div>
 				<div class="col-lg-8">
 					<a href="detail/{{$producto->idProducto}}"><p>{{$producto->titulo}}</p></a>
-					<p>{{$producto->descripcion}}</p>
-					<p>{{$producto->marca}}</p>
+					<p class="cardItem">{{$producto->descripcion}}</p>
+					<p class="cardItem">{{$producto->marca}}</p>
 					<div class="row ml-1">
 						<?php 
 							if ($producto->descuentoVenta > 0){
 								$nuevoCosto = ($producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) / 100);
-								echo '<p><del>$'.$producto->precioVenta.'</del></p>'.
-									'<p class="text-danger ml-2"> $'.$nuevoCosto.' ¡Precio de oferta!</p>';
+								echo '<p class="cardItem"><del>$'.$producto->precioVenta.'</del></p>'.
+									'<p class="text-danger ml-2 cardItem"> $'.$nuevoCosto.' ¡Precio de oferta!</p>';
 							}else{
-								echo '<p>$'.$producto->precioVenta.'</p>';        
+								echo '<p class="cardItem">$'.$producto->precioVenta.'</p>';        
 							} 
 							if ($producto->cantidad <= 0){
-								echo '<p class="ml-4 text-danger">Agotado</p>';
+								echo '<p class="ml-4 text-danger cardItem">Agotado</p>';
 							}
 						?>
 					</div>
-					<div>
-						<div class="form-group">
-							<input hidden type="idProducto" value="{{$producto->idProducto}}">
-							<label for="cantidad">Cantidad: </label>
-							<select name="cantidad" id="cantidad" class="form-control col-lg-6">
+					
+					<div class="form-group ml-1 row">
+							<label for="cantidad" class="mr-3 mt-1">Cantidad: </label>
+							<select name="cantidad" id="cantidad" class="form-control form-control-sm col-lg-1 col-md-2 col-sm-2 col-xs-1">
 								@for($i = 1; $i < 10; $i++)
 									<option value="{{$i}}">{{$i}}</option>
 								@endfor
 							</select>
-						</div>
+							<input hidden type="idProducto" value="{{$producto->idProducto}}">
 					</div>
+				
 				</div>
 				<div class="col-lg-2">
 					<a href="{{ route('deleteProducto', $producto->idCarrito) }}"><p class="btn btn-outline-danger">Quitar de carrito</p></a>
@@ -65,7 +65,7 @@
 		<hr>
 
 		@foreach ($listaProductoCarrito as $producto)
-			<div class="row shadow bg-white rounded">
+			<div class="row ">
 				<div class="col-lg-2">
 					<a href="detail/{{$producto->idProducto}}">
 						<img src="{{asset('img/productos/'.$producto->imagenUrl)}}" alt="">
@@ -112,3 +112,7 @@
 			@endforeach
 	</div>
 @endsection 
+
+@section('style')
+	<link href="{{asset('css/cardProducto.css')}}" rel="stylesheet">
+@endsection

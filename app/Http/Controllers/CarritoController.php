@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 use App\Carrito;
 
 class CarritoController extends Controller
@@ -48,7 +49,10 @@ class CarritoController extends Controller
     }
 
     public function vistaProductosCarrito(){
-        $listaProductoCarrito = DB::table('carrito')
+        $user = Auth::user();
+
+        if($user != null){
+            $listaProductoCarrito = DB::table('carrito')
             ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
             ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
             ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
@@ -61,8 +65,13 @@ class CarritoController extends Controller
             })
             ->get();
         
-        //print_r(auth()->user()->id);
-        return view('Carrito', ['listaProductoCarrito' => $listaProductoCarrito]);
+            //print_r(auth()->user()->id);
+            return view('Carrito', ['listaProductoCarrito' => $listaProductoCarrito]);
+        }else{
+            return redirect('/login');
+        }
+
+        
     }
 
     public function destroy($idCarrito){
@@ -72,5 +81,10 @@ class CarritoController extends Controller
 
         $productoCarritoEliminar -> save();
         return redirect('/indexCarrito');
+    }
+
+    public function pago(){
+         
+        return view('Compra.pago');
     }
 }
