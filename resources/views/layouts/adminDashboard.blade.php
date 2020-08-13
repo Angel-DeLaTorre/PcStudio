@@ -348,6 +348,7 @@
             <div class="container-fluid" id="module-content" style="margin-top: -10%; position: relative;">
                 @yield('content')
             </div>
+            
         </div>
         <!-- /#page-content-wrapper -->
 
