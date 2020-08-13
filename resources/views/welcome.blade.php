@@ -115,10 +115,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">PC</a>
+                    <a class="nav-link" href="http://127.0.0.1:8000/19">PC</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Laptop</a>
+                    <a class="nav-link" href="http://127.0.0.1:8000/20">Laptop</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -126,17 +126,26 @@
                         Más
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <p style="text-align: center">Periféricos</p>
-                        <a class="dropdown-item" href="#">Memorias USB</a>
-                        <a class="dropdown-item" href="#">Mouse</a>
-                        <a class="dropdown-item" href="#">Teclados</a>
-                        <div class="dropdown-divider"></div>
-                        <p style="text-align: center">Componentes</p>
-                        <a class="dropdown-item" href="#">Unidades de estado sólido SSD</a>
-                        <a class="dropdown-item" href="#">Discos duros HDD</a>
-                        <a class="dropdown-item" href="#">Memorias RAM</a>
-                        <a class="dropdown-item" href="#">Procesadores</a>
-                        <a class="dropdown-item" href="#">Gabinetes</a>
+                    <p style="text-align: center">Hardware interno</p>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/1">Placa madre</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/2">Procesador</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/3">Memoria interna RAM</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/5">Tarjeta de video</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/6">Tarjeta de sonido</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/7">Disco Duro</a>
+                            <div class="dropdown-divider"></div>
+                            <p style="text-align: center">Periféricos </p>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/8">Teclados</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/9">Punteros o ratones</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/10">Micrófonos</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/11">Cámaras</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/12">Escáneres</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/13">Joysticks</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/14">Monitores</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/15">Impresoras</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/16">Bocinas</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/17">Videobeams y proyectores</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/18">Copiadoras de CD o DVD</a>
                     </div>
                 </li>
             </ul>
