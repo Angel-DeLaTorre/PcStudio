@@ -21,7 +21,7 @@
     <!-- Argon JS -->
     <script src="{{ asset('js/argon.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -36,7 +36,7 @@
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    
+
 
     @yield('head')
 
@@ -50,9 +50,11 @@
             margin: 0 0 150px;
             /* bottom = footer height */
         }
-        .card-body{
+
+        .card-body {
             overflow-x: auto;
         }
+
         footer {
             position: absolute;
             left: 0;
@@ -128,7 +130,10 @@
         .card-body {
             overflow-x: auto;
         }
-
+        table
+        {
+            overflow-x: auto;
+        }
     </style>
 
     <!-- JQuery -->
@@ -219,6 +224,25 @@
                                         <span class="nav-link-text">Compras</span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/usuario') }}">
+                                        <i class="material-icons" style="color: #3490dc">assignment_ind</i>
+                                        <span class="nav-link-text">Usuarios</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/clienteMoral') }}">
+                                        <i class="material-icons" style="color: #38c172">directions_walk</i>
+                                        <span class="nav-link-text">Institución</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/Envios') }}">
+                                        <i class="material-icons" style="color: #e3342f">local_shipping</i>
+                                        <span class="nav-link-text">Envíos</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -271,13 +295,26 @@
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Proveedores</h4>
                                         </a>
 
-                                        <a href="{{ url('/listaTag') }}"
-                                            class="list-group-item list-group-item-action">
+                                        <a href="{{ url('/listaTag') }}" class="list-group-item list-group-item-action">
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Tags</h4>
                                         </a>
 
                                         <a href="#!" class="list-group-item list-group-item-action">
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Compras</h4>
+                                        </a>
+
+                                        <a href="{{ url('/usuario') }}" class="list-group-item list-group-item-action">
+                                            <h4 class="mb-0 text-sm" style="text-align:center;">Usuarios</h4>
+                                        </a>
+
+
+                                        <a href="{{ url('/clienteMoral') }}" class="list-group-item list-group-item-action">
+                                            <h4 class="mb-0 text-sm" style="text-align:center;">Institución</h4>
+
+                                        </a>
+                                        <a href="{{ url('/Envios') }}"
+                                            class="list-group-item list-group-item-action">
+                                            <h4 class="mb-0 text-sm" style="text-align:center;">Envíos</h4>
                                         </a>
                                     </div>
                                     <!-- View all -->
@@ -325,7 +362,7 @@
                 </div>
             </div>
             <!-- Page content -->
-            <div class="container-fluid" id="module-content" style="margin-top: -10%; position: relative;">
+            <div class="container-fluid" id="module-content" style="margin-top: -150px; position: relative;">
                 @yield('content')
             </div>
         </div>
@@ -344,4 +381,5 @@
     </footer>
 </body>
 @yield('script')
+
 </html>

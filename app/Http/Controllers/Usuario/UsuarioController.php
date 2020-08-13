@@ -18,6 +18,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+
         $user =  DB::table('users')
         ->join('rol', 'users.idRol', '=', 'rol.idRol')
         ->select('users.id','users.name','users.email','rol.rol')
@@ -66,13 +67,38 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $user =  DB::table('users')
-        ->join('rol', 'users.idRol', '=', 'rol.idRol')
-        ->select('users.id','users.name','users.email','rol.rol')
-        ->where('users.id','=', $id)
-        ->get();
 
-        return view('usuario.edit', ['usuario' => $user]);
+        $idUsuario = auth()->user()->id;       
+
+        if($idUsuario  != $id ){
+
+            $user =  DB::table('users')
+            ->join('rol', 'users.idRol', '=', 'rol.idRol')
+            ->select('users.id','users.name','users.email','rol.rol')
+            ->where('users.id','=', $id)
+            ->get();
+
+            foreach ($user as $item) {
+                $rol = $item->rol;
+            }
+
+            if($rol != 'ADMIN'){
+
+                return view('usuario.edit', ['usuario' => $user]);
+
+            }else{
+
+                return redirect()->route('usuario.index')->with('status', 'No se puede actualizar a un administrador');
+
+            }            
+
+        }else{
+            
+            return redirect()->route('usuario.index')->with('status', 'No se puede actualizar a si mismo');
+
+        }
+
+        
     }
 
     /**

@@ -1,18 +1,20 @@
 @extends('layouts.adminDashboard')
-@section('title', 'tabla')
-<!--Contenido del dashboard-->
-<!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
+
+
 @section('module_name')
     <h1 style="color: white;" id="module_text">Usuarios</h1>
 @endsection
+
+
 @section('content')
     <div class="card">
-        @include('common.success')
+
         <div class="card-header">                     
             
             <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
 
         </div>
+        
         <div class="card-content col-md-12">
             <table class="table is-striped" id="registros">
                 <thead>
@@ -40,5 +42,6 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
     </div>
 @endsection

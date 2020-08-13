@@ -59,8 +59,8 @@ class ClienteController extends Controller
         
         $data = DB::select('call  sp_insertarCliente(?, ?, ?, ?, ?, ?, ?, ?)',
         array($request->name, $request->apellidoP, $request->apellidoM, 
-              $request->fechaN, $request->telefono, $request->rfc, 
-              $idUsuario, $tag));
+              $request->fechaN, $request->telefono, $request->rfc, $idUsuario, $tag));
+
 
         return redirect("/");
     }
@@ -84,13 +84,16 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        $empleado = DB::table('cliente')
-                    ->join('persona', 'cliente.idCliente', '=', 'persona.idCliente')
-                    ->select('cliente.idCliente','cliente.codigoEmpleado','cliente.estatus','persona.nombre', 
+        $cliente = DB::table('cliente')
+                    ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
+                    ->select('cliente.idCliente','persona.nombre', 
                             'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
-                            'persona.telefono', 'persona.rfc', 'persona.tipo')
+                            'persona.telefono', 'persona.rfc')
                     ->where('cliente.idUsuario', '=', $id)
                     ->get();
+
+        //return $cliente->all();
+        return view('cliente.edit', ['cliente' => $cliente]);
     }
 
     /**
