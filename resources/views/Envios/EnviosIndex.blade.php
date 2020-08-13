@@ -6,6 +6,9 @@
 @endsection
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <input class="input" type="text" placeholder="Ingrese su búsqueda" id="mInput">
+        </div>
         <div class="card-body">
             <table class="table is-striped" id="registros">
                 <thead>

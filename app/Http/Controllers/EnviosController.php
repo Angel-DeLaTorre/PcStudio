@@ -37,19 +37,21 @@ class EnviosController extends Controller
         return view('Envios.EnviosDetalle', compact('detalle'));
     }
 
+    // GET edit Envio
     public function edit($idCompra)
     {
-        try {
-            $compra = DB::select('select * from compra where idCompra = ?;', array($idCompra));
-            return view('Envios.EnviosEditar', compact('compra'));
-        } catch (Exception $e) {
-            return redirect("/Envios");
-        }
+        $compra = DB::select('select * from compra where idCompra = ?;', array($idCompra));
+        return view('Envios.EnviosEditar', compact('compra'));
     }
 
-    //POST edit proveedor
+    //POST edit Envio
     public function update(Request $request, $idCompra)
     {
+        $compra = DB::select('select * from compra where idCompra = ?;', array($idCompra));
+        if(!empty($compra) && isset($compra))
+        {
+            DB::statement('update compra set estatus = ? where idCompra = ?;', array($request -> estatus, $idCompra));
+        }
         return redirect('/Envios');
     }
 }
