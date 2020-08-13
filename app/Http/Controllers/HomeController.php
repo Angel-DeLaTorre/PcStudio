@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\Return_;
@@ -32,11 +33,72 @@ class HomeController extends Controller
     {
 
         $saludo = $this->obtenerSaludo();
+        
+        $nombreSaludo = $this->obtenerNombreUsuario();
+        
+        $productosMasVendidos = $this->obtenerProductoMasVendido();
 
         $cantidadUsuarios = $this->contarNuevosUsuariosUltimoMes();
 
+        return view('home', ['saludo' => $saludo, 'nombreSaludo' => $nombreSaludo,
+         'cantidadUsuarios' => $cantidadUsuarios, 'productosMasVendidos' => $productosMasVendidos]);
+    }
 
-        return view('home', ['saludo' => $saludo], ['cantidadUsuarios' => $cantidadUsuarios]);
+
+    //Consulta los nombres de los productos más vendidos durante el 
+    //mes actual y el mes anterior
+    private function obtenerProductoMasVendido()
+    {   
+
+        $tituloProductoActual = DB::table('producto')->select('titulo')->where('idProducto', function($query){
+            $query-> select('idProducto')->from('detalleCompra')->join('compra', 'detalleCompra.idCompra', '=', 'compra.idCompra')
+            ->whereMonth('compra.fechaCompra', '=', Carbon::now()->month)->whereYear('compra.fechaCompra', '=', Carbon::now()->year)
+            ->orderByDesc('cantidad')->limit(1);
+        })->get();
+
+        $tituloProductoAnterior = DB::table('producto')->select('titulo')->where('idProducto', function($query){
+            $query-> select('idProducto')->from('detalleCompra')->join('compra', 'detalleCompra.idCompra', '=', 'compra.idCompra')
+            ->whereMonth('compra.fechaCompra', '=', Carbon::now()->subMonth()->format('m'))->orderByDesc('cantidad')->limit(1);
+        })->get();
+
+        
+        $productos = array();
+
+
+
+        if($tituloProductoActual){
+            array_push($productos,$tituloProductoActual[0]->titulo);
+        } else{
+            array_push($productos,"Sin productos populares este mes");
+        }
+
+        if($tituloProductoAnterior){
+            array_push($productos,$tituloProductoAnterior[0]->titulo);
+        } else{
+            array_push($productos,"Sin productos populares el mes anterior");
+        }
+
+        return $productos;
+    }
+
+    //COnsulta el nombre de la Persona para el Usuario actual
+    private function obtenerNombreUsuario()
+    {
+
+        $idUsuario = Auth::user()->id;
+
+        $nombre = DB::table('persona')
+
+            ->join('cliente', 'cliente.idPersona', '=', 'persona.idPersona')->join('users', 'users.id', 'cliente.idUsuario')
+            ->select('persona.nombre')
+            ->where('users.id', '=', $idUsuario)
+            ->get();
+
+        if ($nombre) {
+            return $nombre[0]->nombre;
+        } else {
+            return Auth::user()->nombre;
+        }
     }
 
 
@@ -64,10 +126,9 @@ class HomeController extends Controller
     private function contarNuevosUsuariosUltimoMes()
     {
 
-        $data = DB::table('users')->where('idRol', '=', 1)->whereMonth('created_at', '=', Carbon::now()->month)->count();
+        $data = DB::table('users')->where('idRol', '=', 1)->whereMonth('created_at', '=', Carbon::now()->month)->whereYear('created_at', '=', Carbon::now()->year)->count();
 
         if ($data) {
-
             return $data;
         } else {
             return 0;

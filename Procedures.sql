@@ -281,7 +281,6 @@ $$
 
 DELIMITER ;
 
-
 -- INSERTAR CLIENTE (PERSONA FÍSICA)
 
 DELIMITER $$
@@ -784,4 +783,5 @@ SELECT @var_idPersonaPedido as idPersonaPedido;
 SELECT @var_idDireccionPedido as idDireccionPedido;
 SELECT @var_idCompra as idCompra;
 SELECT @var_idDetalleCompra as idDetalleCompra;
->>>>>>> a4a18dae66a031b53388296e78942ff854d38f74
+
+

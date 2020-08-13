@@ -370,3 +370,4 @@ CREATE TABLE `failed_jobs` (
 
 SELECT COUNT(id) FROM users WHERE idRol = 1 AND MONTH(created_at) = MONTH(CURDATE());
 
+
