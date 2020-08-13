@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\Return_;
 
 class HomeController extends Controller
 {
@@ -24,19 +26,22 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    
+
 
     public function index()
     {
 
         $saludo = $this->obtenerSaludo();
 
-        //Aquí van a ir las consultas jajajajajaja
-        $saludo = 'Buenas noches';
+        $cantidadUsuarios = $this->contarNuevosUsuariosUltimoMes();
 
-        return view('home', ['saludo' => $saludo]);
+
+        return view('home', ['saludo' => $saludo], ['cantidadUsuarios' => $cantidadUsuarios]);
     }
 
+
+    //Permite establecer un saludo con base en la hora del día
+    //del servidor actual
     private function obtenerSaludo()
     {
 
@@ -48,12 +53,24 @@ class HomeController extends Controller
             $saludo = 'Buenas tardes';
         } else if ($hora >= 19 && $hora < 1) {
             $saludo = 'Buenas noches';
-        } else{
+        } else {
             $saludo = 'Buen día';
         }
 
         return $saludo;
     }
 
-    
+    //Realiza el conteo de los usuarios de tipo cliente registrados durante el último mes
+    private function contarNuevosUsuariosUltimoMes()
+    {
+
+        $data = DB::table('users')->where('idRol', '=', 1)->whereMonth('created_at', '=', Carbon::now()->month)->count();
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return 0;
+        }
+    }
 }

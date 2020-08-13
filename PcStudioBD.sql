@@ -340,4 +340,5 @@ CREATE TABLE `failed_jobs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-SELECT * FROM users
+SELECT COUNT(id) FROM users WHERE idRol = 1 AND MONTH(created_at) = MONTH(CURDATE());
+
