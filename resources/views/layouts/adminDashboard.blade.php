@@ -130,7 +130,10 @@
         .card-body {
             overflow-x: auto;
         }
-
+        table
+        {
+            overflow-x: auto;
+        }
     </style>
 
     <!-- JQuery -->
