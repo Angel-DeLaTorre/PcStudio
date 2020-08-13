@@ -23,9 +23,9 @@ Auth::routes();
 
 //Rutas de producto
 Route::resource('producto', 'Producto\ProductoController')->middleware('auth');
-Route::get('/producto/Delete/{idProducto}', 'Producto\ProductoController@destroy')->name('deleteProducto')->middleware('auth');
-Route::get('/producto/detail/{idProducto}', 'Producto\ProductoController@detail')->name('showProducto')->middleware('auth');
-Route::get('/producto/lista', 'Producto\ProductoController@busqueda')->name('listaProducto')->middleware('auth');
+Route::get('/Delete/{idProducto}', 'Producto\ProductoController@destroy')->name('deleteProducto')->middleware('auth');
+Route::get('/detail/{idProducto}', 'Producto\ProductoController@detail')->name('showProducto')->middleware('auth');
+Route::get('/lista', 'Producto\ProductoController@busqueda')->name('listaProducto')->middleware('auth');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
