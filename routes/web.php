@@ -99,10 +99,15 @@ if(Request::path() == 1 || Request::path() == 2 || Request::path() == 3 || Reque
     Route::get (Request::path(),'SnatchBotController@index');
 }
 
-Route::get ('/indexProducto','CarritoController@index');
-Route::post ('/indexProducto','CarritoController@agregarProductoCarrito');
-Route::get ('/indexCarrito','CarritoController@vistaProductosCarrito');
+Route::get('/indexProducto','CarritoController@index');
+Route::post('/indexProducto','CarritoController@agregarProductoCarrito');
+Route::get('/indexCarrito','CarritoController@vistaProductosCarrito');
 Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');
-Route::post ('/indexCarrito','CarritoController@confirmarCompra');
+Route::get('/Guardar/{idCarrito}', 'CarritoController@guardar')->name('guardarProducto');
+Route::get('/asignarCompra/{idCarrito}', 'CarritoController@asignarCompra')->name('asignarCompra');
+
+Route::get ('/datosDestino','ComprasController@indexCuestionarioDestino')->name('datosDestino');
+Route::post ('/datosDestino','ComprasController@guardarDetalle')->name('datosDestino');
+Route::post ('/insertarCompra','ComprasController@insertarCompra')->name('datosDestino');
 
 Route::get('tipo/{type}', 'SweetController@notification');

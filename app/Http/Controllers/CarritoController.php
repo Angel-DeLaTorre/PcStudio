@@ -12,7 +12,7 @@ class CarritoController extends Controller
     {
         $listaProducto = DB::table('producto')
                         ->select('idProducto','titulo','descripcion', 'marca',
-                                 'precioVenta')
+                                 'precioVenta', 'cantidad')
                         ->where('estatus', '=', 1)
                         ->get();    
         
@@ -43,26 +43,37 @@ class CarritoController extends Controller
             return redirect($request->ruta);
         }
         else{
-            return "Hola, no te salio";
+            return redirect('/indexProducto');
         }
     }
 
     public function vistaProductosCarrito(){
         $listaProductoCarrito = DB::table('carrito')
-            ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
-            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
-            ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
-                    'producto.descripcion','producto.marca', 'producto.precioVenta',
-                    'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
-            ->where(function($query)
-            {
-                $query->where('carrito.idUsuario', '=', auth()->user()->id)
-                        ->where('carrito.estatus', '=', 1);
-            })
-            ->get();
+                                    ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
+                                    ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+                                    ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
+                                            'producto.descripcion','producto.marca', 'producto.precioVenta',
+                                            'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
+                                    ->where(function($query)
+                                    {
+                                        $query->where('carrito.idUsuario', '=', auth()->user()->id)
+                                                ->where('carrito.estatus', '=', 1);
+                                    })
+                                    ->get();
         
-        //print_r(auth()->user()->id);
-        return view('Carrito', ['listaProductoCarrito' => $listaProductoCarrito]);
+        $listaPendiente = DB::table('carrito')
+                            ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
+                            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+                            ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
+                                    'producto.descripcion','producto.marca', 'producto.precioVenta',
+                                    'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
+                            ->where(function($query)
+                            {
+                                $query->where('carrito.idUsuario', '=', auth()->user()->id)
+                                        ->where('carrito.estatus', '=', 2);
+                            })
+                            ->get();
+        return view('Carrito', ['listaProductoCarrito' => $listaProductoCarrito], ['listaPendiente' => $listaPendiente]);
     }
 
     public function destroy($idCarrito){
@@ -71,6 +82,24 @@ class CarritoController extends Controller
         $productoCarritoEliminar->estatus = 0;
 
         $productoCarritoEliminar -> save();
+        return redirect('/indexCarrito');
+    }
+
+    public function guardar($idCarrito){
+        
+        $productoCarritoGuardar = Carrito::findOrFail($idCarrito);
+        $productoCarritoGuardar->estatus = 2;
+
+        $productoCarritoGuardar -> save();
+        return redirect('/indexCarrito');
+    }
+
+    public function asignarCompra($idCarrito){
+        
+        $productoCarritoComprar = Carrito::findOrFail($idCarrito);
+        $productoCarritoComprar->estatus = 1;
+
+        $productoCarritoComprar -> save();
         return redirect('/indexCarrito');
     }
 }
