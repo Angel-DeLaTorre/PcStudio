@@ -42,6 +42,8 @@ class HomeController extends Controller
 
         $cantidadVentas = $this->obtenerCantidadVentas();
 
+        $this->obtenerCantidadUsuariosClasificados();
+
         return view('home', [
             'saludo' => $saludo, 'nombreSaludo' => $nombreSaludo,
             'cantidadUsuarios' => $cantidadUsuarios, 'productosMasVendidos' => $productosMasVendidos,
@@ -49,40 +51,98 @@ class HomeController extends Controller
         ]);
     }
 
-    private function obtenerCantidadVentas(){
+    public function obtenerCantidadUsuariosClasificados()
+    {
+
+        $usuariosTag = array();
+
+        //1 - Experto
+        //2 - Avanzado
+        //3 - Principiante
+        //4 - Elemental
+
+        $experto = DB::table('cliente')->where('idTag', '=', 1)->count();
+
+        if ($experto) {
+            $usuariosTag[0]['tag'] = 'Experto';
+            $usuariosTag[0]['cantidad'] = $experto;
+        } else {
+            $usuariosTag[0]['tag'] = 'Experto';
+            $usuariosTag[0]['cantidad'] = 0;
+        }
+
+        $avanzado = DB::table('cliente')->where('idTag', '=', 2)->count();
+
+        if ($avanzado) {
+            
+            $usuariosTag[1]['tag'] = 'Avanzado';
+            $usuariosTag[1]['cantidad'] = $avanzado;
+
+        } else {
+            $usuariosTag[1]['tag'] = 'Avanzado';
+            $usuariosTag[1]['cantidad'] = 0;
+        }
+
+        $principiante = DB::table('cliente')->where('idTag', '=', 3)->count();
+
+        if ($principiante) {
+
+            $usuariosTag[2]['tag'] = 'Principiante';
+            $usuariosTag[2]['cantidad'] = $principiante;
+        } else {
+            $usuariosTag[2]['tag'] = 'Principiante';
+            $usuariosTag[2]['cantidad'] = 0;
+        }
+
+        $elemental = DB::table('cliente')->where('idTag', '=', 4)->count();
+
+        if ($elemental) {
+            
+            $usuariosTag[3]['tag'] = 'Elemental';
+            $usuariosTag[3]['cantidad'] = $elemental;
+        } else {
+            $usuariosTag[3]['tag'] = 'Elemental';
+            $usuariosTag[3]['cantidad'] = 0;
+        }
+
+        
+        return response()->json($usuariosTag);
+    }
+
+
+
+    //Consulta de la cantidad de productos vendidos durante el mes
+    //actual y el mes anterior
+    private function obtenerCantidadVentas()
+    {
 
         $cantidadVentasActual = DB::table('detalleCompra')
-        ->join('compra', 'detalleCompra.idCompra', '=', 'compra.idCompra')
-        ->whereMonth('compra.fechaCompra', '=', Carbon::now()->month)->whereYear('compra.fechaCompra', '=', Carbon::now()->year)->sum('detalleCompra.cantidad');
+            ->join('compra', 'detalleCompra.idCompra', '=', 'compra.idCompra')
+            ->whereMonth('compra.fechaCompra', '=', Carbon::now()->month)->whereYear('compra.fechaCompra', '=', Carbon::now()->year)->sum('detalleCompra.cantidad');
 
         $cantidadVentasPasado = DB::table('detalleCompra')
-        ->join('compra', 'detalleCompra.idCompra', '=', 'compra.idCompra')
-        ->whereMonth('compra.fechaCompra', '=', Carbon::now()->subMonth()->format('m'))->sum('detalleCompra.cantidad');
+            ->join('compra', 'detalleCompra.idCompra', '=', 'compra.idCompra')
+            ->whereMonth('compra.fechaCompra', '=', Carbon::now()->subMonth()->format('m'))->sum('detalleCompra.cantidad');
 
         $cantidadVentas = array();
 
-        if($cantidadVentasActual){
+        if ($cantidadVentasActual) {
 
             array_push($cantidadVentas, $cantidadVentasActual);
-            
-        } else{
-            
-            array_push($cantidadVentas, 0);
+        } else {
 
+            array_push($cantidadVentas, 0);
         }
 
-        if($cantidadVentasPasado){
+        if ($cantidadVentasPasado) {
 
             array_push($cantidadVentas, $cantidadVentasPasado);
-            
-        } else{
-            
-            array_push($cantidadVentas, 0);
+        } else {
 
+            array_push($cantidadVentas, 0);
         }
 
         return $cantidadVentas;
-
     }
 
 
