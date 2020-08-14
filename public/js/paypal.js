@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     amount = $('#costo').val();
     console.log(amount);
 
@@ -8,42 +7,20 @@ $(document).ready(function(){
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: amount
+                        value: 1
                     }
                 }]
             });
         },
         onApprove: function(data, actions) {
             let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            console.log('token' + token);
+            console.log('Token: ' + token);
             // This function captures the funds from the transaction.
             return actions.order.capture().then(function(details) {
                 if(details.status == 'COMPLETED'){
-                return fetch('/api/paypal-capture-payment', {
-                            method: 'post',
-                            headers: {
-                                'content-type': 'application/json',
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": token
-                            },
-                            body: JSON.stringify({
-                                orderId     : data.orderID,
-                                id : details.id,
-                                status: details.status,
-                                payerEmail: details.payer.email_address,
-                            })
-                        })
-                        .then(status)
-                        .then(function(response){
-                            // redirect to the completed page if paid
-                            console.log('realizado');
-                            window.location.href = '/pay-success';
-                        })
-                        .catch(function(error) {
-                            // redirect to failed page if internal error occurs
-                            window.location.href = '/producto/detail/11?reason=internalFailure';
-                        });
+                    
+                    $( "#formPago" ).submit();
+                    
                 }else{
                     window.location.href = '/producto/detail/11?reason=failedToCapture';
                 }
@@ -55,6 +32,7 @@ $(document).ready(function(){
     }).render('#paypal-button-container');
 
     function status(res) {
+        console.log(res);
         if (!res.ok) {
             throw new Error(res.statusText);
         }
