@@ -40,6 +40,7 @@ Route::post ('/create','tagController@create');
 Route::resource('usuario', 'Usuario\UsuarioController')->middleware('auth');
 
 //Rutas de Usuarios
+Route::get('/direccion/Delete/{idDireccion}', 'Direccion\DireccionController@destroy')->name('deleteDieccion')->middleware('auth');
 Route::resource('direccion', 'Direccion\DireccionController');
 
 //Rutas de Usuarios
@@ -109,14 +110,18 @@ if(Request::path() == 1 || Request::path() == 2 || Request::path() == 3 || Reque
 
 Route::get('/indexProducto','CarritoController@index');
 Route::post('/indexProducto','CarritoController@agregarProductoCarrito');
-Route::get('/indexCarrito','CarritoController@vistaProductosCarrito');
+Route::get('/Carrito','CarritoController@vistaProductosCarrito')->middleware('auth');
 Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');
+
 Route::get('/Guardar/{idCarrito}', 'CarritoController@guardar')->name('guardarProducto');
 Route::get('/asignarCompra/{idCarrito}', 'CarritoController@asignarCompra')->name('asignarCompra');
 
-Route::get ('/datosDestino','ComprasController@indexCuestionarioDestino')->name('datosDestino');
-Route::post ('/datosDestino','ComprasController@guardarDetalle')->name('datosDestino');
-Route::post ('/insertarCompra','ComprasController@insertarCompra')->name('datosDestino');
+Route::get ('/datosDestino','ComprasController@indexCuestionarioDestino')->name('datosDestino')->middleware('auth');
+Route::post ('/datosDestino','ComprasController@guardarDetalle')->name('datosDestino')->middleware('auth');
+Route::post ('/DetallesPago','ComprasController@detallesPago')->name('datosDestino')->middleware('auth');
+Route::post ('/insertarCompra','ComprasController@insertarCompra')->name('datosDestino')->middleware('auth');
+Route::get ('/exito','ComprasController@exito')->name('exitoCompra')->middleware('auth');
+
 
 Route::get('tipo/{type}', 'SweetController@notification');
 

@@ -2,64 +2,69 @@
 
 @section('content')
     <div class="container">
-        <div class="row ">
-            <div class="col-md-12">
-                <h2>Mi direccion</h2>                 
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-9">
+                <div class="col-md-9 py-2">                    
+                    <h4>Mi Dirección</h4>
+                </div>                
                 
-                <form class="form-group" method="POST" action="/direccion" enctype="multipart/form-data">
-                    <!--CSRF Es una directiva de blade para la proteccion de la peticion
-                    laravel genera un token -->  
+                <form class="form-group" method="POST" action="/direccion" enctype="multipart/form-data">                    
+                    
                     @csrf
                     <div class="card  form-group">
                     <br>
-                    <div class="col-md-12 row form-group ">
-                       
-                            
+                    <div class="col-md-12 row form-group ">                       
+                        
                         <div class="col-md-6 form-group">     
-                            <label for="">codigo Postal</label>
-                        <input type="text" name="codigoPostal" id="codigoPostal" class="form-control" required>
-                        </div>
+                            <label for="">Codigo Postal</label>
+                        <input type="number" name="codigoPostal" id="codigoPostal" maxlength="6"  class="form-control"  required>
+                        </div>                        
 
                         <div class="col-md-6 form-group">     
-                            <label for="">calle</label>
-                            <input type="text" name="calle" id="calle" value="{{$item->apellidoPaterno}}" class="form-control"  required>
-                        </div>
-
-                        <div class="col-md-6 form-group">     
-                            <label for="">colonia</label>
-                            <input type="text" name="colonia" id="colonia" value="{{$item->apellidoMaterno}}" class="form-control" >
-                        </div>
-
-                        <div class="col-md-6 form-group">     
-                            <label for="">estado</label>
-                            <input type="date" name="estado" id="estado" value="{{$item->fechaNacimiento}}" class="form-control" >
+                            <label for="">Estado</label>
+                            <input type="text" name="estado" id="estado"  class="form-control" >
                         </div>
                         
                         <div class="col-md-6 form-group">     
-                            <label for="">municipio</label>
-                            <input type="text" name="municipio" id="municipio" class="form-control" value="{{$item->telefono}}" required>
+                            <label for="">Municipio</label>
+                            <input type="text" name="municipio" id="municipio" class="form-control"  required>
+                        </div>
+
+                        
+                        <div class="col-md-6 form-group">     
+                            <label for="">Colonia</label>
+                            <input type="text" name="colonia" id="colonia" class="form-control" >
                         </div>
 
                         <div class="col-md-6 form-group">     
-                            <label for="">descripcion</label>
-                            <input type="textarea" name="descripcion" id="descripcion" class="form-control" value="{{$item->rfc}}" maxlength="10">
+                            <label for="">Calle</label>
+                            <input type="text" name="calle" id="calle" class="form-control"  required>
+                        </div>
+
+
+                        <div class="col-md-6 form-group">     
+                            <label for="">Numero</label>
+                            <input type="text" name="numero" id="numero" class="form-control"  required>
                         </div>
 
                         <div class="col-md-6 form-group">     
-                            <label for="">numero</label>
-                            <input type="text" name="numero" id="numero" class="form-control" value="{{$item->telefono}}" required>
+                            <label for="">Numero Externo</label>
+                            <input type="text" name="numeroExterno" id="numeroExterno" maxlength="9" class="form-control" >
                         </div>
 
                         <div class="col-md-6 form-group">     
-                            <label for="">numeroExterno</label>
-                            <input type="text" name="numeroExterno" id="numeroExterno" class="form-control" value="{{$item->telefono}}" required>
+                            <label for="">Descripción</label>
+                            <input type="textarea" name="descripcion" id="descripcion"  maxlength="198" class="form-control" required>
                         </div>
 
-                            <div class="col-md-12">
-                                <div class=" col-lg-3">
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                </div>
-                            </div>                        
+                        <div class="col-md-4 form-group">
+                            <button type="submit" class="btn btn-outline-primary btn-block ">Guardar</button>                            
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <a href="{{ url('/cliente') }}">Regresar</Button></a>
+                        </div>
+                                             
                     </div>                    
                 </div> 
                 </form>               

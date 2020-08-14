@@ -35,6 +35,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- Iconos de materialize -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <!-- JS -->
 
     <script>
@@ -178,7 +179,8 @@
                                         <div class="navbar-dropdown">
                                             <a href="{{ route('logout') }}" class="navbar-item"
                                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
-                                                Sesión</a>                                           
+                                                Sesión</a>
+                                                <a href="/cliente" class="navbar-item">Mis Datos</a>                                           
                                         </div>                                        
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             style="display: none;">
@@ -186,7 +188,7 @@
                                         </form>
                                     </div>
                                     <div class="navbar-item">
-                                        <a href="/indexCarrito" class="navbar-item is-hoverable">
+                                        <a href="/Carrito" class="navbar-item is-hoverable">
                                             <i class="material-icons">shopping_cart</i>
                                         </a>
                                     </div>

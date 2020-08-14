@@ -171,7 +171,7 @@
                                         <a href="{{ route('logout') }}" class="navbar-item"
                                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
                                             Sesión</a>
-                                            <a href="/cliente/{{auth()->user()->id}}/edit" class="navbar-item">Mis Datos</a>
+                                            <a href="/cliente" class="navbar-item">Mis Datos</a>
                                     </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         style="display: none;">
@@ -179,7 +179,7 @@
                                     </form>
                                 </div>
                                 <div class="navbar-item">
-                                    <a href="" class="navbar-item is-hoverable">
+                                    <a href="/Carrito" class="navbar-item is-hoverable">
                                         <i class="material-icons">shopping_cart</i>
                                     </a>
                                 </div>

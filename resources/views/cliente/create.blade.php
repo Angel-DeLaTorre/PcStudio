@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row ">
             <div class="col-md-12">
-                <h2>Cliente</h2>
+                <h2>Datos Personales</h2>
                 <form class="form-group" method="POST" action="/cliente" enctype="multipart/form-data">
                     <!--CSRF Es una directiva de blade para la proteccion de la peticion
                     laravel genera un token -->  
