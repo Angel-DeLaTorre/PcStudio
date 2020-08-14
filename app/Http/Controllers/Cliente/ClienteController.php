@@ -42,13 +42,17 @@ class ClienteController extends Controller
 
             $direccion = DB::table('direccion')
                         ->join('persona', 'direccion.idPersona', '=', 'persona.idPersona')
-                        ->select('direccion.idDireccion','direccion.codigoPostal','direccion.calle', 'persona.idPersona', 
-                                'direccion.colonia', 'direccion.estado', 'direccion.municipio',
-                                'direccion.descripcion', 'direccion.numero', 'direccion.numeroExterno')
-                        ->where('direccion.idPersona', '=', $idPersona, 'and', 'direccion.estatus', '=', 1)
+                        ->select('direccion.idDireccion','direccion.codigoPostal','direccion.calle', 
+                                'persona.idPersona', 'direccion.colonia', 
+                                'direccion.estado', 'direccion.municipio',
+                                'direccion.estatus','direccion.descripcion',
+                                'direccion.numero', 'direccion.numeroExterno')
+                        ->where('direccion.idPersona', '=', $idPersona)
+                        ->where('direccion.estatus', '=', 1)
                         ->get();           
 
-            return view('cliente.index', ['cliente' => $cliente], ['direccion' => $direccion]);
+           
+           return view('cliente.index', ['cliente' => $cliente], ['direccion' => $direccion]);
 
         }else{
 
@@ -133,9 +137,10 @@ class ClienteController extends Controller
     {
 
         if(auth()->user()->idRol == 1){
+
             $cliente = DB::table('cliente')
                         ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
-                        ->select('cliente.idCliente','persona.nombre', 
+                        ->select('cliente.idCliente','persona.nombre',  'cliente.idPersona',
                                 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
                                 'persona.telefono', 'persona.rfc')
                         ->where('cliente.idUsuario', '=', $id)
@@ -144,8 +149,9 @@ class ClienteController extends Controller
 
             //$direccion = DB::table('direccion')->where('idPersona', $id);
 
-            //return $direccion->all();
-            return view('cliente.edit', ['cliente' => $cliente]);
+            //return $cliente->all();
+           return view('cliente.edit', ['cliente' => $cliente]);
+
         }else{
 
             abort(401, 'Esta Accion no esta autorizada');
@@ -162,7 +168,11 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = DB::select('call  sp_actualizarCliente(?, ?, ?, ?, ?, ?, ?)',
+        array($id , $request->name, $request->apellidoP,$request->apellidoM,
+            $request->fecha,$request->telefono, $request->rfc));
+
+        return redirect()->route('cliente.index');       
     }
 
     /**

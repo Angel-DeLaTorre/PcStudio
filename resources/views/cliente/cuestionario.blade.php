@@ -162,7 +162,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="button is-primary" style="">Guardar Encuesta</button>
+            <button type="submit" class="btn btn-outline-primary btn-block form-control" style="">Guardar Encuesta</button>
         </form>
     </div>
 
