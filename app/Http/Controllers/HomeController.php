@@ -131,10 +131,11 @@ class HomeController extends Controller
 
         $nombre = DB::table('persona')
 
-            ->join('cliente', 'cliente.idPersona', '=', 'persona.idPersona')->join('users', 'users.id', 'cliente.idUsuario')
+            ->join('empleado', 'empleado.idPersona', '=', 'persona.idPersona')->join('users', 'users.id', 'empleado.idUsuario')
             ->select('persona.nombre')
             ->where('users.id', '=', $idUsuario)
             ->get();
+
 
         if ($nombre) {
             return $nombre[0]->nombre;
