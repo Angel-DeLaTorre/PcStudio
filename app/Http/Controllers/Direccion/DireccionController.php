@@ -4,9 +4,22 @@ namespace App\Http\Controllers\Direccion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Direccion;
+use Illuminate\Support\Facades\DB;
 
 class DireccionController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +27,8 @@ class DireccionController extends Controller
      */
     public function index()
     {
-        //
+        
+        
     }
 
     /**
@@ -24,7 +38,7 @@ class DireccionController extends Controller
      */
     public function create()
     {
-        //
+        return view('direccion.create');
     }
 
     /**
@@ -35,7 +49,41 @@ class DireccionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+       $estado = strtoupper($request->estado);
+       $municipio = strtoupper($request->municipio);
+       $colonia = strtoupper($request->colonia);
+       $calle = strtoupper($request->calle);
+       $descripcion = strtoupper($request->descripcion);
+        $calle = strtoupper($request->calle);
+
+        
+
+        $cliente = DB::table('cliente')
+            ->join('users', 'cliente.idUsuario', '=', 'users.id')
+            ->select('cliente.idPersona')
+            ->where('cliente.idUsuario', '=', auth()->user()->id)
+            ->get();
+
+        foreach ($cliente as $item) {
+            $idPersona = $item->idPersona;
+        }
+
+        $direccion = new Direccion();
+            $direccion->codigoPostal = $request->input("codigoPostal");
+            $direccion->calle = $request->input("calle");
+            $direccion->colonia = $request->input("colonia");
+            $direccion->estado = $request->input("estado");
+            $direccion->municipio = $request->input("municipio");
+            $direccion->descripcion =  $request->input("descripcion");
+            $direccion->numero = $request->input("numero");
+            $direccion->numeroExterno = $request->input("numeroExterno");
+            $direccion->idPersona = $idPersona;
+            $direccion->estatus = 1;
+            $direccion->save();
+
+            return redirect()->route('cliente.index');        
+
     }
 
     /**
@@ -57,7 +105,23 @@ class DireccionController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(auth()->user()->idRol == 1 ){
+
+            $direccion = DB::table('direccion')
+                        ->select('direccion.codigoPostal','direccion.calle','direccion.idDireccion', 
+                                'direccion.colonia', 'direccion.estado', 'direccion.municipio',
+                                'direccion.descripcion', 'direccion.numero', 'direccion.numeroExterno')
+                        ->where('direccion.idDireccion', '=', $id)
+                        ->get();           
+
+        //return $direccion->all();
+            return view('direccion.edit', ['direccion' => $direccion]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -69,7 +133,20 @@ class DireccionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $codigoPostal = $request->input("codigoPostal");
+        $calle = $request->input("calle");
+        $colonia = $request->input("colonia");
+        $estado = $request->input("estado");
+        $municipio = $request->input("municipio");
+        $descripcion =  $request->input("descripcion");
+        $numero = $request->input("numero");
+        $numeroExterno = $request->input("numeroExterno");
+
+        $data = DB::select('call  sp_actualizarDireccion(?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        array($id, $codigoPostal, $calle, $colonia, $estado, $municipio, 
+                $descripcion, $numero, $numeroExterno));
+
+       return redirect()->route('cliente.index');
     }
 
     /**

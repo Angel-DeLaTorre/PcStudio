@@ -15,7 +15,7 @@ class EncuestaController extends Controller
     public function index()
     {
         //return ;
-        return view('cliente.cuestionario');
+        return view('cliente.cuestionario', ['valor' => 0]);;
     }
 
     /**
@@ -36,16 +36,24 @@ class EncuestaController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->R1 != null && $request->R2 != null && $request->R3 != null && $request->R4 != null){
+
+            $respuestas = array(
+                'R1' => $request->R1,
+                'R2' => $request->R2,
+                'R3' => $request->R3,
+                'R4' => $request->R4
+            );
+
+            return view('cliente.create', ['respuestas' => $respuestas]);
+
+        }else{
+
+            return view('cliente.cuestionario', ['valor' => 1]);
+
+        }
         
-        $respuestas = array(
-            'R1' => $request->R1,
-            'R2' => $request->R2,
-            'R3' => $request->R3,
-            'R4' => $request->R4
-        );
         
-       
-        return view('cliente.create', ['respuestas' => $respuestas]);
     }
 
     /**
