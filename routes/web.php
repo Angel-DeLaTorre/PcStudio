@@ -23,9 +23,9 @@ Auth::routes();
 
 //Rutas de producto
 Route::resource('producto', 'Producto\ProductoController')->middleware('auth');
-Route::get('/producto/Delete/{idProducto}', 'Producto\ProductoController@destroy')->name('deleteProducto')->middleware('auth');
-Route::get('/producto/detail/{idProducto}', 'Producto\ProductoController@detail')->name('showProducto')->middleware('auth');
-Route::get('/producto/lista', 'Producto\ProductoController@busqueda')->name('listaProducto')->middleware('auth');
+Route::get('/Delete/{idProducto}', 'Producto\ProductoController@destroy')->name('deleteProducto')->middleware('auth');
+Route::get('/detail/{idProducto}', 'Producto\ProductoController@detail')->name('showProducto')->middleware('auth');
+Route::get('/lista', 'Producto\ProductoController@busqueda')->name('listaProducto')->middleware('auth');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -107,10 +107,16 @@ if(Request::path() == 1 || Request::path() == 2 || Request::path() == 3 || Reque
     Route::get (Request::path(),'SnatchBotController@index');
 }
 
-Route::get ('/indexProducto','CarritoController@index');
-Route::post ('/indexProducto','CarritoController@agregarProductoCarrito');
-Route::get ('/indexCarrito','CarritoController@vistaProductosCarrito');
+Route::get('/indexProducto','CarritoController@index');
+Route::post('/indexProducto','CarritoController@agregarProductoCarrito');
+Route::get('/indexCarrito','CarritoController@vistaProductosCarrito');
 Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');
+Route::get('/Guardar/{idCarrito}', 'CarritoController@guardar')->name('guardarProducto');
+Route::get('/asignarCompra/{idCarrito}', 'CarritoController@asignarCompra')->name('asignarCompra');
+
+Route::get ('/datosDestino','ComprasController@indexCuestionarioDestino')->name('datosDestino');
+Route::post ('/datosDestino','ComprasController@guardarDetalle')->name('datosDestino');
+Route::post ('/insertarCompra','ComprasController@insertarCompra')->name('datosDestino');
 
 Route::get('tipo/{type}', 'SweetController@notification');
 

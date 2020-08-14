@@ -63,6 +63,7 @@
 
     </script>
 
+
     @yield('script')
 
     <style>
@@ -99,6 +100,7 @@
         a {
             text-decoration: none !important;
         }
+
     </style>
 
     @yield('style')
@@ -117,33 +119,45 @@
             </button>
     
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">PC</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Laptop</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Más
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <p style="text-align: center">Periféricos</p>
-                            <a class="dropdown-item" href="#">Memorias USB</a>
-                            <a class="dropdown-item" href="#">Mouse</a>
-                            <a class="dropdown-item" href="#">Teclados</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/19">PC</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/20">Laptop</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Más
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <p style="text-align: center">Hardware interno</p>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/1">Placa madre</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/2">Procesador</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/3">Memoria interna RAM</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/5">Tarjeta de video</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/6">Tarjeta de sonido</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/7">Disco Duro</a>
                             <div class="dropdown-divider"></div>
-                            <p style="text-align: center">Componentes</p>
-                            <a class="dropdown-item" href="#">Unidades de estado sólido SSD</a>
-                            <a class="dropdown-item" href="#">Discos duros HDD</a>
-                            <a class="dropdown-item" href="#">Memorias RAM</a>
-                            <a class="dropdown-item" href="#">Procesadores</a>
-                            <a class="dropdown-item" href="#">Gabinetes</a>
-                        </div>
-                    </li>
-                </ul>
+                            <p style="text-align: center">Periféricos </p>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/8">Teclados</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/9">Punteros o ratones</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/10">Micrófonos</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/11">Cámaras</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/12">Escáneres</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/13">Joysticks</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/14">Monitores</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/15">Impresoras</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/16">Bocinas</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/17">Videobeams y proyectores</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/18">Copiadoras de CD o DVD</a>
+                    </div>
+                </li>
+            </ul>
                 <form class="form-inline col-lg-6 col-md-3 my-2 my-lg-0" id="searchForm">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
                         aria-label="Search" id="busqueda" name="busqueda">
@@ -202,6 +216,18 @@
             @yield('content')
          </main>
      </div>
- </body>
-
+     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('js/lightslider.js') }}" defer></script>
+</body>
+<script src="https://account.snatchbot.me/script.js"></script><script>window.sntchChat.Init(124898)</script>
  </html>

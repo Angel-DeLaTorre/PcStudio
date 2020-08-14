@@ -302,6 +302,35 @@ CREATE TABLE `detalleCompra` (
   CONSTRAINT `Fk_idProducto_detalleCompra` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- Persona Pedido
+drop TABLE IF exists personapedido;
+Create TABLE personapedido(
+	idPersonaPedido INT(11) NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(150) NOT NULL,
+    apellidoPaterno VARCHAR(150) DEFAULT NULL,
+    apellidoMaterno VARCHAR(150) DEFAULT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    CONSTRAINT Pk_idPersonaPedido PRIMARY KEY(idPersonaPedido)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+select * from personapedido;
+
+-- direccion Pedido
+drop TABLE IF exists direccionpedido;
+Create TABLE direccionpedido(
+	idDireccionPedido INT(11) NOT NULL AUTO_INCREMENT,
+    codigoPostal INT(11) NOT NULL,
+    colonia VARCHAR(200) NOT NULL,
+    calle VARCHAR(200) NOT NULL,
+    municipio VARCHAR(200) NOT NULL,
+    descripcion VARCHAR(200) NOT NULL,
+    numero VARCHAR(10) NULL,
+    numeroExterno VARCHAR(10) NOT NULL,
+    idPersonaPedido INT(11) NOT NULL,
+    CONSTRAINT Pk_idDireccionPedido PRIMARY KEY(idDireccionPedido),
+    CONSTRAINT Fk_idPersona_Direccion_Pedido FOREIGN KEY(idPersonaPedido) REFERENCES personapedido(idPersonaPedido)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+select * from direccionpedido;
 
 -- migrations
 
