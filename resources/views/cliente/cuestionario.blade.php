@@ -1,6 +1,23 @@
 @extends('layouts.appCuestionario')
 
 @section('content')
+
+        @if($valor)
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function () {                    
+                    
+                        var session = {!! json_encode($valor) !!}; 
+                        
+                        if(session = 1){
+                            alert('Es necesario agregar todos los datos');
+                        }else{
+
+                        }
+                    
+                    });
+                </script>
+        @endif
     <div class="container">
         <div class="card">
             <div class="card-content">
@@ -147,6 +164,7 @@
             </div>
             <button type="submit" class="button is-primary" style="">Guardar Encuesta</button>
         </form>
-
     </div>
+
+
 @endsection

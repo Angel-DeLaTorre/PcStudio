@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         
-        @include('common.success')
+        
         <div class="card-header">       
             
             <a href="{{ url('/empleado/create') }}"><Button class="btn btn-outline-primary btn-block">Agregar</Button></a>

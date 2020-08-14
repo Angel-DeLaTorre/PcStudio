@@ -2,9 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="row ">
-            <div class="col-md-12">
-                <h2>Mis Datos</h2>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-9">
+                <div class="col-md-9 py-3">
+                    <h4>Datos Personales</h4>                    
+                </div>
                 @foreach ($cliente as $item)                   
                 
                 <form class="form-group" method="POST" action="/cliente/{{$item->idCliente}}" enctype="multipart/form-data">
@@ -13,7 +15,7 @@
                      
                     @method('PUT')
                     @csrf
-                    <div class="card  form-group">
+                <div class="card  form-group">
                     <br>
                     <div class="col-md-12 row form-group ">
                        
@@ -48,11 +50,16 @@
                             <input type="text" name="rfc" id="rfc" class="form-control" value="{{$item->rfc}}" maxlength="10">
                         </div>
 
-                            <div class="col-md-12">
-                                <div class=" col-lg-3">
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                </div>
-                            </div>                        
+                        <div class="col-md-12 row form-group">
+                            <div class=" col-md-4">
+                                <button type="submit" class="btn btn-outline-primary btn-block form-control">Guardar</button>
+                            </div>
+
+                            <div class=" col-md-4 form-group">
+                                <a href="/cliente" >Regresar</a>
+                            </div>
+                            
+                        </div>                        
                     </div>                    
                 </div> 
                 </form> 

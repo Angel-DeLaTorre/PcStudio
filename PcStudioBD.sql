@@ -103,8 +103,11 @@ CREATE TABLE `direccion` (
   `municipio` varchar(200) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `numero` varchar(10) NOT NULL,
-  `numeroExterno` varchar(10) NOT NULL,
+  `numeroExterno` varchar(10) ,
   `idPersona` int(11) NOT NULL,
+  `estatus` int(11) NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`idDireccion`),
   KEY `Fk_idPersona_Direccion` (`idPersona`),
   CONSTRAINT `Fk_idPersona_Direccion` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`)
