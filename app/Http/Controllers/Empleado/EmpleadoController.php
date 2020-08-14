@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\DB;
 
 class EmpleadoController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,16 +30,24 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $empleado = DB::table('empleado')
-        ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
-        ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
-                'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
-                'persona.telefono', 'persona.rfc')
-        ->where('empleado.estatus', '=', 1)
-        ->get();
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
+
+            $empleado = DB::table('empleado')
+            ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
+            ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
+                    'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                    'persona.telefono', 'persona.rfc')
+            ->where('empleado.estatus', '=', 1)
+            ->get();
         
 
-        return view('empleado.index', ['empleado' => $empleado]);
+            return view('empleado.index', ['empleado' => $empleado]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -37,7 +57,15 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        return view('empleado.create');
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
+
+            return view('empleado.create');
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -48,27 +76,26 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-       $nombre = $request['name'];
-       $email = $request['email']; 
-       $password = Hash::make($request['password']);
-       $rol = $request->rol;
-       $apellidoP = $request->apellidoP;
-       $apellidoM = $request->apellidoM;
-       $fecha = $request->fechaN;
-       $tel = $request->telefono;
-       $rfc = $request->rfc;
+       
+            $nombre = $request['name'];
+            $email = $request['email']; 
+            $password = Hash::make($request['password']);
+            $rol = $request->rol;
+            $apellidoP = $request->apellidoP;
+            $apellidoM = $request->apellidoM;
+            $fecha = $request->fechaN;
+            $tel = $request->telefono;
+            $rfc = $request->rfc;
 
 
         $data = DB::select('call  sp_insertarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?)',
         array($nombre, $email, $password, $rol, $apellidoP, $apellidoM, $fecha, $tel, $rfc));
 
-        //dd($data);
 
         $validacion = $data[0];
 
         return redirect()->route('empleado.index')->with('status', $validacion);
 
-        //return $request->all();
     }
 
     /**
@@ -79,16 +106,22 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        $empleado = DB::table('empleado')
-        ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
-        ->join('users', 'empleado.idUsuario', '=', 'users.id')
-        ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
-                'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
-                'persona.telefono', 'persona.rfc', 'users.email')
-        ->where('empleado.idEmpleado', '=', $id)
-        ->get();
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
+            $empleado = DB::table('empleado')
+            ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
+            ->join('users', 'empleado.idUsuario', '=', 'users.id')
+            ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
+                    'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                    'persona.telefono', 'persona.rfc', 'users.email')
+            ->where('empleado.idEmpleado', '=', $id)
+            ->get();
 
-        return view('empleado.show', ['empleado' => $empleado]);
+            return view('empleado.show', ['empleado' => $empleado]);
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -99,17 +132,24 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        $empleado = DB::table('empleado')
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
 
-                    ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
-                    ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus','persona.nombre', 
-                            'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
-                            'persona.telefono', 'persona.rfc', 'persona.tipo')
-                    ->where('empleado.idEmpleado', '=', $id)
-                    ->get();
+            $empleado = DB::table('empleado')
+                        ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
+                        ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus','persona.nombre', 
+                                'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                                'persona.telefono', 'persona.rfc', 'persona.tipo')
+                        ->where('empleado.idEmpleado', '=', $id)
+                        ->get();
 
-       
-       return view('empleado.edit', ['empleado' => $empleado]);
+        
+            return view('empleado.edit', ['empleado' => $empleado]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -147,12 +187,19 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
         
-        $data = DB::select("UPDATE empleado SET estatus = 0 WHERE idEmpleado = $id");
-        
-        echo "<script>alert('se a actualizado');</script>";
-        
-        return redirect()->route('empleado.index')->with('status', 'El empleado se a Eliminado');
+            $data = DB::select("UPDATE empleado SET estatus = 0 WHERE idEmpleado = $id");
+            
+            echo "<script>alert('se a actualizado');</script>";
+            
+            return redirect()->route('empleado.index')->with('status', 'El empleado se a Eliminado');
+            
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
         
     }
 }

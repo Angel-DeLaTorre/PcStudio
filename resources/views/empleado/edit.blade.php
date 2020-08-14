@@ -17,12 +17,12 @@
 
                 <div class="col-md-6">     
                     <label for="">Nombre</label>
-                <input type="text" name="name" id="name" value="{{$item->nombre}}" class="form-control">
+                <input type="text" name="name" id="name" value="{{$item->nombre}}" class="form-control" required>
                 </div>
 
                 <div class="col-md-6">     
                     <label for="">Apellido Paterno</label>
-                <input type="text" name="apellidoP" id="apellidoP" value="{{$item->apellidoPaterno}}" class="form-control" >
+                <input type="text" name="apellidoP" id="apellidoP" value="{{$item->apellidoPaterno}}" class="form-control" required>
                 </div>
 
                 <div class="col-md-6">     
@@ -37,7 +37,7 @@
                 
                 <div class="col-md-6">     
                     <label for="">Telefono</label>
-                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" >
+                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
                 </div>
 
                 <div class="col-md-6">     

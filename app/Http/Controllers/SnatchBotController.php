@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
 
 class SnatchBotController extends Controller
 {
     public function index(Request $request)
     {
         $url = $request->path();
-        
+                
         $productos = DB::table('imagenproducto')
                     ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
                     ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo',
@@ -21,6 +21,6 @@ class SnatchBotController extends Controller
                     ->get();
         
         return view('producto.busqueda', compact('productos'));
-        //print_r($bot);
+        //print_r($u);
     }
 }

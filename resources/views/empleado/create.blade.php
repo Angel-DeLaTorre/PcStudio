@@ -92,12 +92,12 @@
 
             <div class="col-md-6 form-group">     
                 <label for="">Fecha de nacimiento</label>
-                <input type="date" name="fechaN" id="fechaN" class="form-control" >
+                <input type="date" name="fechaN" id="fechaN" class="form-control" required>
             </div>
             
             <div class="col-md-6 form-group">     
                 <label for="">Telefono</label>
-                <input type="text" name="telefono" id="telefono" class="form-control" required>
+                <input type="text" name="telefono" id="telefono" maxlength="18" class="form-control" required>
             </div>
 
             <div class="col-md-6 form-group">     
