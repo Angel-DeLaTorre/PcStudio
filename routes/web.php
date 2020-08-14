@@ -125,3 +125,5 @@ Route::get('/Envios', 'EnviosController@index')->name('indexEnvios');
 Route::get('/Envios/Detalle/{idCompra}', 'EnviosController@Detalle')->name('detalleEnvios');
 Route::get('/Envios/Edit/{idCompra}', 'EnviosController@edit')->name('editEnvio');
 Route::put('/Envios/Update/{idCompra}', 'EnviosController@update')->name('updateEnvio');
+
+Route::get('/DetalleCompra', 'ComprasController@indexDetalleCompra')->name('indexEnvios');
