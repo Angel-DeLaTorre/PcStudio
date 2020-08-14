@@ -7,7 +7,7 @@ $(document).ready(function(){
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: amount
+                        value: 1
                     }
                 }]
             });
@@ -18,8 +18,9 @@ $(document).ready(function(){
             // This function captures the funds from the transaction.
             return actions.order.capture().then(function(details) {
                 if(details.status == 'COMPLETED'){
-                    //se ha realizado con exito
-                    //mover a pagina de realizado
+                    
+                    $( "#formPago" ).submit();
+                    
                 }else{
                     window.location.href = '/producto/detail/11?reason=failedToCapture';
                 }

@@ -34,12 +34,12 @@
 								echo '<p><del>$'.$producto->precioVenta.'</del></p>'.
 									'<p class="text-danger ml-2"> $'.$nuevoCosto.' ¡Precio de oferta!</p>';
 									?>
-									<input type="text" name="txtprecioVenta" id="txtprecioVenta<?php echo $j;?>" value="{{$nuevoCosto}}" />
+									<input hidden type="text" name="txtprecioVenta" id="txtprecioVenta<?php echo $j;?>" value="{{$nuevoCosto}}" />
 									<?php
 								}else{
 								echo '<p>$'.$producto->precioVenta.'</p>';      
 								?>
-								<input type="text"name="txtprecioVenta" id="txtprecioVenta<?php echo $j;?>" value="{{$producto->precioVenta}}" />
+								<input hidden hidden type="text" name="txtprecioVenta" id="txtprecioVenta<?php echo $j;?>" value="{{$producto->precioVenta}}" />
 								<?php  
 							} 
 							if ($producto->cantidad <= 0){
@@ -51,27 +51,29 @@
 					<div>
 						<div class="form-group">
 							<input hidden type="idProducto" value="{{$producto->idProducto}}">
-              <label for="cantidad">Cantidad: </label>
-              <select name="cantidad" id="cantidad<?php echo $j;?>" class="form-control col-lg-6" onchange="ShowSelected();">
-                @for($i = 1; $i <= $producto->cantidad; $i++)
-                <option value="{{$producto->cantidadProducto}}" 
-                    @if ($producto->cantidadProducto == $i)
-                    selected
-                    @endif>{{$i}}</option>        
-                @endfor
-			  </select>
-			  <?php $subtotal = ($producto->precioVenta * $producto->cantidadProducto) ?>
-				<hr>
-					<input type="text" name="txtIdProducto[]" id="txtIdProducto<?php echo $j;?>" value="{{$producto->idProducto}}" >
+							<div class="row">
+								<label for="cantidad" class="mt-1 mr-3">Cantidad: </label>
+								<select name="cantidad" id="cantidad<?php echo $j;?>" class="form-control col-lg-1 col-md-1 form-control-sm" onchange="ShowSelected();">
+									@for($i = 1; $i <= $producto->cantidad; $i++)
+									<option value="{{$producto->cantidadProducto}}" 
+										@if ($producto->cantidadProducto == $i)
+										selected
+										@endif>{{$i}}</option>        
+									@endfor
+								</select>
+							</div>
+							
+							<?php $subtotal = ($producto->precioVenta * $producto->cantidadProducto) ?>
+							<input type="text" hidden name="txtIdProducto[]" id="txtIdProducto<?php echo $j;?>" value="{{$producto->idProducto}}" >
 
-					<input type="text" name="txtCantidad[]" id="txtCantidad<?php echo $j;?>" value="{{$producto->cantidadProducto}}">
+							<input type="text" hidden name="txtCantidad[]" id="txtCantidad<?php echo $j;?>" value="{{$producto->cantidadProducto}}">
 
-					<input type="text" name="txtSubtotal[]" id="txtSubtotal<?php echo $j;?>" value="{{$subtotal}}">
-				
-			  		<input type="hidden" id="txtTotall<?php echo $j;?>" value="{{$total += $subtotal}}" />
+							<input type="text" hidden name="txtSubtotal[]" id="txtSubtotal<?php echo $j;?>" value="{{$subtotal}}">
+						
+							<input type="hidden" id="txtTotall<?php echo $j;?>" value="{{$total += $subtotal}}" />
 						</div>
 					</div>
-				
+								
 				</div>
 				<div class="col-lg-2">
 					<a href="{{ route('deleteProducto', $producto->idCarrito) }}"><p class="btn btn-outline-danger">Quitar de carrito</p></a>
@@ -84,26 +86,23 @@
 		</form>
 		<input type="hidden" id="j" value="<?php echo $j; ?>" />
 		<input type="hidden" id="txtTotal" value="{{$total}}" />
-		<h1 id="hTotal1">Total ${{$total}}</h1>  
-		<h1 id="hTotal2"></h1> 					
+		<h3 id="hTotal1">Total ${{$total}}</h3>  
+		<h2 id="hTotal2"></h2> 					
 		<hr>
 
-<<<<<<< HEAD
-		@foreach ($listaProductoCarrito as $producto)
-			<div class="row ">
-=======
+	<div class="row ">
+
 		@foreach ($listaPendiente as $lp)
-			<div class="row shadow bg-white rounded">
->>>>>>> 12f69bc7887c5a10b90c4ad5b4ce829931e0598b
+			<div class="row">
 				<div class="col-lg-2">
-					<a href="detail/{{$lp->idProducto}}">
+					<a href="producto/detail/{{$lp->idProducto}}">
 						<img src="{{asset('img/productos/'.$lp->imagenUrl)}}" alt="">
 					</a>
 				</div>
 				<div class="col-lg-8">
-					<a href="detail/{{$lp->idProducto}}"><p>{{$lp->titulo}}</p></a>
-					<p>{{$lp->descripcion}}</p>
-					<p>{{$lp->marca}}</p>
+					<a href="producto/detail/{{$lp->idProducto}}"><p>{{$lp->titulo}}</p></a>
+					<p class="cardItem">{{$lp->descripcion}}</p>
+					<p class="cardItem">{{$lp->marca}}</p>
 					<div class="row ml-1">
 						<?php 
 							if ($lp->descuentoVenta > 0){
@@ -119,16 +118,16 @@
 						?>
 					</div>
 					<div>
-						<div class="form-group">
+						<div class="form-group row">
 							<input hidden type="idProducto" value="{{$lp->idProducto}}">
-							<label for="cantidad">Cantidad: </label>
-							<select name="cantidad" id="cantidad" class="form-control col-lg-6">
-                @for($i = 1; $i <= $lp->cantidad; $i++)
-                  <option value="{{$lp->cantidadProducto}}" 
-                      @if ($lp->cantidadProducto == $i)
-                      selected
-                      @endif>{{$i}}</option>        
-                  @endfor
+							<label for="cantidad" class="mt-1 mr-3">Cantidad: </label>
+							<select name="cantidad" id="cantidad" class="form-control col-lg-1 col-md-1 form-control-sm">
+								@for($i = 1; $i <= $lp->cantidad; $i++)
+								<option value="{{$lp->cantidadProducto}}" 
+									@if ($lp->cantidadProducto == $i)
+									selected
+									@endif>{{$i}}</option>        
+								@endfor
 							</select>
 						</div>
 					</div>
@@ -145,11 +144,10 @@
 	</div>
 @endsection 
 
-<<<<<<< HEAD
 @section('style')
 	<link href="{{asset('css/cardProducto.css')}}" rel="stylesheet">
 @endsection
-=======
+
 <script type="text/javascript">
     function ShowSelected()
 		{
@@ -180,4 +178,3 @@
 			}
 		}
 </script>
->>>>>>> 12f69bc7887c5a10b90c4ad5b4ce829931e0598b

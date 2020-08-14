@@ -9,7 +9,7 @@
         <div class="row ">
             <div class="col-md-12">
                 <h2>Agrega un domicilio</h2>
-                <form class="form-group" method="POST" action="/insertarCompra" enctype="multipart/form-data">
+                <form class="form-group" method="POST" action="/DetallesPago" enctype="multipart/form-data">
                     <!--CSRF Es una directiva de blade para la proteccion de la peticion
                     laravel genera un token -->  
                     @csrf
@@ -60,7 +60,7 @@
 
                                 <div class="col-md-6 form-group">     
                                     <label for="">N° Externo</label>
-                                    <input type="text" name="txtNumeroExterno" id="txtNumeroExterno" class="form-control" value="{{$item->numeroExterno}}" required>
+                                    <input type="text" name="txtNumeroExterno" id="txtNumeroExterno" class="form-control" value="{{$item->numeroExterno}}">
                                 </div>
 
                                 <div class="col-md-6 form-group">     
@@ -79,14 +79,13 @@
 
                                     <div class="col-md-12">
                                         <div class=" col-lg-3">
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                            <button type="submit" class="btn btn-primary">Proceder al pago</button>
                                         </div>
                                     </div>                        
                             </div>
                         </div>
-                        <input type="text" name="txtCliente" id="txtCliente" value="{{$item->idCliente}}">
-                        <input type="text" name="txtDetalle" id="txtDetalle" value="{{$detalleCompra}}">
-                         
+                        <input hidden readonly type="text" name="txtCliente" id="txtCliente" value="{{$item->idCliente}}">
+                        <input hidden readonly type="text" name="txtDetalle" id="txtDetalle" value="{{$detalleCompra}}">
                     @endforeach       
                 </form>           
             </div>

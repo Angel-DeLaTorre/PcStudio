@@ -186,7 +186,7 @@
                                         </form>
                                     </div>
                                     <div class="navbar-item">
-                                        <a href="/indexCarrito" class="navbar-item is-hoverable">
+                                        <a href="/Carrito" class="navbar-item is-hoverable">
                                             <i class="material-icons">shopping_cart</i>
                                         </a>
                                     </div>
