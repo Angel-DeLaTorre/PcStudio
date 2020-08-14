@@ -40,6 +40,7 @@ Route::post ('/create','tagController@create');
 Route::resource('usuario', 'Usuario\UsuarioController')->middleware('auth');
 
 //Rutas de Usuarios
+Route::get('/direccion/Delete/{idDireccion}', 'Direccion\DireccionController@destroy')->name('deleteDieccion')->middleware('auth');
 Route::resource('direccion', 'Direccion\DireccionController');
 
 //Rutas de Usuarios

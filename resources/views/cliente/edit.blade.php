@@ -9,7 +9,7 @@
                 </div>
                 @foreach ($cliente as $item)                   
                 
-                <form class="form-group" method="POST" action="/cliente/{{$item->idCliente}}" enctype="multipart/form-data">
+                <form class="form-group" method="POST" action="/cliente/{{$item->idPersona}}" enctype="multipart/form-data">
                     <!--CSRF Es una directiva de blade para la proteccion de la peticion
                     laravel genera un token -->  
                      
@@ -56,7 +56,7 @@
                             </div>
 
                             <div class=" col-md-4 form-group">
-                                <a href="/cliente" >Regresar</a>
+                                <a href="/cliente" >Regresar...</a>
                             </div>
                             
                         </div>                        

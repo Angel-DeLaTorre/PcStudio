@@ -133,18 +133,17 @@ class DireccionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $codigoPostal = $request->input("codigoPostal");
-        $calle = $request->input("calle");
-        $colonia = $request->input("colonia");
-        $estado = $request->input("estado");
-        $municipio = $request->input("municipio");
-        $descripcion =  $request->input("descripcion");
-        $numero = $request->input("numero");
-        $numeroExterno = $request->input("numeroExterno");
+            $direccion = Direccion::findOrFail($id);
 
-        $data = DB::select('call  sp_actualizarDireccion(?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        array($id, $codigoPostal, $calle, $colonia, $estado, $municipio, 
-                $descripcion, $numero, $numeroExterno));
+            $direccion->codigoPostal = $request->input("codigoPostal");
+            $direccion->calle = strtoupper($request->input("calle"));
+            $direccion->colonia = strtoupper($request->input("colonia"));
+            $direccion->estado = $request->input("estado");
+            $direccion->municipio = $request->input("municipio");
+            $direccion->descripcion =  $request->input("descripcion");
+            $direccion->numero = $request->input("numero");
+            $direccion->numeroExterno = $request->input("numeroExterno");
+            $direccion->save();
 
        return redirect()->route('cliente.index');
     }
@@ -157,6 +156,11 @@ class DireccionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $direccion = Direccion::findOrFail($id);
+
+        $direccion->estatus = 0;
+        $direccion->save();
+
+        return redirect()->route('cliente.index');
     }
 }
