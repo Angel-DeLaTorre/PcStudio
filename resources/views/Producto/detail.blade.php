@@ -71,7 +71,7 @@
                         <form class="form-group mt-3" method="POST" action="/indexProducto" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="idProducto" id="idProducto" value="{{$item->idProducto}}" />
-                            <input type="hidden" name="ruta" id="ruta" value="/producto/detail/{{$item->idProducto}}" />
+                            <input type="hidden" name="ruta" id="ruta" value="/detail/{{$item->idProducto}}" />
                             <div class="form-group">
                                 <label for="cantidad">Cantidad: </label>
                                 <select name="cantidad" id="cantidad" class="form-control col-lg-6">
