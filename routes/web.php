@@ -111,7 +111,7 @@ if(Request::path() == 1 || Request::path() == 2 || Request::path() == 3 || Reque
 Route::get('/indexProducto','CarritoController@index');
 Route::post('/indexProducto','CarritoController@agregarProductoCarrito');
 Route::get('/Carrito','CarritoController@vistaProductosCarrito')->middleware('auth');
-Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');
+Route::get('/Quitar/{idCarrito}', 'CarritoController@destroy')->name('deleteProductoCarrito');
 
 Route::get('/Guardar/{idCarrito}', 'CarritoController@guardar')->name('guardarProducto');
 Route::get('/asignarCompra/{idCarrito}', 'CarritoController@asignarCompra')->name('asignarCompra');
