@@ -9,13 +9,57 @@ use Illuminate\Support\Facades\DB;
 class ClienteController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-       
+        if(auth()->user()->idRol == 1 ){
+
+            $cliente = DB::table('cliente')
+                        ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
+                        ->select('cliente.idCliente','persona.nombre', 'persona.idPersona', 
+                                'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                                'persona.telefono', 'persona.rfc')
+                        ->where('cliente.idUsuario', '=', auth()->user()->id)
+                        ->get();
+
+             foreach ($cliente as $item) {
+                    $idPersona = $item->idPersona;
+                }
+
+            $direccion = DB::table('direccion')
+                        ->join('persona', 'direccion.idPersona', '=', 'persona.idPersona')
+                        ->select('direccion.idDireccion','direccion.codigoPostal','direccion.calle', 
+                                'persona.idPersona', 'direccion.colonia', 
+                                'direccion.estado', 'direccion.municipio',
+                                'direccion.estatus','direccion.descripcion',
+                                'direccion.numero', 'direccion.numeroExterno')
+                        ->where('direccion.idPersona', '=', $idPersona)
+                        ->where('direccion.estatus', '=', 1)
+                        ->get();           
+
+           
+           return view('cliente.index', ['cliente' => $cliente], ['direccion' => $direccion]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
+        
     }
 
     /**
@@ -36,33 +80,40 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $idUsuario = auth()->user()->id;
+        if(auth()->user()->idRol == 1){
+            $idUsuario = auth()->user()->id;
 
-        $tortalRespuestas = $request->R1 + $request->R2 + $request->R3 + $request->R4;
+            $tortalRespuestas = $request->R1 + $request->R2 + $request->R3 + $request->R4;
 
-        if($tortalRespuestas >= 11){
-          
-            $tag = 'Experto';
-                    
-            }else if($tortalRespuestas >= 7 && $tortalRespuestas <= 10 ){
-        
-            $tag = 'Avanzado';
+            if($tortalRespuestas >= 11){
             
-            }else if($tortalRespuestas >= 4 && $tortalRespuestas <= 6){            
-            $tag = 'Principiante';
+                $tag = 'Experto';
+                        
+                }else if($tortalRespuestas >= 7 && $tortalRespuestas <= 10 ){
             
-        }else{                
-           $tag = 'Elemental';
+                $tag = 'Avanzado';
                 
+                }else if($tortalRespuestas >= 4 && $tortalRespuestas <= 6){            
+                $tag = 'Principiante';
+                
+            }else{                
+            $tag = 'Elemental';
+                    
+            }
+            
+            
+            $data = DB::select('call  sp_insertarCliente(?, ?, ?, ?, ?, ?, ?, ?)',
+            array($request->name, $request->apellidoP, $request->apellidoM, 
+                $request->fechaN, $request->telefono, $request->rfc, $idUsuario, $tag));
+
+
+            return redirect("/");
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
         }
-        
-        
-        $data = DB::select('call  sp_insertarCliente(?, ?, ?, ?, ?, ?, ?, ?)',
-        array($request->name, $request->apellidoP, $request->apellidoM, 
-              $request->fechaN, $request->telefono, $request->rfc, $idUsuario, $tag));
-
-
-        return redirect("/");
     }
 
     /**
@@ -84,16 +135,28 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        $cliente = DB::table('cliente')
-                    ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
-                    ->select('cliente.idCliente','persona.nombre', 
-                            'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
-                            'persona.telefono', 'persona.rfc')
-                    ->where('cliente.idUsuario', '=', $id)
-                    ->get();
 
-        //return $cliente->all();
-        return view('cliente.edit', ['cliente' => $cliente]);
+        if(auth()->user()->idRol == 1){
+
+            $cliente = DB::table('cliente')
+                        ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
+                        ->select('cliente.idCliente','persona.nombre',  'cliente.idPersona',
+                                'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
+                                'persona.telefono', 'persona.rfc')
+                        ->where('cliente.idUsuario', '=', $id)
+                        ->get();
+       
+
+            //$direccion = DB::table('direccion')->where('idPersona', $id);
+
+            //return $cliente->all();
+           return view('cliente.edit', ['cliente' => $cliente]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -105,7 +168,11 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = DB::select('call  sp_actualizarCliente(?, ?, ?, ?, ?, ?, ?)',
+        array($id , $request->name, $request->apellidoP,$request->apellidoM,
+            $request->fecha,$request->telefono, $request->rfc));
+
+        return redirect()->route('cliente.index');       
     }
 
     /**
