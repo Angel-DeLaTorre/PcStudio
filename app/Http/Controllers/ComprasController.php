@@ -7,21 +7,36 @@ use Illuminate\Support\Facades\DB;
 
 class ComprasController extends Controller
 {
+    public function indexDetalleCompra(){
+        $listaDetalleCompra = DB::table('persona')
+                            ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
+                            ->join('compra', 'cliente.idCliente', '=', 'compra.idCliente')
+                            ->join('detalleCompra', 'compra.idCompra', '=', 'detalleCompra.idCompra')
+                            ->join('producto', 'detalleCompra.idProducto', '=', 'producto.idProducto')
+                            ->select('persona.nombre','persona.apellidoPaterno','persona.apellidoMaterno',
+                                    'persona.telefono','cliente.idCliente','compra.fechaCompra',
+                                    'compra.idEmpleado','compra.idCompra','producto.titulo',
+                                    'detalleCompra.cantidad','detalleCompra.costo')
+                            ->get();
+
+        return view('DetalleCompras', ['listaDetalleCompra' => $listaDetalleCompra]);
+    }
+
     public function indexCuestionarioDestino()
     {
         $listaPersonaPedido = DB::table('cliente')
-                            ->join('persona', 'cliente.idPersona', '=', 'cliente.idPersona')
-                            ->join('direccion', 'persona.idPersona', '=', 'direccion.idPersona')
-                            ->select('persona.idPersona','persona.nombre','persona.apellidoPaterno',
-                                    'persona.apellidoMaterno','persona.telefono','cliente.idCliente', 
-                                    'cliente.idUsuario','direccion.codigoPostal','direccion.calle',
-                                    'direccion.colonia','direccion.municipio','direccion.numeroExterno', 
-                                    'direccion.numero','direccion.descripcion')
-                            ->where(function($query)
-                            {
-                                $query->where('cliente.idUsuario', '=', auth()->user()->id);
-                            })
-                            ->get();
+            ->join('persona', 'cliente.idPersona', '=', 'cliente.idPersona')
+            ->join('direccion', 'persona.idPersona', '=', 'direccion.idPersona')
+            ->select('persona.idPersona','persona.nombre','persona.apellidoPaterno',
+                    'persona.apellidoMaterno','persona.telefono','cliente.idCliente', 
+                    'cliente.idUsuario','direccion.codigoPostal','direccion.calle',
+                    'direccion.colonia','direccion.municipio','direccion.numeroExterno', 
+                    'direccion.numero','direccion.descripcion')
+            ->where(function($query)
+            {
+                $query->where('cliente.idUsuario', '=', auth()->user()->id);
+            })
+            ->get();
 
         $detalleCompra = session('DetalleCompra');
         return view('DatosEnvio', ['listaPersonaPedido' => $listaPersonaPedido], compact('detalleCompra'));
@@ -73,6 +88,60 @@ class ComprasController extends Controller
         $id = DB::select('select @var_idCompra as idCompra');
         $id = DB::select('select @var_idDetalleCompra as idDetalleCompra');
 
-        return  redirect('/datosDestino');
+        return  redirect('/exitoCompra');
+    }
+
+    public function detallesPago(Request $request){
+        $datos = [
+            "txtNombre"          => $request['txtNombre'],
+            "txtApellidoPaterno" => $request['txtApellidoPaterno'],
+            "txtApellidoMaterno" => $request['txtApellidoMaterno'],
+            "txtTelefono"        => $request['txtTelefono'],
+            "txtCp"              => $request['txtCp'],
+            "txtColonia"         => $request['txtColonia'],
+            "txtCalle"           => $request['txtCalle'],
+            "txtMunicipio"       => $request['txtMunicipio'],
+            "txtDescripcion"     => $request['txtDescripcion'],
+            "txtNumeroInterno"   => $request['txtNumeroInterno'],
+            "txtNumeroExterno"   => $request['txtNumeroExterno'],
+            "fechaCompra"        => date('Y-m-d H:i:s'),
+            "empleado"           => null,
+            "txtCliente"         => $request['txtCliente'],
+            "txtDetalle"         => $request['txtDetalle']
+        ];
+        $idList = array();
+        $cantList = array();
+        $costList = array();
+
+        $items = explode("-", $request['txtDetalle']);
+        array_pop($items);
+        foreach($items as $item){
+            $id = explode("*", $item);
+            array_push($idList, $id[0]);
+            array_push($cantList, $id[1]);
+            array_push($costList, $id[2]);
+        }
+
+
+        $listaProducto = DB::table('producto')
+            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->select('producto.idProducto','producto.titulo',
+                    'producto.descripcion','producto.marca', 'producto.precioVenta',
+                    'imagenproducto.imagenUrl','producto.descuentoVenta','producto.cantidad')
+            ->whereIn('producto.idProducto',$idList)
+            ->get();
+        
+        for($i = 0; $i < count($cantList); $i++){
+            $listaProducto[$i] ->cantidad = $cantList[$i];
+            $listaProducto[$i] ->precioVenta = $costList[$i];
+        }
+
+
+ 
+        return view('Compra.pago',compact('datos','listaProducto'));
+    }
+
+    public function exito(){
+        return view('Compra.exito');
     }
 }

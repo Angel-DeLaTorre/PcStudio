@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 use App\Carrito;
 
 class CarritoController extends Controller
@@ -33,12 +34,10 @@ class CarritoController extends Controller
         }
         
         if($request->cantidad <= $cantidadDisponible){
-            $carrito->idUsuario = auth()->user()->id;
-            $carrito->idProducto = $request->idProducto;
-            $carrito->cantidadProducto = $request->cantidad;
-            $carrito->estatus = 1;
-
-            $carrito->save();
+            
+            $data = DB::select('call  sp_InsertarCarrito(?,?,?,?,@var_idCarrito)', 
+                    array(auth()->user()->id,$request->idProducto,$request->cantidad,1));
+            $id = DB::select('select @var_idCarrito as idCarrito');
 
             return redirect($request->ruta);
         }
@@ -47,32 +46,33 @@ class CarritoController extends Controller
         }
     }
 
-    public function vistaProductosCarrito(){
+    public function vistaProductosCarrito()
+    {
         $listaProductoCarrito = DB::table('carrito')
-                                    ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
-                                    ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
-                                    ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
-                                            'producto.descripcion','producto.marca', 'producto.precioVenta',
-                                            'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
-                                    ->where(function($query)
-                                    {
-                                        $query->where('carrito.idUsuario', '=', auth()->user()->id)
-                                                ->where('carrito.estatus', '=', 1);
-                                    })
-                                    ->get();
+            ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
+            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
+                    'producto.descripcion','producto.marca', 'producto.precioVenta',
+                    'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
+            ->where(function($query)
+            {
+                $query->where('carrito.idUsuario', '=', auth()->user()->id)
+                        ->where('carrito.estatus', '=', 1);
+            })
+            ->get();
         
         $listaPendiente = DB::table('carrito')
-                            ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
-                            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
-                            ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
-                                    'producto.descripcion','producto.marca', 'producto.precioVenta',
-                                    'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
-                            ->where(function($query)
-                            {
-                                $query->where('carrito.idUsuario', '=', auth()->user()->id)
-                                        ->where('carrito.estatus', '=', 2);
-                            })
-                            ->get();
+            ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
+            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
+                    'producto.descripcion','producto.marca', 'producto.precioVenta',
+                    'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
+            ->where(function($query)
+            {
+                $query->where('carrito.idUsuario', '=', auth()->user()->id)
+                        ->where('carrito.estatus', '=', 2);
+            })
+            ->get();
         return view('Carrito', ['listaProductoCarrito' => $listaProductoCarrito], ['listaPendiente' => $listaPendiente]);
     }
 
@@ -82,8 +82,9 @@ class CarritoController extends Controller
         $productoCarritoEliminar->estatus = 0;
 
         $productoCarritoEliminar -> save();
-        return redirect('/indexCarrito');
+        return redirect('/Carrito');
     }
+
 
     public function guardar($idCarrito){
         
@@ -91,7 +92,7 @@ class CarritoController extends Controller
         $productoCarritoGuardar->estatus = 2;
 
         $productoCarritoGuardar -> save();
-        return redirect('/indexCarrito');
+        return redirect('/Carrito');
     }
 
     public function asignarCompra($idCarrito){
@@ -100,6 +101,7 @@ class CarritoController extends Controller
         $productoCarritoComprar->estatus = 1;
 
         $productoCarritoComprar -> save();
-        return redirect('/indexCarrito');
+        return redirect('/Carrito');
+
     }
 }
