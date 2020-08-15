@@ -1,10 +1,30 @@
 $(document).ready(function () {
-
+    
     obtenerUsuariosTags();
+    obtenerCategoriasPopulares();
     obtenerProductosMasVendidos();
 
 });
 
+function obtenerProductosMasVendidos() {
+
+    var token = $("meta[name='csrf-token']").attr("content");
+
+    $.ajax({
+        type: "post",
+        data: {
+            "_token": token
+        },
+        url: '/productosTop',
+
+        success: function (data) {
+
+            console.log('PRODUCTOS');
+            console.log(data);
+            generarGraficoProductosMasVendidos(data);
+        }
+    });
+}
 function obtenerUsuariosTags() {
 
     var token = $("meta[name='csrf-token']").attr("content");
@@ -25,9 +45,7 @@ function obtenerUsuariosTags() {
     });
 }
 
-function obtenerProductosMasVendidos() {
-    console.log('ALGO');
-
+function obtenerCategoriasPopulares() {
     var token = $("meta[name='csrf-token']").attr("content");
 
     $.ajax({
@@ -35,18 +53,21 @@ function obtenerProductosMasVendidos() {
         data: {
             "_token": token
         },
-        url: '/productosTop',
+        url: '/categoriasTop',
 
         success: function (data) {
-            generarGraficoProductosMasVendidos(data);
+            console.log('CATEGORÍAS');
+            console.log(data);
+            generarGraficaCategoriasPopulares(data);
         }
     });
+
 
 }
 
 //Gráfico 1
 function generarGraficoProductosMasVendidos(data) {
-    console.log(data);
+
     am4core.ready(function () {
 
         var category = 'producto';
@@ -89,7 +110,7 @@ function generarGraficoProductosMasVendidos(data) {
         var labelBullet = series.bullets.push(new am4charts.LabelBullet())
         labelBullet.label.horizontalCenter = "left";
         labelBullet.label.dx = 10;
-        labelBullet.label.text = "{values.valueX.workingValue.formatNumber('#.0as')}";
+        labelBullet.label.text = "{values.valueX.workingValue}";
         labelBullet.locationX = 1;
         labelBullet.label.fill = am4core.color("#FFF");
 
@@ -110,7 +131,7 @@ function generarGraficoProductosMasVendidos(data) {
 //Gráfica 2
 
 function generarGrafico1UsuariosTags(data) {
-  
+
     am4core.ready(function () {
 
         // Themes begin
@@ -231,4 +252,50 @@ function generarGrafico2UsuariosTags(data) {
         categoryAxis.sortBySeries = series;
 
     });
+}
+
+//Gráfica 4
+function generarGraficaCategoriasPopulares(data) {
+    
+    var category = 'categoria';
+    var value = 'monto';
+    am4core.ready(function() {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        
+        // Create chart instance
+        var chart = am4core.create("chartdiv4", am4charts.PieChart);
+        
+        // Add data
+        chart.data = data;
+        
+        // Set inner radius
+        chart.innerRadius = am4core.percent(50);
+        
+        // Add and configure Series
+        var pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = value;
+        pieSeries.dataFields.category = category;
+        pieSeries.slices.template.stroke = am4core.color("#fff");
+        pieSeries.slices.template.strokeWidth = 2;
+        pieSeries.slices.template.strokeOpacity = 1;
+        pieSeries.labels.template.fill = am4core.color("white");
+        pieSeries.slices.template.propertyFields.fill = "color";
+        pieSeries.colors.step = 2;
+        pieSeries.tooltip.autoTextColor = false;
+        pieSeries.tooltip.label.fill = am4core.color("#FFFFFF");
+        
+        // This creates initial animation
+        pieSeries.hiddenState.properties.opacity = 1;
+        pieSeries.hiddenState.properties.endAngle = -90;
+        pieSeries.hiddenState.properties.startAngle = -90;
+        
+        chart.legend = new am4charts.Legend();
+        chart.legend.labels.template.fill = am4core.color("white");
+        chart.legend.valueLabels.template.fill = am4core.color("white");
+        chart.legend.valueLabels.template.text = "{value.value}";
+        }); 
+
 }

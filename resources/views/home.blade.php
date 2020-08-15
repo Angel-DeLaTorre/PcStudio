@@ -32,8 +32,9 @@
                                 <h4><span class="font-weight-bold mb-0 mt-0">{{ $productosMasVendidos[0] }}</span></h4>
                             </div>
                             <div class="col-auto">
-                                <div class="icon icon-shape bg-gradient-info text-white
-                                                                                                rounded-circle shadow">
+                                <div
+                                    class="icon icon-shape bg-gradient-info text-white
+                                                                                                        rounded-circle shadow">
                                     <i class="ni ni-active-40"></i>
                                 </div>
                             </div>
@@ -67,7 +68,7 @@
                             <div class="col-auto">
                                 <div
                                     class="icon icon-shape bg-gradient-orange
-                                                                                                text-white rounded-circle shadow">
+                                                                                                        text-white rounded-circle shadow">
                                     <i class="ni ni-chart-pie-35"></i>
                                 </div>
                             </div>
@@ -98,8 +99,9 @@
                                 <span class="h6 text-uppercase mb-0">PRODUCTOS VENDIDOS</span>
                             </div>
                             <div class="col-auto">
-                                <div class="icon icon-shape bg-gradient-green text-white
-                                                                                                rounded-circle shadow">
+                                <div
+                                    class="icon icon-shape bg-gradient-green text-white
+                                                                                                        rounded-circle shadow">
                                     <i class="ni ni-money-coins"></i>
                                 </div>
                             </div>
@@ -172,11 +174,11 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div id="chartdiv2" style="width: 100%;
-                                                height: 500px;"></div>
+                                                        height: 500px;"></div>
                                 </div>
                                 <div class="col-6">
                                     <div id="chartdiv3" style="width: 100%;
-                                                height: 500px;"></div>
+                                                        height: 500px;"></div>
                                 </div>
                             </div>
 
@@ -187,19 +189,18 @@
                 <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
                     <div class="card bg-default">
                         <div class="card-header bg-transparent">
-                            <h3 class="text-white">CLASIFICACIÓN DE USUARIOS SEGÚN SU TAG</h3>
+                            <h3 class="text-white">CATEGORÍAS MÁS POPULARES</h3>
                         </div>
                         <div class="card-body">
 
                             <div class="row">
-                                <div class="col-6">
-                                    <div id="" style="width: 100%;
-                                                height: 500px;"></div>
+                                <div class="col-12">
+                                    <div id="chartdiv4" style="width: 100%;
+                                    height: 500px">
+                                    
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <div id="" style="width: 100%;
-                                                height: 500px;"></div>
-                                </div>
+
                             </div>
 
 

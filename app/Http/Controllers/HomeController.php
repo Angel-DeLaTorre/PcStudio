@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function index()
     {
-       
+        $this->obtenerCategoriasMasVendidas();
         $saludo = $this->obtenerSaludo();
 
         $nombreSaludo = $this->obtenerNombreUsuario();
@@ -51,8 +51,22 @@ class HomeController extends Controller
         ]);
     }
 
+    public function obtenerCategoriasMasVendidas()
+    {
 
-    //
+        $categoriasMasVendidos = DB::table('detalleCompra')
+            ->join('producto', 'detalleCompra.idProducto', '=', 'producto.idProducto')
+            ->join('categoria', 'categoria.idCategoria', '=', 'producto.idCategoria')
+            ->select('categoria.nombre AS categoria', DB::raw('SUM(detalleCompra.cantidad) AS monto'))
+            ->groupBy('detalleCompra.idProducto', 'detalleCompra.cantidad')
+            ->orderByDesc('detalleCompra.cantidad')->limit(8)->get()->toArray();
+
+
+        return response()->json($categoriasMasVendidos);
+    }
+
+
+    //Consulta de los productos más vendidos
     public function obtenerProductosMasVendidos()
     {
 

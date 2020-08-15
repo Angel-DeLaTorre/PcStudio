@@ -31,6 +31,7 @@ Route::get('/lista', 'Producto\ProductoController@busqueda')->name('listaProduct
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/usersTag', 'HomeController@obtenerCantidadUsuariosClasificados')->name('homeUsers');
 Route::post('/productosTop', 'HomeController@obtenerProductosMasVendidos')->name('homeProducts');
+Route::post('/categoriasTop', 'HomeController@obtenerCategoriasMasVendidas')->name('homeCategories');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 

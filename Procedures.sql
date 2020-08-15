@@ -785,3 +785,8 @@ SELECT @var_idCompra as idCompra;
 SELECT @var_idDetalleCompra as idDetalleCompra;
 
 
+SELECT categoria.nombre, SUM(detalleCompra.cantidad) FROM detalleCompra INNER JOIN producto on detalleCompra.idProducto = producto.idProducto
+INNER JOIN categoria  on producto.idCategoria = categoria.idCategoria
+GROUP BY detalleCompra.idProducto, detalleCompra.cantidad ORDER BY detalleCompra.cantidad DESC
+
+DESCRIBE producto
