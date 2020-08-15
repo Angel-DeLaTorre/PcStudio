@@ -7,7 +7,7 @@ $(document).ready(function(){
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: 1
+                        value: amount
                     }
                 }]
             });
