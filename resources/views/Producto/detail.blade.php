@@ -57,12 +57,12 @@
                     if ($item->descuentoVenta > 0){
                         $nuevoCosto = ($item->precioVenta - ($item->descuentoVenta * $item->precioVenta) / 100);
                         ?>
-                            <p class="costo"><del>${{$item->precioVenta}}</del></p>
-                            <p class="costo oferta">${{$nuevoCosto}}</p>
+                            <p class="costo"><del>${{number_format($item->precioVenta,2)}}</del></p>
+                            <p class="costo oferta">${{number_format($nuevoCosto)}}</p>
                             <p class="costo oferta">Precio de oferta</p>
                         <?php
                     }else{
-                        echo '<p class="costo">$'.$item->precioVenta.'</p>';        
+                        echo '<p class="costo">$'. number_format($item->precioVenta).'</p>';        
                     } 
                     if ($item->cantidad <= 0){
                         echo '<h4 class="agotado">Agotado :(</h4>';
