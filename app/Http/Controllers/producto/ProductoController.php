@@ -277,11 +277,13 @@ class ProductoController extends Controller
     public function inicio(){
         $user = Auth::user();
         if($user == null){
-            echo 'Hola';
             $productos = DB::table('imagenproducto')
             ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->join('tag', 'tag.idTag', '=', 'producto.idTag')
             ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
-             'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta')
+             'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta','tag.tag')
+             ->orderByRaw('producto.idCategoria DESC')
+             ->limit(15)
             ->get();
         }else if($user->idRol == 1){
             $productos = DB::table('imagenproducto')
