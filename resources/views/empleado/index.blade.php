@@ -1,4 +1,5 @@
 @extends('layouts.adminDashboard')
+
 <!--Contenido del dashboard-->
 <!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
 @section('module_name')
@@ -7,9 +8,9 @@
 
 
 @section('content')
-    <div class="card">
-        
-        
+@include('common.success')
+@include('common.errors')
+    <div class="card">        
         <div class="card-header">       
             
             <a href="{{ url('/empleado/create') }}"><Button class="btn btn-outline-primary btn-block">Agregar</Button></a>
