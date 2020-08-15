@@ -96,6 +96,10 @@
                                                     <div class="col-md-4">                        
                                                         <a href="/direccion/{{$item->idDireccion}}/edit" class="btn btn-outline-primary btn-block form-control" >Editar </a>                                            
                                                     </div> 
+                                                <div class="col-md-4"> 
+                                                        <a href="{{ route('deleteDieccion', $item->idDireccion) }}"><i class="material-icons"
+                                                            style="color: #e3342f; margin-left: 15px;">delete_forever</i></a>
+                                                        </div> 
                                                 </div> 
                                             </div>
                                         </div>      

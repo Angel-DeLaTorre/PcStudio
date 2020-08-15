@@ -69,14 +69,18 @@ class ProductoController extends Controller
     {
         $user = Auth::user();
 
-        $productos = DB::table('imagenproducto')
+        if($user->idRol == 1){
+            $productos = DB::table('imagenproducto')
             ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
             ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
              'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta')
             ->get();
         
 
-        return view('producto.busqueda',compact('productos'));
+            return view('producto.busqueda',compact('productos'));
+        }else{
+            abort(401, 'Esta Accion no esta autorizada');
+        }
     }
 
     /**
@@ -267,5 +271,44 @@ class ProductoController extends Controller
         echo "<script>alert('se a actualizado');</script>";
         
         return redirect()->route('producto.index')->with('status', 'El producto se a Eliminado');
+    }
+
+
+    public function inicio(){
+        $user = Auth::user();
+        if($user == null){
+            echo 'Hola';
+            $productos = DB::table('imagenproducto')
+            ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
+             'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta')
+            ->get();
+        }else if($user->idRol == 1){
+            $productos = DB::table('imagenproducto')
+            ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->join('cliente', 'producto.idTag', '=', 'cliente.idTag')
+            ->join('users', 'cliente.idUsuario', '=', 'users.id')
+            ->join('tag', 'tag.idTag', '=', 'producto.idTag')
+            ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
+             'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta','tag.tag')
+            ->where('users.id','=',$user->id)
+            ->get();
+
+        }else{
+            abort(401, 'Esta Accion no esta autorizada');
+        }
+
+        $news = DB::table('imagenproducto')
+            ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->join('cliente', 'producto.idTag', '=', 'cliente.idTag')
+            ->join('users', 'cliente.idUsuario', '=', 'users.id')
+            ->join('tag', 'tag.idTag', '=', 'producto.idTag')
+            ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
+             'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta','tag.tag')
+            ->orderByRaw('producto.updated_at - producto.created_at DESC')
+            ->limit(6)
+            ->get();
+
+        return view('welcome',compact('productos','news'));
     }
 }
