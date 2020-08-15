@@ -14,11 +14,8 @@
 
 <div class="card">
     @include('common.success')
-    @include('common.alert')
 
-    <button type="button" class="btn btn-primary col-lg-2" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button>
+
 
     <div class="card-header">
         <a href="{{ url('/producto/create') }}"><Button class="button is-primary is-outlined">Agregar</Button></a>

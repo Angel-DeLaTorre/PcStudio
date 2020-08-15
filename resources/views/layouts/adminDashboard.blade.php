@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -365,6 +365,7 @@
             <div class="container-fluid" id="module-content" style="margin-top: -150px; position: relative;">
                 @yield('content')
             </div>
+            
         </div>
         <!-- /#page-content-wrapper -->
 
