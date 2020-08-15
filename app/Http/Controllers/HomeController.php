@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function index()
     {
-
+       
         $saludo = $this->obtenerSaludo();
 
         $nombreSaludo = $this->obtenerNombreUsuario();
@@ -51,6 +51,23 @@ class HomeController extends Controller
         ]);
     }
 
+
+    //
+    public function obtenerProductosMasVendidos()
+    {
+
+        $productosMasVendidos = DB::table('detalleCompra')
+            ->join('producto', 'detalleCompra.idProducto', '=', 'producto.idProducto')
+            ->select('producto.titulo AS producto', DB::raw('SUM(detalleCompra.cantidad) AS unidades'))
+            ->groupBy('detalleCompra.idProducto', 'detalleCompra.cantidad')
+            ->orderByDesc('detalleCompra.cantidad')->limit(10)->get()->toArray();
+
+        return response()->json($productosMasVendidos);
+    }
+
+
+    //Consulta y ordena la información necesaria para graficar
+    //los clientes ordenados por sus tags
     public function obtenerCantidadUsuariosClasificados()
     {
 
@@ -74,10 +91,9 @@ class HomeController extends Controller
         $avanzado = DB::table('cliente')->where('idTag', '=', 2)->count();
 
         if ($avanzado) {
-            
+
             $usuariosTag[1]['tag'] = 'Avanzado';
             $usuariosTag[1]['cantidad'] = $avanzado;
-
         } else {
             $usuariosTag[1]['tag'] = 'Avanzado';
             $usuariosTag[1]['cantidad'] = 0;
@@ -97,7 +113,7 @@ class HomeController extends Controller
         $elemental = DB::table('cliente')->where('idTag', '=', 4)->count();
 
         if ($elemental) {
-            
+
             $usuariosTag[3]['tag'] = 'Elemental';
             $usuariosTag[3]['cantidad'] = $elemental;
         } else {
@@ -105,7 +121,7 @@ class HomeController extends Controller
             $usuariosTag[3]['cantidad'] = 0;
         }
 
-        
+
         return response()->json($usuariosTag);
     }
 
