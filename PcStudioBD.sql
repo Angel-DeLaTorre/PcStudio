@@ -277,8 +277,9 @@ DROP TABLE IF EXISTS `compra`;
 CREATE TABLE `compra` (
   `idCompra` int(11) NOT NULL AUTO_INCREMENT,
   `fechaCompra` datetime NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
+  `idEmpleado` int(11) NULL DEFAULT NULL,
   `idCliente` int(11) NOT NULL,
+  `estatus` INT NOT NULL,
   PRIMARY KEY (`idCompra`),
   KEY `Fk_idEmpleado_compra` (`idEmpleado`),
   KEY `Fk_idCliente_compra` (`idCliente`),
@@ -369,3 +370,7 @@ CREATE TABLE `failed_jobs` (
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+SELECT COUNT(id) FROM users WHERE idRol = 1 AND MONTH(created_at) = MONTH(CURDATE());
+
+
