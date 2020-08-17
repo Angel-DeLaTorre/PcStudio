@@ -6,7 +6,10 @@
 @endsection
 @section('content')
 <div class="container">
+    @include('common.success')
+    @include('common.errors')
     <div class="row d-flex justify-content-center">
+      
         <div class="col-md-8 ">
 
             <div class="col-md-9 py-2">                    
