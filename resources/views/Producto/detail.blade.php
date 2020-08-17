@@ -81,7 +81,9 @@
                                 </select>
                             </div>
                             
-                            <input type="submit" value="Agregar al carrito" class="btn btn-outline-primary" />
+                            <input type="submit" value="Agregar al carrito" class="btn btn-outline-primary" /></br>
+                            </br>
+                            <a href="{{ URL::previous() }}">Volver</a>
                         </form>
                         <?php
                     }
