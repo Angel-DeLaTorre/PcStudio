@@ -23,7 +23,8 @@ class ClienteMoralController extends Controller
         ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
                 'persona.nombre', 'persona.rfc', 'contacto.nombre AS nombreContacto',
                 'contacto.telefono AS telefonoContacto', 'contacto.email')
-        ->where('cliente.estatus', '=', 1, 'and' , 'persona.tipo', '=', 2)
+        ->where('cliente.estatus', '=', 1)
+        ->where('persona.tipo', '=', 2)
         ->get();
 
         //return $institucion;

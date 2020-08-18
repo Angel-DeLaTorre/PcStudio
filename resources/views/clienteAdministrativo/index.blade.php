@@ -1,7 +1,7 @@
 @extends('layouts.adminDashboard')
 
 @section('module_name')
-    <h1 style="color: white;" id="module_text">Cliente Moral</h1>
+    <h1 style="color: white;" id="module_text">Clientes</h1>
 @endsection
 
 @section('content')
