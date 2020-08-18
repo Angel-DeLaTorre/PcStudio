@@ -20,7 +20,8 @@ class ClienteAdministrativoController extends Controller
         ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
                 'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno',
                 'persona.fechaNacimiento', 'persona.telefono')
-        ->where('cliente.estatus', '=', 1)
+        ->where('cliente.estatus', '=', 1)        
+        ->where('persona.tipo', '=', 1)
         ->get();
 
         //return $institucion;
