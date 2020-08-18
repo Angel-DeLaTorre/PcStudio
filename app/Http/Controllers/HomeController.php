@@ -31,24 +31,29 @@ class HomeController extends Controller
 
     public function index()
     {
-        $this->obtenerCategoriasMasVendidas();
-        $saludo = $this->obtenerSaludo();
+        if (auth()->user()->idRol == 2 || auth()->user()->idRol == 3) {
+            $this->obtenerCategoriasMasVendidas();
+            $saludo = $this->obtenerSaludo();
 
-        $nombreSaludo = $this->obtenerNombreUsuario();
+            $nombreSaludo = $this->obtenerNombreUsuario();
 
-        $productosMasVendidos = $this->obtenerProductoMasVendido();
+            $productosMasVendidos = $this->obtenerProductoMasVendido();
 
-        $cantidadUsuarios = $this->contarNuevosUsuarios();
+            $cantidadUsuarios = $this->contarNuevosUsuarios();
 
-        $cantidadVentas = $this->obtenerCantidadVentas();
+            $cantidadVentas = $this->obtenerCantidadVentas();
 
-        $this->obtenerCantidadUsuariosClasificados();
+            $this->obtenerCantidadUsuariosClasificados();
 
-        return view('home', [
-            'saludo' => $saludo, 'nombreSaludo' => $nombreSaludo,
-            'cantidadUsuarios' => $cantidadUsuarios, 'productosMasVendidos' => $productosMasVendidos,
-            'cantidadVentas' => $cantidadVentas
-        ]);
+            return view('home', [
+                'saludo' => $saludo, 'nombreSaludo' => $nombreSaludo,
+                'cantidadUsuarios' => $cantidadUsuarios, 'productosMasVendidos' => $productosMasVendidos,
+                'cantidadVentas' => $cantidadVentas
+            ]);
+        } else {
+
+            return View('/');
+        }
     }
 
     public function obtenerCategoriasMasVendidas()
