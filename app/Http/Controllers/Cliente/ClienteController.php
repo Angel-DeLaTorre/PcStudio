@@ -145,11 +145,7 @@ class ClienteController extends Controller
                                 'persona.telefono', 'persona.rfc')
                         ->where('cliente.idUsuario', '=', $id)
                         ->get();
-       
 
-            //$direccion = DB::table('direccion')->where('idPersona', $id);
-
-            //return $cliente->all();
            return view('cliente.edit', ['cliente' => $cliente]);
 
         }else{
