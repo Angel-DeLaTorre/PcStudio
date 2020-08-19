@@ -793,3 +793,5 @@ SELECT * FROM imagenProducto
 
 SELECT producto.titulo AS producto, SUM(detalleCompra.cantidad) AS unidades FROM detalleCompra INNER JOIN producto on detalleCompra.idProducto = producto.idProducto
 GROUP BY detalleCompra.idProducto, detalleCompra.cantidad LIMIT 10
+
+SELECT * FROM users

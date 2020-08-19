@@ -31,6 +31,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         if (auth()->user()->idRol == 2 || auth()->user()->idRol == 3) {
             $this->obtenerCategoriasMasVendidas();
             $saludo = $this->obtenerSaludo();
@@ -51,8 +52,7 @@ class HomeController extends Controller
                 'cantidadVentas' => $cantidadVentas
             ]);
         } else {
-
-            return View('inicio');
+            return redirect()->action('Producto\ProductoController@inicio');
         }
     }
 
