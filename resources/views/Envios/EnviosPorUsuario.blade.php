@@ -5,11 +5,12 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="subtitle">Estatus del envío:
-                    <strong>@switch($detalle[0]->estatus)
+                    <strong>
+                        @switch($detalle[0]->estatus)
                             @case(1)
                             En preparación
                             @break
-
+                            
                             @case(2)
                             Enviado
                             @break
@@ -23,8 +24,8 @@
                             @break
                             @default
                             ?
-
-                        @endswitch</strong>
+                        @endswitch
+                    </strong>
                 </h5>
                 <progress class="progress is-primary" value="{{ $detalle[0]->estatus * 25 }}" max="100">Hola</progress>
             </div>
@@ -40,8 +41,8 @@
                     <div class="columns">
                         <div class="column">
                             <img src="{{ url($url) }}" alt="{{ $item->titulo }}" width="150px" style="display: block;
-                                            margin-left: auto;
-                                            margin-right: auto;">
+                                                    margin-left: auto;
+                                                    margin-right: auto;">
                         </div>
                         <div class="column">
                             <h6 class="subtitle">{{ $item->titulo }}</h6>
