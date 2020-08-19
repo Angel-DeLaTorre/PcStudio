@@ -31,6 +31,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         if (auth()->user()->idRol == 2 || auth()->user()->idRol == 3) {
             $this->obtenerCategoriasMasVendidas();
             $saludo = $this->obtenerSaludo();
@@ -51,8 +52,7 @@ class HomeController extends Controller
                 'cantidadVentas' => $cantidadVentas
             ]);
         } else {
-
-            return View('/');
+            return redirect()->action('Producto\ProductoController@inicio');
         }
     }
 
@@ -63,7 +63,7 @@ class HomeController extends Controller
             ->join('producto', 'detalleCompra.idProducto', '=', 'producto.idProducto')
             ->join('categoria', 'categoria.idCategoria', '=', 'producto.idCategoria')
             ->select('categoria.nombre AS categoria', DB::raw('SUM(detalleCompra.cantidad) AS monto'))
-            ->groupBy('detalleCompra.idProducto', 'detalleCompra.cantidad')
+            ->groupBy('detalleCompra.idProducto', 'detalleCompra.cantidad', 'categoria.nombre')
             ->orderByDesc('detalleCompra.cantidad')->limit(8)->get()->toArray();
 
 
@@ -203,13 +203,13 @@ class HomeController extends Controller
 
 
 
-        if ($tituloProductoActual) {
+        if (!$tituloProductoActual->isEmpty()) {
             array_push($productos, $tituloProductoActual[0]->titulo);
         } else {
             array_push($productos, "Sin productos populares este mes");
         }
 
-        if ($tituloProductoAnterior) {
+        if (!$tituloProductoAnterior->isEmpty()) {
             array_push($productos, $tituloProductoAnterior[0]->titulo);
         } else {
             array_push($productos, "Sin productos populares el mes anterior");
