@@ -126,26 +126,26 @@
                         Más
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <p style="text-align: center">Hardware interno</p>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/1">Placa madre</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/2">Procesador</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/3">Memoria interna RAM</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/5">Tarjeta de video</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/6">Tarjeta de sonido</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/7">Disco Duro</a>
-                            <div class="dropdown-divider"></div>
-                            <p style="text-align: center">Periféricos </p>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/8">Teclados</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/9">Punteros o ratones</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/10">Micrófonos</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/11">Cámaras</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/12">Escáneres</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/13">Joysticks</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/14">Monitores</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/15">Impresoras</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/16">Bocinas</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/17">Videobeams y proyectores</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/18">Copiadoras de CD o DVD</a>
+                        <p style="text-align: center">Hardware interno</p>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/1">Placa madre</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/2">Procesador</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/3">Memoria interna RAM</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/5">Tarjeta de video</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/6">Tarjeta de sonido</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/7">Disco Duro</a>
+                        <div class="dropdown-divider"></div>
+                        <p style="text-align: center">Periféricos </p>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/8">Teclados</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/9">Punteros o ratones</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/10">Micrófonos</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/11">Cámaras</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/12">Escáneres</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/13">Joysticks</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/14">Monitores</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/15">Impresoras</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/16">Bocinas</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/17">Videobeams y proyectores</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/18">Copiadoras de CD o DVD</a>
                     </div>
                 </li>
             </ul>
@@ -171,7 +171,9 @@
                                         <a href="{{ route('logout') }}" class="navbar-item"
                                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
                                             Sesión</a>
-                                            <a href="/cliente" class="navbar-item">Mis Datos</a>
+                                        <a href="/cliente" class="navbar-item">Mis Datos</a>
+                                        <a href="{{ route('enviosPorUsuario', Auth::user() -> id) }}" class="navbar-item">Mis pedidos</a>
+
                                     </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         style="display: none;">
@@ -268,7 +270,7 @@
                                     </p>
                                 </div>
                         </div>
-                            </a>
+                        </a>
                     </li>
                     <li class="item-a">
                         <!--slider-box-->
@@ -450,5 +452,10 @@
     </script>
     <script src="{{ asset('js/lightslider.js') }}" defer></script>
 </body>
-<script src="https://account.snatchbot.me/script.js"></script><script>window.sntchChat.Init(124898)</script>
+<script src="https://account.snatchbot.me/script.js"></script>
+<script>
+    window.sntchChat.Init(124898)
+
+</script>
+
 </html>
