@@ -37,10 +37,19 @@ class ComprasController extends Controller
                 $query->where('cliente.idUsuario', '=', auth()->user()->id);
             })
             ->get();
+        $direcciones = DB::table('direccion')
+        ->join('cliente', 'direccion.idPersona', '=', 'direccion.idPersona')
+        ->join('persona', 'persona.idPersona', '=', 'cliente.idPersona')
+        ->join('users', 'users.id', '=', 'cliente.idUsuario')
+        ->select('direccion.idDireccion','direccion.codigoPostal','direccion.calle',
+                'direccion.colonia','direccion.estado','direccion.municipio', 
+                'direccion.descripcion','direccion.numero','direccion.numeroExterno','cliente.idCliente',
+                'persona.telefono','persona.nombre','persona.apellidoPaterno','persona.apellidoMaterno')
+        ->where('users.id','=',auth()->user()->id)
+        ->get(); 
 
         $detalleCompra = session('DetalleCompra');
-        return view('DatosEnvio', ['listaPersonaPedido' => $listaPersonaPedido], compact('detalleCompra'));
-        //print_r($detalleCompra);
+        return view('DatosEnvio', ['listaPersonaPedido' => $listaPersonaPedido], compact('detalleCompra','direcciones'));
     }
 
     public function guardarDetalle(Request $request){        
@@ -85,10 +94,12 @@ class ComprasController extends Controller
                             $nInterno,$nExterno,$fechaCompra,$empleado,$cliente,$detalle));
         $id = DB::select('select @var_idPersonaPedido as idPersonaPedido');
         $id = DB::select('select @var_idDireccionPedido as idDireccionPedido');
-        $id = DB::select('select @var_idCompra as idCompra');
         $id = DB::select('select @var_idDetalleCompra as idDetalleCompra');
-
-        return  redirect('/exitoCompra');
+        $idCompra = DB::select('select @var_idCompra as idCompra');
+        
+        return redirect()->action(
+            'ComprasController@detalle', ['idCompra' => 1]
+        );
     }
 
     public function detallesPago(Request $request){
@@ -141,7 +152,15 @@ class ComprasController extends Controller
         return view('Compra.pago',compact('datos','listaProducto'));
     }
 
-    public function exito(){
-        return view('Compra.exito');
+    public function detalle(Request $detalle){
+        if( $detalle->input('idCompra') != null ){
+            $idCompra = $detalle->input('idCompra');
+        }
+        if( $detalle->input('detalle') != null ){
+            $idCompra = $detalle->input('detalle');
+        }
+
+        
+        return view('Compra.exito',compact('idCompra'));
     }
 }
