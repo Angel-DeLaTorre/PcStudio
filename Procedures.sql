@@ -789,4 +789,9 @@ SELECT categoria.nombre, SUM(detalleCompra.cantidad) FROM detalleCompra INNER JO
 INNER JOIN categoria  on producto.idCategoria = categoria.idCategoria
 GROUP BY detalleCompra.idProducto, detalleCompra.cantidad ORDER BY detalleCompra.cantidad DESC
 
-DESCRIBE producto
+SELECT * FROM imagenProducto
+
+SELECT producto.titulo AS producto, SUM(detalleCompra.cantidad) AS unidades FROM detalleCompra INNER JOIN producto on detalleCompra.idProducto = producto.idProducto
+GROUP BY detalleCompra.idProducto, detalleCompra.cantidad LIMIT 10
+
+SELECT * FROM users

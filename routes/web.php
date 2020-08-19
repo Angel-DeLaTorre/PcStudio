@@ -121,7 +121,7 @@ Route::get ('/datosDestino','ComprasController@indexCuestionarioDestino')->name(
 Route::post ('/datosDestino','ComprasController@guardarDetalle')->name('datosDestino')->middleware('auth');
 Route::post ('/DetallesPago','ComprasController@detallesPago')->name('datosDestino')->middleware('auth');
 Route::post ('/insertarCompra','ComprasController@insertarCompra')->name('datosDestino')->middleware('auth');
-Route::get ('/exito','ComprasController@exito')->name('exitoCompra')->middleware('auth');
+Route::get ('/detalleCompra','ComprasController@detalle')->name('detalleCompra')->middleware('auth');
 
 
 Route::get('tipo/{type}', 'SweetController@notification');
