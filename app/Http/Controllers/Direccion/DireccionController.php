@@ -49,16 +49,6 @@ class DireccionController extends Controller
      */
     public function store(Request $request)
     {
-        
-       $estado = strtoupper($request->estado);
-       $municipio = strtoupper($request->municipio);
-       $colonia = strtoupper($request->colonia);
-       $calle = strtoupper($request->calle);
-       $descripcion = strtoupper($request->descripcion);
-        $calle = strtoupper($request->calle);
-
-        
-
         $cliente = DB::table('cliente')
             ->join('users', 'cliente.idUsuario', '=', 'users.id')
             ->select('cliente.idPersona')
@@ -82,7 +72,7 @@ class DireccionController extends Controller
             $direccion->estatus = 1;
             $direccion->save();
 
-            return redirect()->route('cliente.index');        
+            return redirect()->route('cliente.index')->with('status', 'Se guardo correctamente tu direccion');        
 
     }
 
@@ -145,7 +135,7 @@ class DireccionController extends Controller
             $direccion->numeroExterno = $request->input("numeroExterno");
             $direccion->save();
 
-       return redirect()->route('cliente.index');
+       return redirect()->route('cliente.index')->with('status', 'Se actualizado correctamente tu direccion');
     }
 
     /**
@@ -161,6 +151,6 @@ class DireccionController extends Controller
         $direccion->estatus = 0;
         $direccion->save();
 
-        return redirect()->route('cliente.index');
+        return redirect()->route('cliente.index')->with('status', 'Se a eliminado tu direccion');
     }
 }

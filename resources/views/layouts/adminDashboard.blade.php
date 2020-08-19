@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -219,7 +219,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="register.html">
+                                    <a class="nav-link" href="{{ url('/DetalleCompra') }}">
                                         <i class="material-icons" style="color: #f6993f">shopping_cart</i>
                                         <span class="nav-link-text">Compras</span>
                                     </a>
@@ -299,7 +299,7 @@
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Tags</h4>
                                         </a>
 
-                                        <a href="#!" class="list-group-item list-group-item-action">
+                                        <a href="{{ url('/DetalleCompra') }}" class="list-group-item list-group-item-action">
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Compras</h4>
                                         </a>
 
@@ -365,6 +365,7 @@
             <div class="container-fluid" id="module-content" style="margin-top: -150px; position: relative;">
                 @yield('content')
             </div>
+            
         </div>
         <!-- /#page-content-wrapper -->
 

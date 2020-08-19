@@ -76,7 +76,7 @@
 								
 				</div>
 				<div class="col-lg-2">
-					<a href="{{ route('deleteProducto', $producto->idCarrito) }}"><p class="btn btn-outline-danger">Quitar de carrito</p></a>
+					<a href="{{ route('deleteProductoCarrito', $producto->idCarrito) }}"><p class="btn btn-outline-danger">Quitar de carrito</p></a>
 					<a href="{{ route('guardarProducto', $producto->idCarrito) }}"><p class="btn btn-outline-primary">Guadar para mas tarde</p></a>
 				</div>
 			</div>
@@ -133,7 +133,7 @@
 					</div>
 				</div>
 				<div class="col-lg-2">
-					<a href="{{ route('deleteProducto', $lp->idCarrito) }}"><p class="btn btn-outline-danger">Quitar de carrito</p></a>
+					<a href="{{ route('deleteProductoCarrito', $lp->idCarrito) }}"><p class="btn btn-outline-danger">Quitar de carrito</p></a>
 					<a href="{{ route('asignarCompra', $lp->idCarrito) }}"><p class="btn btn-outline-primary">Agregar a compra</p></a>
 				</div>
 			</div>

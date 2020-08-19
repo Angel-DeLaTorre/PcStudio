@@ -57,12 +57,12 @@
                     if ($item->descuentoVenta > 0){
                         $nuevoCosto = ($item->precioVenta - ($item->descuentoVenta * $item->precioVenta) / 100);
                         ?>
-                            <p class="costo"><del>${{$item->precioVenta}}</del></p>
-                            <p class="costo oferta">${{$nuevoCosto}}</p>
+                            <p class="costo"><del>${{number_format($item->precioVenta,2)}}</del></p>
+                            <p class="costo oferta">${{number_format($nuevoCosto)}}</p>
                             <p class="costo oferta">Precio de oferta</p>
                         <?php
                     }else{
-                        echo '<p class="costo">$'.$item->precioVenta.'</p>';        
+                        echo '<p class="costo">$'. number_format($item->precioVenta).'</p>';        
                     } 
                     if ($item->cantidad <= 0){
                         echo '<h4 class="agotado">Agotado :(</h4>';
@@ -71,7 +71,7 @@
                         <form class="form-group mt-3" method="POST" action="/indexProducto" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="idProducto" id="idProducto" value="{{$item->idProducto}}" />
-                            <input type="hidden" name="ruta" id="ruta" value="/producto/detail/{{$item->idProducto}}" />
+                            <input type="hidden" name="ruta" id="ruta" value="/detail/{{$item->idProducto}}" />
                             <div class="form-group">
                                 <label for="cantidad">Cantidad: </label>
                                 <select name="cantidad" id="cantidad" class="form-control col-lg-6">
@@ -81,7 +81,9 @@
                                 </select>
                             </div>
                             
-                            <input type="submit" value="Agregar al carrito" class="btn btn-outline-primary" />
+                            <input type="submit" value="Agregar al carrito" class="btn btn-outline-primary" /></br>
+                            </br>
+                            <a href="{{ URL::previous() }}">Volver</a>
                         </form>
                         <?php
                     }

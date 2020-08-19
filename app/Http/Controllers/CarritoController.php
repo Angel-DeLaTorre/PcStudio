@@ -34,12 +34,10 @@ class CarritoController extends Controller
         }
         
         if($request->cantidad <= $cantidadDisponible){
-            $carrito->idUsuario = auth()->user()->id;
-            $carrito->idProducto = $request->idProducto;
-            $carrito->cantidadProducto = $request->cantidad;
-            $carrito->estatus = 1;
-
-            $carrito->save();
+            
+            $data = DB::select('call  sp_InsertarCarrito(?,?,?,?,@var_idCarrito)', 
+                    array(auth()->user()->id,$request->idProducto,$request->cantidad,1));
+            $id = DB::select('select @var_idCarrito as idCarrito');
 
             return redirect($request->ruta);
         }

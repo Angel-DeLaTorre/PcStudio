@@ -96,7 +96,20 @@
         a {
             text-decoration: none !important;
         }
-
+        .ego{
+            margin: 0;
+            padding: .5em 1em;
+            color: #757575;
+            font-family: 1.2em;
+        }
+        .ago{
+            color: #f44336;
+            font-size: 1.2em;
+        }
+        .del{
+            color: #f44336;
+            
+        }
     </style>
 </head>
 
@@ -301,6 +314,29 @@
                         </div>
                         </a>
                     </li>
+                    @foreach ($news as $new)
+                        <li class="item-a">
+                            <!--slider-box-->
+                            <div class="box">
+                                <a href="producto/detail/{{$new->idProducto}}">
+                                    <img src="{{ url('img/productos/'.$new->imagenUrl) }}" class="model">
+                                    <hr>
+                                    <div class="details">
+                                        <div class="row ml-2">
+                                            @if ($new->descuentoVenta > 0)
+                                                <p class="title is-4 is-spaced">${{ number_format(($new->precioVenta - ($new->descuentoVenta * $new->precioVenta) / 100),2)}}</p>    
+                                                <del class="ml-2 del"><p class="del">${{ number_format($new->precioVenta,2)}}</p></del>
+                                            @else
+                                                <p class="title is-4 is-spaced">${{ number_format($new->precioVenta,2)}}</p>
+                                            @endif
+                                            
+                                        </div>
+                                        <p class="subtitle is-5">{{$new->titulo}}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>    
+                    @endforeach
                 </ul>
 
             </div>
@@ -313,114 +349,32 @@
             <h1 class="title">Recomendados para ti</h1>
         </div>
         <div class="row">
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
-            <div class="box">
-                <a href="">
-                    <img src="{{ url('img/slider1.png') }}" class="model">
-                    <hr>
-                    <div class="details">
-                        <p class="title is-3 is-spaced">$4,999</p>
-                        <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                            núcleos y
-                            3.6GHz de frecuencia con gráfica integrada</p>
-                    </div>
-                </a>
-            </div>
+            @foreach ($productos as $producto)
+                <div class="box">
+                    <a href="/producto/detail/{{$producto->idProducto}}">
+                        <img src="{{ url('img/productos/'.$producto->imagenUrl) }}" class="model">
+                        <hr>
+                        <div class="details">
+                            <div class="row ml-2">
+                                @if ($producto->descuentoVenta > 0)
+                                    <p class="title is-4 is-spaced">${{ number_format(($producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) / 100),2)}}</p>    
+                                    <del class="ml-2 del"><p class="del">${{ number_format($producto->precioVenta,2)}}</p></del>
+                                @else
+                                    <p class="title is-4 is-spaced">${{ number_format($producto->precioVenta,2)}}</p>
+                                @endif
+                                
+                            </div>
+                            
+                            @if ($producto->cantidad == 0)
+                                <p class="ago">Agotado</p>
+                            @endif
+                            <p class="subtitle is-5">{{$producto->titulo}}</p>
+                            <p class="ego">{{$producto->marca}}</p>
+                            <p class="tag">#{{$producto->tag}}</p>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
 
 
