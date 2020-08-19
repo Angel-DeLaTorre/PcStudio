@@ -7,14 +7,53 @@
 @section('content')
 <div class="container">
         <div class="row ">
-            <div class="col-md-12">
-                <h2>Agrega un domicilio</h2>
+            <div class="col-lg-12 row">
+                @foreach ($direcciones as $direccion)
+                        <form class="col-lg-4" method="POST" action="/DetallesPago" enctype="multipart/form-data">
+                            @csrf
+                            <input hidden readonly type="text" name="txtNombre" id="txtNombre" class="form-control" value="{{$direccion->nombre}}" required>
+                            <input hidden readonly type="text" name="txtApellidoPaterno" id="txtApellidoPaterno" class="form-control" value="{{$direccion->apellidoPaterno}}" required>
+                            <input hidden readonly type="text" name="txtApellidoMaterno" id="txtApellidoMaterno" class="form-control" value="{{$direccion->apellidoMaterno}}">
+                            <input hidden readonly type="text" name="txtCp" id="txtCp" class="form-control" value="{{$direccion->codigoPostal}}" required>
+                            <input hidden readonly type="text" name="txtColonia" id="txtColonia" class="form-control" value="{{$direccion->colonia}}" required>
+                            <input hidden readonly type="text" name="txtMunicipio" id="txtMunicipio" class="form-control" value="{{$direccion->municipio}}" required>
+                            <input hidden readonly type="text" name="txtCalle" id="txtCalle" class="form-control" value="{{$direccion->calle}}" required>
+                            <input hidden readonly type="text" name="txtNumeroInterno" id="txtNumeroInterno" class="form-control" value="{{$direccion->numero}}">
+                            <input hidden readonly type="text" name="txtNumeroExterno" id="txtNumeroExterno" class="form-control" value="{{$direccion->numeroExterno}}">
+                            <input hidden readonly type="text" name="txtTelefono" id="txtTelefono" class="form-control" value="{{$direccion->telefono}}" required>
+                            <textarea hidden readonly name="txtDescripcion" id="txtDescripcion" class="form-control"
+                            placeholder="Descripción de la fachada, puntos de referencia para encontrarlo, indicaciones de seguridad, etc." required>
+                            {{$direccion->descripcion}}
+                            </textarea>
+                            <input hidden readonly type="text" name="txtCliente" id="txtCliente" value="{{$direccion->idCliente}}">
+                            <input hidden readonly type="text" name="txtDetalle" id="txtDetalle" value="{{$detalleCompra}}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="">Direccion</h5>
+                                    <p class="prop">{{$direccion->nombre}} {{$direccion->apellidoPaterno}} {{$direccion->apellidoMaterno}}</p>
+                                    <p class="prop">{{$direccion->calle}} #{{$direccion->numero}} - {{$direccion->numeroExterno}}</p>
+                                    <p class="prop">{{$direccion->colonia}} </p>
+                                    <p class="prop">{{$direccion->codigoPostal}} {{$direccion->municipio}}</p>
+                                    <p class="prop">{{$direccion->telefono}}</p>
+                                    <p class="prop">Descripción: {{$direccion->descripcion}}</p>
+                                    <button type="submit" class="btn btn-primary mt-3">Seleccionar dirección</button>
+                                </div>
+                            </div>
+                            
+                            
+                        </form>
+                @endforeach
+            </div>
+            <div class="col-md-12 col-lg-12">
                 <form class="form-group" method="POST" action="/DetallesPago" enctype="multipart/form-data">
+                    
                     <!--CSRF Es una directiva de blade para la proteccion de la peticion
                     laravel genera un token -->  
                     @csrf
                     @foreach ($listaPersonaPedido as $item)
+                        
                         <div class="card  form-group">
+                            <h2 class="ml-4 mt-3">Agrega un domicilio</h2>
                             <br>
                             <div class="col-md-12 row form-group ">
 
@@ -92,3 +131,11 @@
         </div>
     </div>
 @endsection 
+
+@section('style')
+    <style>
+        .prop{
+            margin: 0;
+        }
+    </style>
+@endsection
