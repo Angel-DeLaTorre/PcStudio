@@ -52,7 +52,7 @@ class HomeController extends Controller
             ]);
         } else {
 
-            return View('/');
+            return View('inicio');
         }
     }
 
