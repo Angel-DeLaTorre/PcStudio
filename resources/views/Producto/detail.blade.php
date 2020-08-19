@@ -75,7 +75,7 @@
                             <div class="form-group">
                                 <label for="cantidad">Cantidad: </label>
                                 <select name="cantidad" id="cantidad" class="form-control col-lg-6">
-                                    @for($i = 1; $i < 10; $i++)
+                                    @for($i = 1; $i <= $item->cantidad; $i++)
                                         <option value="{{$i}}">{{$i}}</option>
                                     @endfor
                                 </select>
