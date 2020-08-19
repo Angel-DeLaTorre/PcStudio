@@ -94,7 +94,7 @@ class EmpleadoController extends Controller
 
         $validacion = $data[0];
 
-        return redirect()->route('empleado.index')->with('status', $validacion);
+        return redirect()->route('empleado.index')->with('status', 'Se a insertado correctamente el empleado');
 
     }
 
@@ -175,8 +175,9 @@ class EmpleadoController extends Controller
 
         //dd($data);
         //print_r($data);
+        $validacion = 1;
 
-        return redirect()->route('empleado.index')->with('status', 'El empleado Actualizado');
+        return redirect()->route('empleado.index')->with('status', 'El empleado se actualizo correctamente');
     }
 
     /**
@@ -193,7 +194,7 @@ class EmpleadoController extends Controller
             
             echo "<script>alert('se a actualizado');</script>";
             
-            return redirect()->route('empleado.index')->with('status', 'El empleado se a Eliminado');
+            return redirect()->route('empleado.index')->with('status', 'Se a eliminado el empleado correctamente');
             
         }else{
 

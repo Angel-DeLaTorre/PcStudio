@@ -27,6 +27,9 @@ Route::get('/lista', 'Producto\ProductoController@busqueda')->name('listaProduct
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/usersTag', 'HomeController@obtenerCantidadUsuariosClasificados')->name('homeUsers');
+Route::post('/productosTop', 'HomeController@obtenerProductosMasVendidos')->name('homeProducts');
+Route::post('/categoriasTop', 'HomeController@obtenerCategoriasMasVendidas')->name('homeCategories');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
@@ -109,7 +112,7 @@ if(Request::path() == 1 || Request::path() == 2 || Request::path() == 3 || Reque
 Route::get('/indexProducto','CarritoController@index');
 Route::post('/indexProducto','CarritoController@agregarProductoCarrito');
 Route::get('/Carrito','CarritoController@vistaProductosCarrito')->middleware('auth');
-Route::get('/Delete/{idCarrito}', 'CarritoController@destroy')->name('deleteProducto');
+Route::get('/Quitar/{idCarrito}', 'CarritoController@destroy')->name('deleteProductoCarrito');
 
 Route::get('/Guardar/{idCarrito}', 'CarritoController@guardar')->name('guardarProducto');
 Route::get('/asignarCompra/{idCarrito}', 'CarritoController@asignarCompra')->name('asignarCompra');
@@ -129,3 +132,4 @@ Route::get('/Envios/Detalle/{idCompra}', 'EnviosController@Detalle')->name('deta
 Route::get('/Envios/Edit/{idCompra}', 'EnviosController@edit')->name('editEnvio');
 Route::put('/Envios/Update/{idCompra}', 'EnviosController@update')->name('updateEnvio');
 
+Route::get('/DetalleCompra', 'ComprasController@indexDetalleCompra')->name('indexEnvios');

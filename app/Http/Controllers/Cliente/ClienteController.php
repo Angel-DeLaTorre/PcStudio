@@ -172,7 +172,7 @@ class ClienteController extends Controller
         array($id , $request->name, $request->apellidoP,$request->apellidoM,
             $request->fecha,$request->telefono, $request->rfc));
 
-        return redirect()->route('cliente.index');       
+        return redirect()->route('cliente.index')->with('status', 'Se actualizaron tus datos correctamente');       
     }
 
     /**

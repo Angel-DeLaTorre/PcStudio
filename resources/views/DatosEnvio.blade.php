@@ -117,8 +117,9 @@
                                 </div>
 
                                     <div class="col-md-12">
-                                        <div class=" col-lg-3">
+                                        <div class=" col-lg-4">
                                             <button type="submit" class="btn btn-primary">Proceder al pago</button>
+                                            <a href="{{ url('/Carrito') }}" class="text-primary font-weight-bold py-3">Regresar al carrito</a>
                                         </div>
                                     </div>                        
                             </div>

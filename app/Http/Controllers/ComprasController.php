@@ -7,6 +7,21 @@ use Illuminate\Support\Facades\DB;
 
 class ComprasController extends Controller
 {
+    public function indexDetalleCompra(){
+        $listaDetalleCompra = DB::table('persona')
+                            ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
+                            ->join('compra', 'cliente.idCliente', '=', 'compra.idCliente')
+                            ->join('detalleCompra', 'compra.idCompra', '=', 'detalleCompra.idCompra')
+                            ->join('producto', 'detalleCompra.idProducto', '=', 'producto.idProducto')
+                            ->select('persona.nombre','persona.apellidoPaterno','persona.apellidoMaterno',
+                                    'persona.telefono','cliente.idCliente','compra.fechaCompra',
+                                    'compra.idEmpleado','compra.idCompra','producto.titulo',
+                                    'detalleCompra.cantidad','detalleCompra.costo')
+                            ->get();
+
+        return view('DetalleCompras', ['listaDetalleCompra' => $listaDetalleCompra]);
+    }
+
     public function indexCuestionarioDestino()
     {
         $listaPersonaPedido = DB::table('cliente')
