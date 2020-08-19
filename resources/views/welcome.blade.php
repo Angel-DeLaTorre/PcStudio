@@ -139,26 +139,26 @@
                         Más
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <p style="text-align: center">Hardware interno</p>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/1">Placa madre</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/2">Procesador</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/3">Memoria interna RAM</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/5">Tarjeta de video</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/6">Tarjeta de sonido</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/7">Disco Duro</a>
-                            <div class="dropdown-divider"></div>
-                            <p style="text-align: center">Periféricos </p>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/8">Teclados</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/9">Punteros o ratones</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/10">Micrófonos</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/11">Cámaras</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/12">Escáneres</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/13">Joysticks</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/14">Monitores</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/15">Impresoras</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/16">Bocinas</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/17">Videobeams y proyectores</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/18">Copiadoras de CD o DVD</a>
+                        <p style="text-align: center">Hardware interno</p>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/1">Placa madre</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/2">Procesador</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/3">Memoria interna RAM</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/5">Tarjeta de video</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/6">Tarjeta de sonido</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/7">Disco Duro</a>
+                        <div class="dropdown-divider"></div>
+                        <p style="text-align: center">Periféricos </p>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/8">Teclados</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/9">Punteros o ratones</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/10">Micrófonos</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/11">Cámaras</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/12">Escáneres</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/13">Joysticks</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/14">Monitores</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/15">Impresoras</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/16">Bocinas</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/17">Videobeams y proyectores</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/18">Copiadoras de CD o DVD</a>
                     </div>
                 </li>
             </ul>
@@ -184,7 +184,9 @@
                                         <a href="{{ route('logout') }}" class="navbar-item"
                                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
                                             Sesión</a>
-                                            <a href="/cliente" class="navbar-item">Mis Datos</a>
+                                        <a href="/cliente" class="navbar-item">Mis Datos</a>
+                                        <a href="{{ route('enviosPorUsuario', Auth::user() -> id) }}" class="navbar-item">Mis pedidos</a>
+
                                     </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         style="display: none;">
@@ -252,6 +254,66 @@
             <div class="cards-container">
                 <ul id="autoWidth" class="cs-hidden">
                     <!-- Los li se tienen que crear de forma dinámica a través del uso de PHP -->
+                    <li class="item-a">
+                        <!--slider-box-->
+                        <div class="box">
+                            <a href="">
+                                <img src="{{ url('img/slider1.png') }}" class="model">
+                                <hr>
+                                <div class="details">
+                                    <p class="title is-3 is-spaced">$4,999</p>
+                                    <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
+                                        núcleos y
+                                        3.6GHz de frecuencia con gráfica integrada</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="item-a">
+                        <!--slider-box-->
+                        <div class="box">
+                            <a href="">
+                                <img src="https://http2.mlstatic.com/alfombrilla-para-mouse-rgb-c7-efectos-luminosos-para-laptop-D_NQ_NP_901102-MLM40469770952_012020-F.webp"
+                                    class="model">
+                                <hr>
+                                <div class="details">
+                                    <p class="title is-3 is-spaced">$368.48</p>
+                                    <p class="subtitle is-5">Alfombrilla Para Mouse Rgb C/7 Efectos Luminosos Para
+                                        Laptop
+                                    </p>
+                                </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="item-a">
+                        <!--slider-box-->
+                        <div class="box">
+                            <a href="">
+                                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_931087-MLA40194584468_122019-F.webp"
+                                    class="model">
+                                <hr>
+                                <div class="details">
+                                    <p class="title is-3 is-spaced">$926.86</p>
+                                    <p class="subtitle is-5">Memoria RAM 8GB 1x8GB Adata ADDS1600W8G11-S</p>
+                                </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="item-a">
+                        <!--slider-box-->
+                        <div class="box">
+                            <a href="">
+                                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_839691-MLA42152911842_062020-F.webp"
+                                    class="model">
+                                <hr>
+                                <div class="details">
+                                    <p class="title is-3 is-spaced">$464</p>
+                                    <p class="subtitle is-5">Disco sólido interno Adata Ultimate SU650 ASU650SS-120GT-R
+                                        120GB negro</p>
+                                </div>
+                        </div>
+                        </a>
+                    </li>
                     @foreach ($news as $new)
                         <li class="item-a">
                             <!--slider-box-->
@@ -344,5 +406,10 @@
     </script>
     <script src="{{ asset('js/lightslider.js') }}" defer></script>
 </body>
-<script src="https://account.snatchbot.me/script.js"></script><script>window.sntchChat.Init(124898)</script>
+<script src="https://account.snatchbot.me/script.js"></script>
+<script>
+    window.sntchChat.Init(124898)
+
+</script>
+
 </html>

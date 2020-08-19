@@ -49,30 +49,38 @@ class DireccionController extends Controller
      */
     public function store(Request $request)
     {
-        $cliente = DB::table('cliente')
-            ->join('users', 'cliente.idUsuario', '=', 'users.id')
-            ->select('cliente.idPersona')
-            ->where('cliente.idUsuario', '=', auth()->user()->id)
-            ->get();
+        if(auth()->user()->idRol == 1){
 
-        foreach ($cliente as $item) {
-            $idPersona = $item->idPersona;
-        }
+            $cliente = DB::table('cliente')
+                ->join('users', 'cliente.idUsuario', '=', 'users.id')
+                ->select('cliente.idPersona')
+                ->where('cliente.idUsuario', '=', auth()->user()->id)
+                ->get();
 
-        $direccion = new Direccion();
-            $direccion->codigoPostal = $request->input("codigoPostal");
-            $direccion->calle = $request->input("calle");
-            $direccion->colonia = $request->input("colonia");
-            $direccion->estado = $request->input("estado");
-            $direccion->municipio = $request->input("municipio");
-            $direccion->descripcion =  $request->input("descripcion");
-            $direccion->numero = $request->input("numero");
-            $direccion->numeroExterno = $request->input("numeroExterno");
-            $direccion->idPersona = $idPersona;
-            $direccion->estatus = 1;
-            $direccion->save();
+            foreach ($cliente as $item) {
+                $idPersona = $item->idPersona;
+            }
 
-            return redirect()->route('cliente.index')->with('status', 'Se guardo correctamente tu direccion');        
+            $direccion = new Direccion();
+                $direccion->codigoPostal = $request->input("codigoPostal");
+                $direccion->calle = $request->input("calle");
+                $direccion->colonia = $request->input("colonia");
+                $direccion->estado = $request->input("estado");
+                $direccion->municipio = $request->input("municipio");
+                $direccion->descripcion =  $request->input("descripcion");
+                $direccion->numero = $request->input("numero");
+                $direccion->numeroExterno = $request->input("numeroExterno");
+                $direccion->idPersona = $idPersona;
+                $direccion->estatus = 1;
+                $direccion->save();
+
+                return redirect()->route('cliente.index')->with('status', 'Se guardo correctamente tu direccion');
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }        
 
     }
 

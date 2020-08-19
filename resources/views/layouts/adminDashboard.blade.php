@@ -194,7 +194,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="profile.html">
+                                    <a class="nav-link" href="{{ url('/clienteAdministrativo') }}">
                                         <i class="material-icons" style="color: #38c172">people</i>
                                         <span class="nav-link-text">Clientes</span>
                                     </a>
@@ -281,7 +281,7 @@
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Empleados</h4>
                                         </a>
 
-                                        <a href="#!" class="list-group-item list-group-item-action">
+                                        <a href="{{ url('/clienteAdministrativo') }}" class="list-group-item list-group-item-action">
                                             <h4 class="mb-0 text-sm" style="text-align:center;">Clientes</h4>
                                         </a>
 
