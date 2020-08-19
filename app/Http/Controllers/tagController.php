@@ -40,7 +40,7 @@ class tagController extends Controller
             'descripcion' => request('descripcion'),
         ]);
 
-        return redirect()->route('listaTag');
+        return redirect()->route('listaTag')->with('status', 'Se a actualizado correctamente la tag');
     }
 
     public function eliminar(tag $tag)

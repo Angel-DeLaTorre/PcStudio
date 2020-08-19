@@ -318,7 +318,7 @@
                         <li class="item-a">
                             <!--slider-box-->
                             <div class="box">
-                                <a href="producto/detail/{{$new->idProducto}}">
+                                <a href="/detail/{{$new->idProducto}}">
                                     <img src="{{ url('img/productos/'.$new->imagenUrl) }}" class="model">
                                     <hr>
                                     <div class="details">
@@ -351,7 +351,7 @@
         <div class="row">
             @foreach ($productos as $producto)
                 <div class="box">
-                    <a href="/producto/detail/{{$producto->idProducto}}">
+                    <a href="/detail/{{$producto->idProducto}}">
                         <img src="{{ url('img/productos/'.$producto->imagenUrl) }}" class="model">
                         <hr>
                         <div class="details">
