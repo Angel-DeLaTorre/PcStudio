@@ -374,3 +374,10 @@ CREATE TABLE `failed_jobs` (
 SELECT COUNT(id) FROM users WHERE idRol = 1 AND MONTH(created_at) = MONTH(CURDATE());
 
 
+select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, concat(per.nombre, " ", per.apellidoPaterno, " ", per.apellidoMaterno) as nombreCliente, concat(per2.nombre, " ", per2.apellidoPaterno, " ", per2.apellidoMaterno) as nombreEmpleado, com.estatus,
+        dC.cantidad
+ from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
+ inner join producto p on dC.idProducto = p.idProducto
+ inner join imagenProducto iP on p.idProducto = iP.idProducto
+ where com.idCompra = 1
+
