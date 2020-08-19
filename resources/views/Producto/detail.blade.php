@@ -65,7 +65,7 @@
                         echo '<p class="costo">$'. number_format($item->precioVenta).'</p>';        
                     } 
                     if ($item->cantidad <= 0){
-                        echo '<h4 class="agotado">Agotado :(</h4>';
+                        echo '<h4 class="agotado">Agotado :(</h4></br>';
                     }else{
                         ?>
                         <form class="form-group mt-3" method="POST" action="/indexProducto" enctype="multipart/form-data">
@@ -75,7 +75,7 @@
                             <div class="form-group">
                                 <label for="cantidad">Cantidad: </label>
                                 <select name="cantidad" id="cantidad" class="form-control col-lg-6">
-                                    @for($i = 1; $i < 10; $i++)
+                                    @for($i = 1; $i <= $item->cantidad; $i++)
                                         <option value="{{$i}}">{{$i}}</option>
                                     @endfor
                                 </select>
@@ -83,11 +83,13 @@
                             
                             <input type="submit" value="Agregar al carrito" class="btn btn-outline-primary" /></br>
                             </br>
-                            <a href="{{ URL::previous() }}">Volver</a>
+                            
                         </form>
+                        
                         <?php
                     }
                 ?>
+                <a href="{{ URL::previous() }}">Volver</a>
             </div>
         </div>
 

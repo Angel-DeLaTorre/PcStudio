@@ -27,7 +27,7 @@ $(document).ready(function(){
             });
         },
         onCancel: function (data) {
-            window.location.href = '/producto/detail/11?reason=userCancelled';
+            window.location.href = '/detalleCompra?result=error';
         }
     }).render('#paypal-button-container');
 

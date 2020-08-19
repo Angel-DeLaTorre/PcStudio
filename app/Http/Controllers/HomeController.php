@@ -31,6 +31,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         if (auth()->user()->idRol == 2 || auth()->user()->idRol == 3) {
             $this->obtenerCategoriasMasVendidas();
             $saludo = $this->obtenerSaludo();
@@ -51,8 +52,7 @@ class HomeController extends Controller
                 'cantidadVentas' => $cantidadVentas
             ]);
         } else {
-
-            return View('/');
+            return redirect()->action('Producto\ProductoController@inicio');
         }
     }
 
@@ -63,10 +63,10 @@ class HomeController extends Controller
             ->join('producto', 'detalleCompra.idProducto', '=', 'producto.idProducto')
             ->join('categoria', 'categoria.idCategoria', '=', 'producto.idCategoria')
             ->select('categoria.nombre AS categoria', DB::raw('SUM(detalleCompra.cantidad) AS monto'))
-            ->groupBy('detalleCompra.idProducto', 'detalleCompra.cantidad')
+            ->groupBy('detalleCompra.idProducto', 'detalleCompra.cantidad', 'categoria.nombre')
             ->orderByDesc('detalleCompra.cantidad')->limit(8)->get()->toArray();
 
-
+        
         return response()->json($categoriasMasVendidos);
     }
 
@@ -78,10 +78,10 @@ class HomeController extends Controller
         $productosMasVendidos = DB::table('detalleCompra')
             ->join('producto', 'detalleCompra.idProducto', '=', 'producto.idProducto')
             ->select('producto.titulo AS producto', DB::raw('SUM(detalleCompra.cantidad) AS unidades'))
-            ->groupBy('detalleCompra.idProducto', 'detalleCompra.cantidad')
-            ->orderByDesc('detalleCompra.cantidad')->limit(10)->get()->toArray();
+            ->groupBy('detalleCompra.idProducto', 'detalleCompra.cantidad', 'producto.titulo')
+            ->orderByDesc('detalleCompra.cantidad')->limit(8)->get()->toArray();
 
-        return response()->json($productosMasVendidos);
+            return response()->json($productosMasVendidos);
     }
 
 
@@ -203,13 +203,12 @@ class HomeController extends Controller
 
 
 
-        if ($tituloProductoActual) {
+        if (!$tituloProductoActual->isEmpty()) {
             array_push($productos, $tituloProductoActual[0]->titulo);
         } else {
             array_push($productos, "Sin productos populares este mes");
         }
-
-        if ($tituloProductoAnterior) {
+        if (!$tituloProductoAnterior->isEmpty()) {
             array_push($productos, $tituloProductoAnterior[0]->titulo);
         } else {
             array_push($productos, "Sin productos populares el mes anterior");
@@ -223,15 +222,12 @@ class HomeController extends Controller
     {
 
         $idUsuario = Auth::user()->id;
-
         $nombre = DB::table('persona')
 
             ->join('empleado', 'empleado.idPersona', '=', 'persona.idPersona')->join('users', 'users.id', 'empleado.idUsuario')
             ->select('persona.nombre')
             ->where('users.id', '=', $idUsuario)
             ->get();
-
-
         if ($nombre) {
             return $nombre[0]->nombre;
         } else {
