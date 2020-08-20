@@ -135,10 +135,10 @@ class ComprasController extends Controller
 
 
         $listaProducto = DB::table('producto')
-            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->join('imagenProducto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
             ->select('producto.idProducto','producto.titulo',
                     'producto.descripcion','producto.marca', 'producto.precioVenta',
-                    'imagenproducto.imagenUrl','producto.descuentoVenta','producto.cantidad')
+                    'imagenProducto.imagenUrl','producto.descuentoVenta','producto.cantidad')
             ->whereIn('producto.idProducto',$idList)
             ->get();
         
