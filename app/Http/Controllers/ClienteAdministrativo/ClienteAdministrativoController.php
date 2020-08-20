@@ -19,9 +19,10 @@ class ClienteAdministrativoController extends Controller
 
                 $clienteAdministrativo = DB::table('cliente')
                 ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
+                ->join('users', 'cliente.idUsuario', '=', 'users.id')
                 ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
                         'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno',
-                        'persona.fechaNacimiento', 'persona.telefono')
+                        'persona.fechaNacimiento', 'persona.telefono', 'users.email')
                 ->where('cliente.estatus', '=', 1)        
                 ->where('persona.tipo', '=', 1)
                 ->get();

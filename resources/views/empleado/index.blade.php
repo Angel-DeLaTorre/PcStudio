@@ -25,9 +25,8 @@
                         <th>Codigo Empleado</th>
                         <th>Nombre</th>
                         <th>Apellidos</th> 
-                        <th>Fecha nacimiento</th>
                         <th>Telefono</th>
-                        <th>RFC</th>
+                        <th>Correo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -37,9 +36,8 @@
                             <td>{{$item->codigoEmpleado}}</td>
                             <td>{{$item->nombre}}</td>
                             <td>{{$item->apellidoPaterno.' '.$item->apellidoMaterno}}</td>
-                            <td>{{$item->fechaNacimiento}}</td>
                             <td>{{$item->telefono}}</td>
-                            <td>{{$item->rfc}}</td>   
+                            <td>{{$item->email}}</td>   
                             <td>
                                 <a href="/empleado/{{$item->idEmpleado}}/edit"><i
                                     class="material-icons">edit</i></a>

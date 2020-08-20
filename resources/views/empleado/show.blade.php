@@ -44,7 +44,7 @@
                 
                 <div class="col-md-6">     
                     <label for=""><strong>Telefono</strong> </label>
-                    <label for="" class="form-control">{{$item->telefono}}/label>
+                    <label for="" class="form-control">{{$item->telefono}}</label>
                 </div>
 
                 <div class="col-md-6">     
