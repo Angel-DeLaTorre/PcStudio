@@ -137,11 +137,6 @@ class ProductoController extends Controller
      */
     public function detail($id)
     {
-        $user = Auth::user();
-        $rol = true;
-        if($user == null || $user->idRol != 1){
-            $rol = false;
-        }
         $producto = DB::table('producto')
             ->join('proveedor', 'proveedor.idProveedor', '=', 'producto.idProveedor')
             ->join('categoria', 'categoria.idCategoria', '=', 'producto.idCategoria')
@@ -152,17 +147,17 @@ class ProductoController extends Controller
                     'categoria.nombre as categoria')
             ->where('producto.idProducto', '=', $id)
             ->get();
-        $atributos = DB::table('atributoproducto')
-            ->join('producto', 'producto.idProducto', '=', 'atributoproducto.idProducto')
-            ->select('atributoproducto.titulo','atributoproducto.descripcion','atributoproducto.idAtributoProducto')
-            ->where('atributoproducto.idProducto', '=', $id)
+        $atributos = DB::table('atributoProducto')
+            ->join('producto', 'producto.idProducto', '=', 'atributoProducto.idProducto')
+            ->select('atributoProducto.titulo','atributoProducto.descripcion','atributoProducto.idAtributoProducto')
+            ->where('atributoProducto.idProducto', '=', $id)
             ->get();
         $imagenes = DB::table('imagenProducto')
             ->join('producto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
             ->select('imagenProducto.imagenUrl')
             ->where('imagenProducto.idProducto', '=', $id)
             ->get();
-        return view('producto.detail', compact('producto','atributos','imagenes','rol'));
+        return view('producto.detail', compact('producto','atributos','imagenes'));
     }
 
     /**
@@ -179,10 +174,10 @@ class ProductoController extends Controller
                     'producto.estatus', 'producto.created_at', 'producto.idTag as tag','producto.idCategoria as categoria','producto.idProveedor as proveedor')
             ->where('producto.idProducto', '=', $id)
             ->get();
-        $atributos = DB::table('atributoproducto')
-            ->join('producto', 'producto.idProducto', '=', 'atributoproducto.idProducto')
-            ->select('atributoproducto.titulo','atributoproducto.descripcion','atributoproducto.idAtributoProducto')
-            ->where('atributoproducto.idProducto', '=', $id)
+        $atributos = DB::table('atributoProducto')
+            ->join('producto', 'producto.idProducto', '=', 'atributoProducto.idProducto')
+            ->select('atributoProducto.titulo','atributoProducto.descripcion','atributoProducto.idAtributoProducto')
+            ->where('atributoProducto.idProducto', '=', $id)
             ->get();
         $imagenes = DB::table('imagenProducto')
             ->join('producto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
@@ -302,13 +297,7 @@ class ProductoController extends Controller
             ->get();
 
         }else{
-            $productos = DB::table('imagenProducto')
-            ->join('producto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
-            ->join('tag', 'tag.idTag', '=', 'producto.idTag')
-            ->select('imagenProducto.imagenUrl','imagenProducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
-             'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta','tag.tag')
-            ->where('tag.idTag','=','4')
-            ->get();
+            abort(401, 'Esta Accion no esta autorizada');
         }
 
         $news = DB::table('imagenProducto')
