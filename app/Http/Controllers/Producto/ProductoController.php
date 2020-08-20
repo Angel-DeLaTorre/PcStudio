@@ -137,6 +137,11 @@ class ProductoController extends Controller
      */
     public function detail($id)
     {
+        $user = Auth::user();
+        $rol = true;
+        if($user == null || $user->idRol != 1){
+            $rol = false;
+        } 
         $producto = DB::table('producto')
             ->join('proveedor', 'proveedor.idProveedor', '=', 'producto.idProveedor')
             ->join('categoria', 'categoria.idCategoria', '=', 'producto.idCategoria')
@@ -157,7 +162,8 @@ class ProductoController extends Controller
             ->select('imagenProducto.imagenUrl')
             ->where('imagenProducto.idProducto', '=', $id)
             ->get();
-        return view('producto.detail', compact('producto','atributos','imagenes'));
+
+        return view('producto.detail', compact('producto','atributos','imagenes', 'rol'));
     }
 
     /**

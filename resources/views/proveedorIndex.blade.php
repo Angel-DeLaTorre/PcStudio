@@ -18,7 +18,6 @@
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Estatus</th>
                         <th scope="col">Fecha Actualización</th>
                         <th scope="col">Acciones</th>
                     </tr>
@@ -28,7 +27,6 @@
                         <tr>
                             <th scope="row">{{ $item->idProveedor }}</th>
                             <td>{{ $item->nombre }}</td>
-                            <td>{{ $item->estatus }}</td>
                             <td>{{ $item->updated_at }}</td>
 
                             <td>
