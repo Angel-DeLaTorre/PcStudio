@@ -30,13 +30,20 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->idRol == 3){
 
-        $user =  DB::table('users')
-        ->join('rol', 'users.idRol', '=', 'rol.idRol')
-        ->select('users.id','users.name','users.email','rol.rol')
-        ->get();
+            $user =  DB::table('users')
+            ->join('rol', 'users.idRol', '=', 'rol.idRol')
+            ->select('users.id','users.name','users.email','rol.rol')
+            ->get();
+    
+            return view('usuario.index', ['usuarios' => $user]);
 
-        return view('usuario.index', ['usuarios' => $user]);
+        }else{
+
+            return redirect()->route('home')->with('status', 'Solo Usuarios de tipo Administrador');
+        }
+        
     }
 
     /**
