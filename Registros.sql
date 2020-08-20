@@ -17,7 +17,8 @@ INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `created_at`, `
 (17, 'Videobeams y proyectores', 'Se trata de aparatos que reciben información del sistema computarizado y la representan gráficamente, muy parecido a como lo hacen los monitores, pero en lugar de emitir en una pantalla, proyectan esa información como haces de luz, del mismo modo que un proyector de cine o de diapositivas.', '2020-08-01 05:00:00', '2020-08-01 05:00:00'),
 (18, 'Copiadoras de CD o DVD.', 'Estos formatos de disco, tanto el Disco Compacto (CD) como el Disco de Video Digital (DVD), permiten trasladar información de un sistema a otro', '2020-08-01 05:00:00', '2020-08-01 05:00:00'),
 (19, 'Computadoras de escritorio', 'Su nombre proviene del inglés personal computer (PC), también llamada “de escritorio”. Es de uso común en el hogar o la oficina.', '2020-08-01 05:00:00', '2020-08-01 05:00:00'),
-(20, 'Laptops', 'También llamada notebook, es una máquina más pequeña y liviana que la PC, pensada para transportarla de manera sencilla. Es de uso personal o laboral.', '2020-08-01 05:00:00', '2020-08-01 05:00:00');
+(20, 'Laptops', 'También llamada notebook, es una máquina más pequeña y liviana que la PC, pensada para transportarla de manera sencilla. Es de uso personal o laboral.', '2020-08-01 05:00:00', '2020-08-01 05:00:00'),
+(21, 'Fuente de porder', 'Dispositivo que convierte la corriente alterna', '2020-08-19 20:28:21', '2020-08-19 20:28:21');
 select * from categoria;
 
 INSERT INTO `tag` (`idTag`, `tag`, `descripcion`, `created_at`, `updated_at`) VALUES
@@ -137,7 +138,9 @@ INSERT INTO `producto` (`idProducto`, `titulo`, `descripcion`, `marca`, `precioC
 (97, 'Laptop Lanix Neuron A V15', 'Cubra sus necesidades diarias en informática La portátil Neuron A ha sido desarrollada como un dispositivo móvil con tecnología de punta y un diseño atractivo.', 'Lanix', 5299, 6299, 10, 0, 1, '2020-08-01 05:00:00', '2020-08-01 05:00:00', 4, 20, 7),
 (98, 'Laptop Hyundai Onnyx II', 'Full HD, Intel Pentium N4200 1.10GHz, 4GB, 500GB, Windows 10 Home 64-bit, Negro', 'Hyundai', 5299, 6299, 10, 0, 1, '2020-08-01 05:00:00', '2020-08-01 05:00:00', 3, 20, 6),
 (99, 'Laptop Hyundai Thinnote ', 'Full HD, Intel Pentium N4200 1.10GHz, 4GB, 32GB, Windows 10 Home 64-bit, Plata', 'Hyundai', 5709, 6709, 10, 0, 1, '2020-08-01 05:00:00', '2020-08-01 05:00:00', 2, 20, 6),
-(100, 'Laptop Samsung Chromebook', 'Capacidad de disco duro: 32 GB · Unidad de estado sólido · Velocidad del procesador: 1.1 GHz · CPU Intel · Duración de batería: 11 horas', 'Samsung', 10990, 12990, 10, 0, 1, '2020-08-01 05:00:00', '2020-08-01 05:00:00', 1, 20, 7);
+(100, 'Laptop Samsung Chromebook', 'Capacidad de disco duro: 32 GB · Unidad de estado sólido · Velocidad del procesador: 1.1 GHz · CPU Intel · Duración de batería: 11 horas', 'Samsung', 10990, 12990, 10, 0, 1, '2020-08-01 05:00:00', '2020-08-01 05:00:00', 1, 20, 7),
+(101, 'Monitor Curvo Eceptre LED 31.5', 'Curvo FULL HD 1ms de respuesta y 165Hz de frecuenta máxima Tecnología de pantalla: VA 2 puertos HDMI', 'Eceptre', 2300, 2500, 10, 0, 1, '2020-08-19 00:00:00', 1, 14, 6, null),
+(102, 'VP-600-RGB', 'La fuente de alimentación de la serie GameMax VP ofrece un esquema de "valor y rendimiento". 80Plus listo para soportar alta eficiencia requerida, también continúa siendo popular para compilaciones de computadoras.', 'GameMax', 4300, 4900, 10, 0, 1, '2020-08-19 00:00:00', 1, 21, 1, '2020-08-19 00:00:00');
 select * from producto;
 
 INSERT INTO `atributoproducto` (`idAtributoProducto`, `titulo`, `descripcion`, `idProducto`) VALUES
@@ -578,7 +581,15 @@ INSERT INTO `atributoproducto` (`idAtributoProducto`, `titulo`, `descripcion`, `
 (436, 'Diagonal de la pantalla', '15.60 Pulgadas', 100),
 (437, 'Memoria interna', '32 GB,', 100),
 (438, 'Capacidad almacenaje', '32 GB', 100),
-(439, 'Software', 'Windows 10 Home Paquetería Microsoft Office 2019', 100);
+(439, 'Software', 'Windows 10 Home Paquetería Microsoft Office 2019', 100),
+(577, 'Diagonal de la pantalla', '31.5pulg', 101),
+(578, 'Tipo HD', 'Full HD', 101),
+(579, 'Resolución', '1920 x 1080 Pixeles', 101),
+(580, 'Velocidad de actualización', '165 Hz', 101),
+(588, 'Alimentación', '600W', 102),
+(589, 'imensiones', '13.97 x 14.99 x 8.64 cm; 1.86 kg', 102),
+(590, 'Modelo', 'VP 600 RGB', 102),
+(591, 'Color', 'RGB', 102);
 select * from atributoProducto;
 
 --- IMAGENES DE PRODUCTO ---
@@ -681,4 +692,24 @@ INSERT INTO `imagenproducto` (`idImagenProducto`, `imagenUrl`, `idProducto`) VAL
 (174, '519_1597106000_001.jpeg', 97),
 (175, '587_1597101488_001.webp', 98),
 (176, '607_1597106034_001.webp', 99),
-(177, '733_1597101523_001.webp', 100);
+(177, '733_1597101523_001.webp', 100),
+(178, '143_1596924683_001.webp', 9);
+(179, '379_1597886009_001.png', 9),
+(180, '1597886769_001.png', 101),
+(182, '1597887181_001.png', 102);
+
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `idRol`) VALUES
+(3, 'Mario', 'mario1234@gmail.com', NULL, '$2y$10$25TZlKPvWGjSwdFPaECjBOBxfC3r2ZTPX286ksbhU5wEnGjUbWkFS', NULL, '2020-08-10 00:38:55', '2020-08-13 01:34:13', 1),
+(5, 'Brallan Leonardo', 'villalobosleonardo41@gmail.com', NULL, '$2y$10$yNDxU0Wtum76NMZCGDaQcuYymSaUelFfCTj8p/qnU741.SVa/DyCW', NULL, '2020-08-10 00:45:36', '2020-08-12 06:37:13', 3);
+
+INSERT INTO `persona` (`idPersona`, `nombre`, `apellidoPaterno`, `apellidoMaterno`, `fechaNacimiento`, `telefono`, `rfc`, `tipo`) VALUES
+(1, 'Mario', 'Salas', 'ornelas', NULL, '4772740203', NULL, 1),
+(2, 'Brallan', 'Sanchez', 'Villalobos', '1998-01-03', '4772740203', 'ISMAE3453S', 0);
+
+INSERT INTO `cliente` (`idCliente`, `codigoCliente`, `estatus`, `idTag`, `idPersona`, `idUsuario`) VALUES
+(1, 'CLIMASA11597001993', 1, 2, 1, 3);
+
+INSERT INTO `empleado` (`idEmpleado`, `codigoEmpleado`, `estatus`, `idPersona`, `idUsuario`) VALUES
+(1, 'ENBRSA31597002336', 1, 2, 5);
+
