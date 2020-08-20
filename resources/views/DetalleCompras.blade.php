@@ -14,8 +14,7 @@
             <table class="table is-striped" id="registros">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre del cliente</th>
+                        <th scope="col">cliente</th>
                         <th scope="col">Fecha compra</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Cantidad</th>
@@ -25,7 +24,6 @@
                 <tbody>
                     @foreach($listaDetalleCompra as $item)
                         <tr>
-                            <td scope="row">{{$item->idCompra}}</td>
                             <td scope="row">{{$item->nombre}}<p> </p>{{$item->apellidoPaterno}}<p> </p>{{$item->apellidoMaterno}}</td>
                             <td scope="row">{{$item->fechaCompra}}</td>
                             <td scope="row">{{$item->titulo}}</td>
