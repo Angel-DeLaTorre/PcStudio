@@ -134,3 +134,6 @@ Route::put('/Envios/Update/{idCompra}', 'EnviosController@update')->name('update
 Route::get('/Envios/EnviosUsuario/{idUsuario}', 'EnviosController@enviosPorUsuario')->name('enviosPorUsuario');
 
 Route::get('/DetalleCompra', 'ComprasController@indexDetalleCompra')->name('indexEnvios');
+
+//Para buscar en toda la tienda
+Route::get('/Productos/Buscar', 'Producto\ProductoController@buscarTodaLaTienda')->name('buscarEnTienda');
