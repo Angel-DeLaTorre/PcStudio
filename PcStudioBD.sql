@@ -325,8 +325,8 @@ Create TABLE direccionpedido(
     calle VARCHAR(200) NOT NULL,
     municipio VARCHAR(200) NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
-    numero VARCHAR(10) NULL,
-    numeroExterno VARCHAR(10) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    numeroExterno VARCHAR(10) NULL,
     idPersonaPedido INT(11) NOT NULL,
     CONSTRAINT Pk_idDireccionPedido PRIMARY KEY(idDireccionPedido),
     CONSTRAINT Fk_idPersona_Direccion_Pedido FOREIGN KEY(idPersonaPedido) REFERENCES personapedido(idPersonaPedido)
