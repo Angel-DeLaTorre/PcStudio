@@ -31,7 +31,7 @@
                                 <div class="card-body">
                                     <h5 class="">Direccion</h5>
                                     <p class="prop">{{$direccion->nombre}} {{$direccion->apellidoPaterno}} {{$direccion->apellidoMaterno}}</p>
-                                    <p class="prop">{{$direccion->calle}} #{{$direccion->numero}} - {{$direccion->numeroExterno}}</p>
+                                    <p class="prop">{{$direccion->calle}} {{$direccion->numero}} - {{$direccion->numeroExterno}}</p>
                                     <p class="prop">{{$direccion->colonia}} </p>
                                     <p class="prop">{{$direccion->codigoPostal}} {{$direccion->municipio}}</p>
                                     <p class="prop">{{$direccion->telefono}}</p>
@@ -111,9 +111,7 @@
                                 <div class="col-md-6 form-group">     
                                     <label for="">Descripción de la casa</label>
                                     <textarea name="txtDescripcion" id="txtDescripcion" class="form-control"
-                                    placeholder="Descripción de la fachada, puntos de referencia para encontrarlo, indicaciones de seguridad, etc." required>
-                                    {{$item->descripcion}}
-                                </textarea>
+                                    placeholder="Descripción de la fachada, puntos de referencia para encontrarlo, indicaciones de seguridad, etc." required>{{$item->descripcion}}</textarea>
                                 </div>
 
                                     <div class="col-md-12">
