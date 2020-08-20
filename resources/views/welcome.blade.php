@@ -96,20 +96,24 @@
         a {
             text-decoration: none !important;
         }
-        .ego{
+
+        .ego {
             margin: 0;
             padding: .5em 1em;
             color: #757575;
             font-family: 1.2em;
         }
-        .ago{
+
+        .ago {
             color: #f44336;
             font-size: 1.2em;
         }
-        .del{
+
+        .del {
             color: #f44336;
-            
+
         }
+
     </style>
 </head>
 
@@ -185,7 +189,8 @@
                                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
                                             Sesión</a>
                                         <a href="/cliente" class="navbar-item">Mis Datos</a>
-                                        <a href="{{ route('enviosPorUsuario', Auth::user() -> id) }}" class="navbar-item">Mis pedidos</a>
+                                        <a href="{{ route('enviosPorUsuario', Auth::user()->id) }}" class="navbar-item">Mis
+                                            pedidos</a>
 
                                     </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -254,88 +259,33 @@
             <div class="cards-container">
                 <ul id="autoWidth" class="cs-hidden">
                     <!-- Los li se tienen que crear de forma dinámica a través del uso de PHP -->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <a href="">
-                                <img src="{{ url('img/slider1.png') }}" class="model">
-                                <hr>
-                                <div class="details">
-                                    <p class="title is-3 is-spaced">$4,999</p>
-                                    <p class="subtitle is-5">Procesador gamer AMD Ryzen 3 3200G YD3200C5FHBOX de 4
-                                        núcleos y
-                                        3.6GHz de frecuencia con gráfica integrada</p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <a href="">
-                                <img src="https://http2.mlstatic.com/alfombrilla-para-mouse-rgb-c7-efectos-luminosos-para-laptop-D_NQ_NP_901102-MLM40469770952_012020-F.webp"
-                                    class="model">
-                                <hr>
-                                <div class="details">
-                                    <p class="title is-3 is-spaced">$368.48</p>
-                                    <p class="subtitle is-5">Alfombrilla Para Mouse Rgb C/7 Efectos Luminosos Para
-                                        Laptop
-                                    </p>
-                                </div>
-                        </div>
-                        </a>
-                    </li>
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <a href="">
-                                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_931087-MLA40194584468_122019-F.webp"
-                                    class="model">
-                                <hr>
-                                <div class="details">
-                                    <p class="title is-3 is-spaced">$926.86</p>
-                                    <p class="subtitle is-5">Memoria RAM 8GB 1x8GB Adata ADDS1600W8G11-S</p>
-                                </div>
-                        </div>
-                        </a>
-                    </li>
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <a href="">
-                                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_839691-MLA42152911842_062020-F.webp"
-                                    class="model">
-                                <hr>
-                                <div class="details">
-                                    <p class="title is-3 is-spaced">$464</p>
-                                    <p class="subtitle is-5">Disco sólido interno Adata Ultimate SU650 ASU650SS-120GT-R
-                                        120GB negro</p>
-                                </div>
-                        </div>
-                        </a>
-                    </li>
                     @foreach ($news as $new)
                         <li class="item-a">
                             <!--slider-box-->
                             <div class="box">
-                                <a href="/detail/{{$new->idProducto}}">
-                                    <img src="{{ url('img/productos/'.$new->imagenUrl) }}" class="model">
+                                <a href="/detail/{{ $new->idProducto }}">
+                                    <img src="{{ url('img/productos/' . $new->imagenUrl) }}" class="model">
                                     <hr>
                                     <div class="details">
                                         <div class="row ml-2">
                                             @if ($new->descuentoVenta > 0)
-                                                <p class="title is-4 is-spaced">${{ number_format(($new->precioVenta - ($new->descuentoVenta * $new->precioVenta) / 100),2)}}</p>    
-                                                <del class="ml-2 del"><p class="del">${{ number_format($new->precioVenta,2)}}</p></del>
+                                                <p class="title is-4 is-spaced">
+                                                    ${{ number_format($new->precioVenta - ($new->descuentoVenta * $new->precioVenta) / 100, 2) }}
+                                                </p>
+                                                <del class="ml-2 del">
+                                                    <p class="del">${{ number_format($new->precioVenta, 2) }}</p>
+                                                </del>
                                             @else
-                                                <p class="title is-4 is-spaced">${{ number_format($new->precioVenta,2)}}</p>
+                                                <p class="title is-4 is-spaced">
+                                                    ${{ number_format($new->precioVenta, 2) }}</p>
                                             @endif
-                                            
+
                                         </div>
-                                        <p class="subtitle is-5">{{$new->titulo}}</p>
+                                        <p class="subtitle is-5">{{ $new->titulo }}</p>
                                     </div>
                                 </a>
                             </div>
-                        </li>    
+                        </li>
                     @endforeach
                 </ul>
 
@@ -351,26 +301,30 @@
         <div class="row">
             @foreach ($productos as $producto)
                 <div class="box">
-                    <a href="/detail/{{$producto->idProducto}}">
-                        <img src="{{ url('img/productos/'.$producto->imagenUrl) }}" class="model">
+                    <a href="/detail/{{ $producto->idProducto }}">
+                        <img src="{{ url('img/productos/' . $producto->imagenUrl) }}" class="model">
                         <hr>
                         <div class="details">
                             <div class="row ml-2">
                                 @if ($producto->descuentoVenta > 0)
-                                    <p class="title is-4 is-spaced">${{ number_format(($producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) / 100),2)}}</p>    
-                                    <del class="ml-2 del"><p class="del">${{ number_format($producto->precioVenta,2)}}</p></del>
+                                    <p class="title is-4 is-spaced">
+                                        ${{ number_format($producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) / 100, 2) }}
+                                    </p>
+                                    <del class="ml-2 del">
+                                        <p class="del">${{ number_format($producto->precioVenta, 2) }}</p>
+                                    </del>
                                 @else
-                                    <p class="title is-4 is-spaced">${{ number_format($producto->precioVenta,2)}}</p>
+                                    <p class="title is-4 is-spaced">${{ number_format($producto->precioVenta, 2) }}</p>
                                 @endif
-                                
+
                             </div>
-                            
+
                             @if ($producto->cantidad == 0)
                                 <p class="ago">Agotado</p>
                             @endif
-                            <p class="subtitle is-5">{{$producto->titulo}}</p>
-                            <p class="ego">{{$producto->marca}}</p>
-                            <p class="tag">#{{$producto->tag}}</p>
+                            <p class="subtitle is-5">{{ $producto->titulo }}</p>
+                            <p class="ego">{{ $producto->marca }}</p>
+                            <p class="tag">#{{ $producto->tag }}</p>
                         </div>
                     </a>
                 </div>
