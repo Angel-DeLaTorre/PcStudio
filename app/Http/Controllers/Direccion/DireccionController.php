@@ -143,7 +143,7 @@ class DireccionController extends Controller
             $direccion->numeroExterno = $request->input("numeroExterno");
             $direccion->save();
 
-       return redirect()->route('cliente.index')->with('status', 'Se actualizado correctamente tu direccion');
+       return redirect()->route('cliente.index')->with('status', 'Se a actualizado correctamente tu direccion');
     }
 
     /**
