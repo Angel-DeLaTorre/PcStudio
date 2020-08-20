@@ -46,7 +46,7 @@ Route::resource('direccion', 'Direccion\DireccionController');
 
 //Rutas de Usuarios
 Route::get('/clienteMoral/Delete/{idCliente}', 'ClienteMoral\ClienteMoralController@destroy')->name('deleteCliente')->middleware('auth');
-Route::resource('clienteMoral', 'ClienteMoral\clienteMoralController')->middleware('auth');
+Route::resource('clienteMoral', 'ClienteMoral\ClienteMoralController')->middleware('auth');
 
 
 //Rutas de Empleados
