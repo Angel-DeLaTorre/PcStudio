@@ -6,7 +6,7 @@
 @endsection
 @section('content')
 <div class="container">
-    @include('common.success')
+    @include('common.successCliente')
     @include('common.errors')
     <div class="row d-flex justify-content-center">
       
