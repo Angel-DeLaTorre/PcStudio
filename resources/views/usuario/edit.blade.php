@@ -54,7 +54,7 @@
                 <div class="col-md-6">     
                     <label for="">Rol</label>
                     <div class="form-group">
-                    <input type="text" name="rol" id="rol" value="{{$item->rol}}" readonly  class="form-control" required>
+                    <input type="text" name="rol" id="rol" value="{{$item->rol}}"   class="form-control" required>
                     </div>
                 </div>
 

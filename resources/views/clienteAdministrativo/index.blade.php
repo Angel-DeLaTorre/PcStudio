@@ -16,10 +16,9 @@
             <table class="table is-striped" id="registros">
                 <thead>
                     <tr>
-                        <th>Institucion</th>  
                         <th>Codigo</th>                        
-                        <th>RFC</th>
-                        <th>Contacto</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
                         <th>Telefono</th> 
                         <th>Email</th>
                         <th>Acciones</th>
@@ -28,13 +27,11 @@
                 <tbody>
                     @foreach($clienteAdministrativo as $item)
                         <tr>
-                            <td>{{$item->idCliente}}</td> 
                             <td>{{$item->codigoCliente}}</td>                               
                             <td>{{$item->nombre}}</td>
-                            <td>{{$item->apellidoPaterno}}</td>
-                            <td>{{$item->apellidoMaterno}}</td>
-                            <td>{{$item->fechaNacimiento}}</td>
-                            <td>{{$item->telefono}}</td>   
+                            <td>{{$item->apellidoPaterno.' '.$item->apellidoMaterno}}</td>
+                            <td>{{$item->telefono}}</td>
+                            <td>{{$item->email}}</td>   
                             <td>
                                 <a href="/clienteAdministrativo/{{$item->idCliente}}/edit"><i class="material-icons">edit</i></a>                               
                             </td>                          

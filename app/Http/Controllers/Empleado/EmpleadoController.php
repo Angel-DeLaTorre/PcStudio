@@ -34,9 +34,10 @@ class EmpleadoController extends Controller
 
             $empleado = DB::table('empleado')
             ->join('persona', 'empleado.idPersona', '=', 'persona.idPersona')
+            ->join('users', 'empleado.idUsuario', '=', 'users.id')
             ->select('empleado.idEmpleado','empleado.codigoEmpleado','empleado.estatus', 'persona.idPersona',
-                    'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno', 'persona.fechaNacimiento',
-                    'persona.telefono', 'persona.rfc')
+                    'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno',
+                    'persona.telefono', 'persona.rfc', 'users.email')
             ->where('empleado.estatus', '=', 1)
             ->get();
         
@@ -190,9 +191,7 @@ class EmpleadoController extends Controller
     {
         if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
         
-            $data = DB::select("UPDATE empleado SET estatus = 0 WHERE idEmpleado = $id");
-            
-            echo "<script>alert('se a actualizado');</script>";
+            $data = DB::select("UPDATE empleado SET estatus = 0 WHERE idEmpleado = $id");            
             
             return redirect()->route('empleado.index')->with('status', 'Se a eliminado el empleado correctamente');
             
