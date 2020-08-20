@@ -158,13 +158,13 @@
                     </div>
                 </li>
             </ul>
-                <form class="form-inline col-lg-6 col-md-3 my-2 my-lg-0" id="searchForm">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
-                        aria-label="Search" id="busqueda" name="busqueda">
-                    <button class="button is-outlined" type="submit">
-                        <i class="material-icons">search</i>
-                    </button>
-                </form>
+            <form class="form-inline col-lg-6 col-md-3 my-2 my-lg-0" id="searchForm" action="{{ route('buscarEnTienda') }}">
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
+                    aria-label="Search" id="busqueda" name="busqueda">
+                <button class="button is-outlined" type="submit">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
                 <div class="navbar-end col-lg-3 col-md-2">
                     @if (Route::has('login'))
                         <div class=" navbar-item">
