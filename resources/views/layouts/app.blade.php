@@ -180,7 +180,9 @@
                                             <a href="{{ route('logout') }}" class="navbar-item"
                                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
                                                 Sesión</a>
-                                                <a href="/cliente" class="navbar-item">Mis Datos</a>                                           
+                                                <a href="/cliente" class="navbar-item">Mis Datos</a>
+                                                <a href="{{ route('enviosPorUsuario', Auth::user()->id) }}" class="navbar-item">Mis
+                                                    pedidos</a>                                           
                                         </div>                                        
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             style="display: none;">
