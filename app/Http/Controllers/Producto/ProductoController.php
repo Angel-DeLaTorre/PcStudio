@@ -162,7 +162,7 @@ class ProductoController extends Controller
             ->select('imagenProducto.imagenUrl')
             ->where('imagenProducto.idProducto', '=', $id)
             ->get();
-        return view('producto.detail', compact('producto','atributos','imagenes'));
+        return view('producto.detail', compact('producto','atributos','imagenes','rol'));
     }
 
     /**
