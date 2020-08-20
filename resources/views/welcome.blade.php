@@ -228,13 +228,13 @@
             </ol>
             <div class="carousel-inner" style="">
                 <div class="carousel-item active">
-                    <img src="{{ url('img/slider1.png') }}" class="d-block w-100" alt="...">
+                    <a href="/detail/9"><img src="{{ url('img/slider1.png') }}" class="d-block w-100" alt="..."></a>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url('img/slider2.png') }}" class="d-block w-100" alt="...">
+                    <a href="/detail/101"><img src="{{ url('img/slider2.png') }}" class="d-block w-100" alt="..."></a>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url('img/slider3.png') }}" class="d-block w-100" alt="...">
+                    <a href="/detail/102"><img src="{{ url('img/slider3.png') }}" class="d-block w-100" alt="..."></a>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
