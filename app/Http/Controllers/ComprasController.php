@@ -36,6 +36,7 @@ class ComprasController extends Controller
             {
                 $query->where('cliente.idUsuario', '=', auth()->user()->id);
             })
+            ->limit(1)
             ->get();
         $direcciones = DB::table('direccion')
         ->join('cliente', 'direccion.idPersona', '=', 'direccion.idPersona')
