@@ -48,41 +48,7 @@
                     <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
                 </div>
                 
-                <div class="col-md-6 form-group">     
-                    <label for="">codigoPostal</label>
-                    <input type="text" name="codigoPostal" id="codigoPostal" value="{{$item->codigoPostal}}" class="form-control" required>
-                </div>
-                <div class="col-md-6 form-group">     
-                    <label for="">calle</label>
-                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
-                </div>
-                <div class="col-md-6 form-group">     
-                    <label for="">colonia</label>
-                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
-                </div>
-                <div class="col-md-6 form-group">     
-                    <label for="">estado</label>
-                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
-                </div>
-                <div class="col-md-6 form-group">     
-                    <label for="">municipio</label>
-                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
-                </div>
-                <div class="col-md-6 form-group">     
-                    <label for="">descripcion</label>
-                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
-                </div>
-
-                <div class="col-md-6 form-group">     
-                    <label for="">numero</label>
-                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
-                </div>
-
-                <div class="col-md-6 form-group">     
-                    <label for="">numeroExterno</label>
-                    <input type="text" name="telefono" id="telefono" value="{{$item->telefono}}" class="form-control" required>
-                </div>
-
+                
                 <div class="col-md-8 row">
                     <div class=" col-md-4">
                         <button type="submit" class="btn btn-outline-primary btn-block">Guardar</button>
