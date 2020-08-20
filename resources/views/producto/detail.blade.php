@@ -78,7 +78,7 @@
                                     @endfor
                                 </select>
                             </div>
-                            <input type="text" value="Agregar al carrito" class="btn btn-outline-primary">
+                            <input type="submit" value="Agregar al carrito" class="btn btn-outline-primary">
                             <br><br>
                         </form>
                     @endif
