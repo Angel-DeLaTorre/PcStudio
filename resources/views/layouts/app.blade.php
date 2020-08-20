@@ -14,6 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -158,13 +162,13 @@
                     </div>
                 </li>
             </ul>
-                <form class="form-inline col-lg-6 col-md-3 my-2 my-lg-0" id="searchForm">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
-                        aria-label="Search" id="busqueda" name="busqueda">
-                    <button class="button is-outlined" type="submit">
-                        <i class="material-icons">search</i>
-                    </button>
-                </form>
+            <form class="form-inline col-lg-6 col-md-3 my-2 my-lg-0" id="searchForm" action="{{ route('buscarEnTienda') }}">
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
+                    aria-label="Search" id="busqueda" name="busqueda">
+                <button class="button is-outlined" type="submit">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
                 <div class="navbar-end col-lg-3 col-md-2">
                     @if (Route::has('login'))
                         <div class=" navbar-item">
