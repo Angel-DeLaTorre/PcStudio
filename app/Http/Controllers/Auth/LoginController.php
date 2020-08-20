@@ -61,7 +61,7 @@ class LoginController extends Controller
         }
         else
         {
-            return view('auth.login');
+            return '/';
         }
        
 

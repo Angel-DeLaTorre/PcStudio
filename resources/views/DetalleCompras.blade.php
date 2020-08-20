@@ -16,10 +16,7 @@
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nombre del cliente</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Id cliente</th>
                         <th scope="col">Fecha compra</th>
-                        <th scope="col">Id Empleado</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Costo del producto</th>
@@ -30,10 +27,7 @@
                         <tr>
                             <td scope="row">{{$item->idCompra}}</td>
                             <td scope="row">{{$item->nombre}}<p> </p>{{$item->apellidoPaterno}}<p> </p>{{$item->apellidoMaterno}}</td>
-                            <td scope="row">{{$item->telefono}}</td>
-                            <td scope="row">{{$item->idCliente}}</td>
                             <td scope="row">{{$item->fechaCompra}}</td>
-                            <td scope="row">{{$item->idEmpleado}}</td>
                             <td scope="row">{{$item->titulo}}</td>
                             <td scope="row">{{$item->cantidad}}</td>
                             <td scope="row">{{$item->costo}}</td>

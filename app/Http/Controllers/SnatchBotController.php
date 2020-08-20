@@ -12,9 +12,9 @@ class SnatchBotController extends Controller
     {
         $url = $request->path();
                 
-        $productos = DB::table('imagenproducto')
-                    ->join('producto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
-                    ->select('imagenproducto.imagenUrl','imagenproducto.idProducto','producto.titulo',
+        $productos = DB::table('imagenProducto')
+                    ->join('producto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
+                    ->select('imagenProducto.imagenUrl','imagenProducto.idProducto','producto.titulo',
                                 'producto.descripcion', 'producto.marca','producto.precioVenta', 
                                 'producto.cantidad', 'producto.descuentoVenta')
                     ->where('idCategoria', '=', $url)

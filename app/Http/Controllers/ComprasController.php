@@ -36,6 +36,7 @@ class ComprasController extends Controller
             {
                 $query->where('cliente.idUsuario', '=', auth()->user()->id);
             })
+            ->limit(1)
             ->get();
         $direcciones = DB::table('direccion')
         ->join('cliente', 'direccion.idPersona', '=', 'direccion.idPersona')
@@ -135,10 +136,10 @@ class ComprasController extends Controller
 
 
         $listaProducto = DB::table('producto')
-            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->join('imagenProducto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
             ->select('producto.idProducto','producto.titulo',
                     'producto.descripcion','producto.marca', 'producto.precioVenta',
-                    'imagenproducto.imagenUrl','producto.descuentoVenta','producto.cantidad')
+                    'imagenProducto.imagenUrl','producto.descuentoVenta','producto.cantidad')
             ->whereIn('producto.idProducto',$idList)
             ->get();
         

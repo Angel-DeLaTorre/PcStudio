@@ -31,7 +31,7 @@ class EnviosController extends Controller
  inner join producto p on dC.idProducto = p.idProducto
  inner join persona per on per.idPersona = (select cliente.idPersona from cliente where cliente.idCliente = com.idCliente)
  inner join persona per2 on per2.idPersona = (select empleado.idPersona from empleado where empleado.idEmpleado = com.idEmpleado)
- inner join imagenproducto iP on p.idProducto = iP.idProducto
+ inner join imagenProducto iP on p.idProducto = iP.idProducto
  where com.idCompra = ?;', array($idCompra));
 
         return view('Envios.EnviosDetalle', compact('detalle'));
@@ -48,10 +48,21 @@ class EnviosController extends Controller
     public function update(Request $request, $idCompra)
     {
         $compra = DB::select('select * from compra where idCompra = ?;', array($idCompra));
-        if(!empty($compra) && isset($compra))
-        {
-            DB::statement('update compra set estatus = ? where idCompra = ?;', array($request -> estatus, $idCompra));
+        if (!empty($compra) && isset($compra)) {
+            DB::statement('update compra set estatus = ? where idCompra = ?;', array($request->estatus, $idCompra));
         }
         return redirect('/Envios');
+    }
+
+    //GET pedidos del usuario
+    public function enviosPorUsuario($idUsuario)
+    {
+        $detalle = DB::select('select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, com.estatus,
+        dC.cantidad
+ from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
+ inner join producto p on dC.idProducto = p.idProducto
+ inner join imagenProducto iP on p.idProducto = iP.idProducto 
+ where com.idCliente = (select cliente.idCliente from cliente where idUsuario = ?);', array($idUsuario));
+        return view('Envios.EnviosPorUsuario', compact('detalle'));
     }
 }

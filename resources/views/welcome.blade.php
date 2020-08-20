@@ -96,20 +96,24 @@
         a {
             text-decoration: none !important;
         }
-        .ego{
+
+        .ego {
             margin: 0;
             padding: .5em 1em;
             color: #757575;
             font-family: 1.2em;
         }
-        .ago{
+
+        .ago {
             color: #f44336;
             font-size: 1.2em;
         }
-        .del{
+
+        .del {
             color: #f44336;
-            
+
         }
+
     </style>
 </head>
 
@@ -139,26 +143,26 @@
                         Más
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <p style="text-align: center">Hardware interno</p>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/1">Placa madre</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/2">Procesador</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/3">Memoria interna RAM</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/5">Tarjeta de video</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/6">Tarjeta de sonido</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/7">Disco Duro</a>
-                            <div class="dropdown-divider"></div>
-                            <p style="text-align: center">Periféricos </p>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/8">Teclados</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/9">Punteros o ratones</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/10">Micrófonos</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/11">Cámaras</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/12">Escáneres</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/13">Joysticks</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/14">Monitores</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/15">Impresoras</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/16">Bocinas</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/17">Videobeams y proyectores</a>
-                            <a class="dropdown-item" href="http://127.0.0.1:8000/18">Copiadoras de CD o DVD</a>
+                        <p style="text-align: center">Hardware interno</p>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/1">Placa madre</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/2">Procesador</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/3">Memoria interna RAM</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/5">Tarjeta de video</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/6">Tarjeta de sonido</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/7">Disco Duro</a>
+                        <div class="dropdown-divider"></div>
+                        <p style="text-align: center">Periféricos </p>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/8">Teclados</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/9">Punteros o ratones</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/10">Micrófonos</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/11">Cámaras</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/12">Escáneres</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/13">Joysticks</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/14">Monitores</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/15">Impresoras</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/16">Bocinas</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/17">Videobeams y proyectores</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:8000/18">Copiadoras de CD o DVD</a>
                     </div>
                 </li>
             </ul>
@@ -184,7 +188,10 @@
                                         <a href="{{ route('logout') }}" class="navbar-item"
                                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar
                                             Sesión</a>
-                                            <a href="/cliente" class="navbar-item">Mis Datos</a>
+                                        <a href="/cliente" class="navbar-item">Mis Datos</a>
+                                        <a href="{{ route('enviosPorUsuario', Auth::user()->id) }}" class="navbar-item">Mis
+                                            pedidos</a>
+
                                     </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         style="display: none;">
@@ -226,13 +233,13 @@
             </ol>
             <div class="carousel-inner" style="">
                 <div class="carousel-item active">
-                    <img src="{{ url('img/slider1.png') }}" class="d-block w-100" alt="...">
+                    <a href="/detail/9"><img src="{{ url('img/slider1.png') }}" class="d-block w-100" alt="..."></a>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url('img/slider2.png') }}" class="d-block w-100" alt="...">
+                    <a href="/detail/101"><img src="{{ url('img/slider2.png') }}" class="d-block w-100" alt="..."></a>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url('img/slider3.png') }}" class="d-block w-100" alt="...">
+                    <a href="/detail/102"><img src="{{ url('img/slider3.png') }}" class="d-block w-100" alt="..."></a>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -256,24 +263,29 @@
                         <li class="item-a">
                             <!--slider-box-->
                             <div class="box">
-                                <a href="/detail/{{$new->idProducto}}">
-                                    <img src="{{ url('img/productos/'.$new->imagenUrl) }}" class="model">
+                                <a href="/detail/{{ $new->idProducto }}">
+                                    <img src="{{ url('img/productos/' . $new->imagenUrl) }}" class="model">
                                     <hr>
                                     <div class="details">
                                         <div class="row ml-2">
                                             @if ($new->descuentoVenta > 0)
-                                                <p class="title is-4 is-spaced">${{ number_format(($new->precioVenta - ($new->descuentoVenta * $new->precioVenta) / 100),2)}}</p>    
-                                                <del class="ml-2 del"><p class="del">${{ number_format($new->precioVenta,2)}}</p></del>
+                                                <p class="title is-4 is-spaced">
+                                                    ${{ number_format($new->precioVenta - ($new->descuentoVenta * $new->precioVenta) / 100, 2) }}
+                                                </p>
+                                                <del class="ml-2 del">
+                                                    <p class="del">${{ number_format($new->precioVenta, 2) }}</p>
+                                                </del>
                                             @else
-                                                <p class="title is-4 is-spaced">${{ number_format($new->precioVenta,2)}}</p>
+                                                <p class="title is-4 is-spaced">
+                                                    ${{ number_format($new->precioVenta, 2) }}</p>
                                             @endif
-                                            
+
                                         </div>
-                                        <p class="subtitle is-5">{{$new->titulo}}</p>
+                                        <p class="subtitle is-5">{{ $new->titulo }}</p>
                                     </div>
                                 </a>
                             </div>
-                        </li>    
+                        </li>
                     @endforeach
                 </ul>
 
@@ -289,26 +301,30 @@
         <div class="row">
             @foreach ($productos as $producto)
                 <div class="box">
-                    <a href="/detail/{{$producto->idProducto}}">
-                        <img src="{{ url('img/productos/'.$producto->imagenUrl) }}" class="model">
+                    <a href="/detail/{{ $producto->idProducto }}">
+                        <img src="{{ url('img/productos/' . $producto->imagenUrl) }}" class="model">
                         <hr>
                         <div class="details">
                             <div class="row ml-2">
                                 @if ($producto->descuentoVenta > 0)
-                                    <p class="title is-4 is-spaced">${{ number_format(($producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) / 100),2)}}</p>    
-                                    <del class="ml-2 del"><p class="del">${{ number_format($producto->precioVenta,2)}}</p></del>
+                                    <p class="title is-4 is-spaced">
+                                        ${{ number_format($producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) / 100, 2) }}
+                                    </p>
+                                    <del class="ml-2 del">
+                                        <p class="del">${{ number_format($producto->precioVenta, 2) }}</p>
+                                    </del>
                                 @else
-                                    <p class="title is-4 is-spaced">${{ number_format($producto->precioVenta,2)}}</p>
+                                    <p class="title is-4 is-spaced">${{ number_format($producto->precioVenta, 2) }}</p>
                                 @endif
-                                
+
                             </div>
-                            
+
                             @if ($producto->cantidad == 0)
                                 <p class="ago">Agotado</p>
                             @endif
-                            <p class="subtitle is-5">{{$producto->titulo}}</p>
-                            <p class="ego">{{$producto->marca}}</p>
-                            <p class="tag">#{{$producto->tag}}</p>
+                            <p class="subtitle is-5">{{ $producto->titulo }}</p>
+                            <p class="ego">{{ $producto->marca }}</p>
+                            <p class="tag">#{{ $producto->tag }}</p>
                         </div>
                     </a>
                 </div>
@@ -344,5 +360,10 @@
     </script>
     <script src="{{ asset('js/lightslider.js') }}" defer></script>
 </body>
-<script src="https://account.snatchbot.me/script.js"></script><script>window.sntchChat.Init(124898)</script>
+<script src="https://account.snatchbot.me/script.js"></script>
+<script>
+    window.sntchChat.Init(124898)
+
+</script>
+
 </html>

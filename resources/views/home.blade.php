@@ -3,6 +3,7 @@
 <!--Hacer el extend del adminDashboard para activar todas las opciones dependiendo del rol-->
 @section('module_name')
 
+@include('common.alert2')
     <script src="{{ url('/js/components/charts/amCharts/core.js') }}"></script>
     <script src="{{ url('/js/components/charts/amCharts/charts.js') }}"></script>
     <script src="{{ url('/js/components/charts/amCharts/animated.js') }}"></script>
@@ -10,12 +11,13 @@
 
     <h1 style="color: white;" id="module_text">
 
-
         {{ $saludo }}
         <span style="color:#83e8f5 ">
             <b>
                 {{ $nombreSaludo }}
+                
             </b>
+            
         </span>
     </h1>
 @endsection

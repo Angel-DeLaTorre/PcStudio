@@ -325,8 +325,8 @@ Create TABLE direccionpedido(
     calle VARCHAR(200) NOT NULL,
     municipio VARCHAR(200) NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
-    numero VARCHAR(10) NULL,
-    numeroExterno VARCHAR(10) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    numeroExterno VARCHAR(10) NULL,
     idPersonaPedido INT(11) NOT NULL,
     CONSTRAINT Pk_idDireccionPedido PRIMARY KEY(idDireccionPedido),
     CONSTRAINT Fk_idPersona_Direccion_Pedido FOREIGN KEY(idPersonaPedido) REFERENCES personapedido(idPersonaPedido)
@@ -373,4 +373,11 @@ CREATE TABLE `failed_jobs` (
 
 SELECT COUNT(id) FROM users WHERE idRol = 1 AND MONTH(created_at) = MONTH(CURDATE());
 
+
+select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, concat(per.nombre, " ", per.apellidoPaterno, " ", per.apellidoMaterno) as nombreCliente, concat(per2.nombre, " ", per2.apellidoPaterno, " ", per2.apellidoMaterno) as nombreEmpleado, com.estatus,
+        dC.cantidad
+ from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
+ inner join producto p on dC.idProducto = p.idProducto
+ inner join imagenProducto iP on p.idProducto = iP.idProducto
+ where com.idCompra = 1
 

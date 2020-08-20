@@ -18,10 +18,7 @@
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Estatus</th>
                         <th scope="col">Fecha Actualización</th>
-                        <th scope="col">Fecha Creación</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -30,10 +27,7 @@
                         <tr>
                             <th scope="row">{{ $item->idProveedor }}</th>
                             <td>{{ $item->nombre }}</td>
-                            <td>{{ $item->descripcion }}</td>
-                            <td>{{ $item->estatus }}</td>
                             <td>{{ $item->updated_at }}</td>
-                            <td>{{ $item->created_at }}</td>
 
                             <td>
                                 <a href="{{ route('editProveedor', $item->idProveedor) }}"><i

@@ -15,17 +15,26 @@ class ClienteAdministrativoController extends Controller
      */
     public function index()
     {
-        $clienteAdministrativo = DB::table('cliente')
-        ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
-        ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
-                'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno',
-                'persona.fechaNacimiento', 'persona.telefono')
-        ->where('cliente.estatus', '=', 1)        
-        ->where('persona.tipo', '=', 1)
-        ->get();
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
 
-        //return $institucion;
-       return view('clienteAdministrativo.index', ['clienteAdministrativo' => $clienteAdministrativo]);
+                $clienteAdministrativo = DB::table('cliente')
+                ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
+                ->join('users', 'cliente.idUsuario', '=', 'users.id')
+                ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
+                        'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno',
+                        'persona.fechaNacimiento', 'persona.telefono', 'users.email')
+                ->where('cliente.estatus', '=', 1)        
+                ->where('persona.tipo', '=', 1)
+                ->get();
+
+                //return $institucion;
+            return view('clienteAdministrativo.index', ['clienteAdministrativo' => $clienteAdministrativo]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -68,16 +77,24 @@ class ClienteAdministrativoController extends Controller
      */
     public function edit($id)
     {
-       $clienteAdministrativo = DB::table('cliente')
-        ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
-        ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
-                'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno',
-                'persona.fechaNacimiento', 'persona.telefono')
-        ->where('cliente.idCliente', '=', $id)
-        ->get();
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
 
-    
-       return view('clienteAdministrativo.edit', ['clienteAdministrativo' => $clienteAdministrativo]);
+            $clienteAdministrativo = DB::table('cliente')
+                ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
+                ->select('cliente.idCliente', 'persona.idPersona',
+                        'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno',
+                        'persona.fechaNacimiento', 'persona.telefono')
+                ->where('cliente.idCliente', '=', $id)
+                ->get();
+
+            
+            return view('clienteAdministrativo.edit', ['clienteAdministrativo' => $clienteAdministrativo]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     
     }
 
@@ -90,7 +107,13 @@ class ClienteAdministrativoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data = DB::select('call  sp_actualizarCliente(?, ?, ?, ?, ?, ?, ?)',
+        array($id , $request->name, $request->apellidoP,$request->apellidoM,
+            $request->fecha,$request->telefono, $request->rfc));
+
+        return redirect()->route('clienteAdministrativo.index')->with('status', 'Se actualizaron tus datos correctamente');  
+
     }
 
     /**
