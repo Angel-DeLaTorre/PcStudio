@@ -53,21 +53,19 @@
         </div>
         <div class="acciones col-lg-3">
             <div class=" ml-1">
-                <?php 
-                    if ($item->descuentoVenta > 0){
-                        $nuevoCosto = ($item->precioVenta - ($item->descuentoVenta * $item->precioVenta) / 100);
-                        ?>
-                            <p class="costo"><del>${{number_format($item->precioVenta,2)}}</del></p>
-                            <p class="costo oferta">${{number_format($nuevoCosto)}}</p>
-                            <p class="costo oferta">Precio de oferta</p>
-                        <?php
-                    }else{
-                        echo '<p class="costo">$'. number_format($item->precioVenta).'</p>';        
-                    } 
-                    if ($item->cantidad <= 0){
-                        echo '<h4 class="agotado">Agotado :(</h4></br>';
-                    }else{
-                        ?>
+                @if ($item->descuentoVenta > 0)
+                    {{$nuevoCosto = ($item->precioVenta - ($item->descuentoVenta * $item->precioVenta) / 100)}}
+                    <p class="costo"><del>${{number_format($item->precioVenta,2)}}</del></p>
+                    <p class="costo oferta">${{number_format($nuevoCosto)}}</p>
+                    <p class="costo oferta">Precio de oferta</p>
+                @else
+                    <p class="costo">${{number_format($item->precioVenta)}}'</p>
+                @endif
+
+                @if ($rol == true)
+                    @if ($item->cantidad <= 0)
+                        <h4 class="agotado">Agotado :(</h4></br>
+                    @else
                         <form class="form-group mt-3" method="POST" action="/indexProducto" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="idProducto" id="idProducto" value="{{$item->idProducto}}" />
@@ -80,15 +78,12 @@
                                     @endfor
                                 </select>
                             </div>
-                            
-                            <input type="submit" value="Agregar al carrito" class="btn btn-outline-primary" /></br>
-                            </br>
-                            
+                            <input type="text" value="Agregar al carrito" class="btn btn-outline-primary">
+                            <br><br>
                         </form>
-                        
-                        <?php
-                    }
-                ?>
+                    @endif
+                @endif    
+
                 <a href="{{ URL::previous() }}">Volver</a>
             </div>
         </div>

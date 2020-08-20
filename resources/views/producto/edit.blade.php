@@ -123,7 +123,7 @@
 
                 <div class="card card pt-4 pb-4 pl-2 pr-2" id="cardAtrib">
                     <div class="row ml-3 mb-3">
-                        <h2 class="ml-2 mt-1">Categorias</h2>
+                        <h2 class="ml-2 mt-1">Atributos</h2>
                         <a href="javascript:new_link()" class="btn btn-outline-primary ml-5">Agregar</a>
                     </div>
                     <div class="" id="newlinktpl"></div>

@@ -137,6 +137,11 @@ class ProductoController extends Controller
      */
     public function detail($id)
     {
+        $user = Auth::user();
+        $rol = true;
+        if($user == null || $user->idRol != 1){
+            $rol = false;
+        }
         $producto = DB::table('producto')
             ->join('proveedor', 'proveedor.idProveedor', '=', 'producto.idProveedor')
             ->join('categoria', 'categoria.idCategoria', '=', 'producto.idCategoria')
@@ -157,7 +162,7 @@ class ProductoController extends Controller
             ->select('imagenProducto.imagenUrl')
             ->where('imagenProducto.idProducto', '=', $id)
             ->get();
-        return view('producto.detail', compact('producto','atributos','imagenes'));
+        return view('producto.detail', compact('producto','atributos','imagenes','rol'));
     }
 
     /**
@@ -297,7 +302,13 @@ class ProductoController extends Controller
             ->get();
 
         }else{
-            abort(401, 'Esta Accion no esta autorizada');
+            $productos = DB::table('imagenProducto')
+            ->join('producto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
+            ->join('tag', 'tag.idTag', '=', 'producto.idTag')
+            ->select('imagenProducto.imagenUrl','imagenProducto.idProducto','producto.titulo','producto.descripcion', 'producto.marca',
+             'producto.precioVenta', 'producto.cantidad', 'producto.descuentoVenta','tag.tag')
+            ->where('tag.idTag','=','4')
+            ->get();
         }
 
         $news = DB::table('imagenProducto')
