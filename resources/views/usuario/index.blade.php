@@ -7,6 +7,8 @@
 
 
 @section('content')
+@include('common.success')
+@include('common.errors')
     <div class="card">
 
         <div class="card-header">                     

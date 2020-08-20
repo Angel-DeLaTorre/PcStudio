@@ -14,7 +14,12 @@
 		<form action="/datosDestino" method="POST" >
 		{{csrf_field()}}
 		@csrf
-			<input type="submit" class="btn btn-outline-primary  mb-3" value="comprar" >
+			@if (!$listaProductoCarrito->IsEmpty())
+				<input type="submit" class="btn btn-outline-primary  mb-3" value="Realizar compra" >	
+			@else
+				<h3>Su carrito esta vacio</h3>
+			@endif
+			
 			@foreach ($listaProductoCarrito as $producto)
 			<div class="row ">
 				<div class="col-lg-2">
