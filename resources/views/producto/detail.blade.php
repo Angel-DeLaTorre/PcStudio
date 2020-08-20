@@ -83,7 +83,6 @@
                         </form>
                     @endif
                 @endif    
-
                 <a href="{{ URL::previous() }}">Volver</a>
             </div>
         </div>

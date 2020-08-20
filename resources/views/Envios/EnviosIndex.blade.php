@@ -14,10 +14,8 @@
                 <thead>
                     <tr>
                         <th scope="col"># Compra</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Empleado</th>
-                        <th scope="col">Cliente</th>
-                        <th scope="col">Estatus</th>
+                        <th scope="col">Nombre del cliente</th>
+                        <th scope="col">Fecha de compra</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -25,30 +23,8 @@
                     @foreach ($compras as $item)
                         <tr>
                             <th scope="row">{{ $item->idCompra }}</th>
-                            <td>{{ $item->fechaCompra }}</td>
-                            <td>{{ $item->nombreEmpleado }}</td>
-                            <td>{{ $item->nombreCliente }}</td>
-                            <td>@switch($item->estatus)
-                                    @case(1)
-                                    En preparación
-                                    @break
-
-                                    @case(2)
-                                    Enviado
-                                    @break
-
-                                    @case(3)
-                                    En tránsito
-                                    @break
-
-                                    @case(4)
-                                    Entregado
-                                    @break
-                                    @default
-                                    ?
-
-                                @endswitch</td>
-
+                            <td>{{ $item -> nombreCliente}}</td>
+                            <td>{{ $item -> fechaCompra }}</td>
                             <td>
                                 <a href="{{ route('editEnvio', $item->idCompra) }}"><i class="material-icons">update</i></a>
                                 <a href="{{ route('detalleEnvios', $item->idCompra) }}"><i class="material-icons"
