@@ -50,10 +50,10 @@ class CarritoController extends Controller
     {
         $listaProductoCarrito = DB::table('carrito')
             ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
-            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->join('imagenProducto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
             ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
                     'producto.descripcion','producto.marca', 'producto.precioVenta',
-                    'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
+                    'carrito.cantidadProducto','imagenProducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
             ->where(function($query)
             {
                 $query->where('carrito.idUsuario', '=', auth()->user()->id)
@@ -63,10 +63,10 @@ class CarritoController extends Controller
         
         $listaPendiente = DB::table('carrito')
             ->join('producto', 'carrito.idProducto', '=', 'producto.idProducto')
-            ->join('imagenproducto', 'producto.idProducto', '=', 'imagenproducto.idProducto')
+            ->join('imagenProducto', 'producto.idProducto', '=', 'imagenProducto.idProducto')
             ->select('carrito.idCarrito','producto.idProducto','producto.titulo',
                     'producto.descripcion','producto.marca', 'producto.precioVenta',
-                    'carrito.cantidadProducto','imagenproducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
+                    'carrito.cantidadProducto','imagenProducto.imagenUrl','producto.precioVenta','producto.descuentoVenta','producto.cantidad')
             ->where(function($query)
             {
                 $query->where('carrito.idUsuario', '=', auth()->user()->id)
