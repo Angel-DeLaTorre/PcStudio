@@ -15,7 +15,7 @@
                     <div class="select is-primary is-large">
                         <select name="estatus" id="estatus">
                             <option value="{{ $compra[0]->estatus }}" selected>
-                                Actual: 
+                                Actual:
                                 @switch($compra[0]->estatus)
                                     @case(1)
                                     En preparación

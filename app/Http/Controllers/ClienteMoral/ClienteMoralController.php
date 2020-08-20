@@ -17,18 +17,27 @@ class ClienteMoralController extends Controller
      */
     public function index()
     {
-        $institucion = DB::table('persona')
-        ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
-        ->join('contacto', 'persona.idPersona', '=', 'contacto.idPersona')
-        ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
-                'persona.nombre', 'persona.rfc', 'contacto.nombre AS nombreContacto',
-                'contacto.telefono AS telefonoContacto', 'contacto.email')
-        ->where('cliente.estatus', '=', 1)
-        ->where('persona.tipo', '=', 2)
-        ->get();
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
 
-        //return $institucion;
-       return view('clienteMoral.index', ['institucion' => $institucion]);
+            $institucion = DB::table('persona')
+            ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
+            ->join('contacto', 'persona.idPersona', '=', 'contacto.idPersona')
+            ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
+                    'persona.nombre', 'persona.rfc', 'contacto.nombre AS nombreContacto',
+                    'contacto.telefono AS telefonoContacto', 'contacto.email')
+            ->where('cliente.estatus', '=', 1)
+            ->where('persona.tipo', '=', 2)
+            ->get();
+
+            
+            return view('clienteMoral.index', ['institucion' => $institucion]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
+
     }
 
     /**
@@ -49,18 +58,25 @@ class ClienteMoralController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
        
-       $email = $request['email']; 
-       $password = Hash::make($request['password']);
+            $email = $request['email']; 
+            $password = Hash::make($request['password']);
 
-        
-        $data = DB::select('call  sp_insertarClienteMoral(?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        array($request->nameInstitucion, $request->telInstitucion, $request->rfc, 
-                  $request->nombreContacto, $request->telContacto, $request->ext, 
-                  $request->emailContacto, $email, $password));
+            
+            $data = DB::select('call  sp_insertarClienteMoral(?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            array($request->nameInstitucion, $request->telInstitucion, $request->rfc, 
+                    $request->nombreContacto, $request->telContacto, $request->ext, 
+                    $request->emailContacto, $email, $password));
 
 
-        return redirect()->route('clienteMoral.index')->with('status', 'Se a guardado el empleado');
+            return redirect()->route('clienteMoral.index')->with('status', 'Se a guardado el empleado');
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -71,17 +87,25 @@ class ClienteMoralController extends Controller
      */
     public function show($id)
     {
-        $institucion = DB::table('persona')
-        ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
-        ->join('contacto', 'persona.idPersona', '=', 'contacto.idPersona')
-        ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
-                'persona.nombre', 'persona.rfc', 'persona.telefono', 'contacto.ext',
-                'contacto.nombre AS nombreContacto',
-                'contacto.telefono AS telefonoContacto', 'contacto.email')
-        ->where('cliente.idPersona', '=', $id)
-        ->get();
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
 
-        return view('clienteMoral.show', ['institucion' => $institucion]);
+            $institucion = DB::table('persona')
+            ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
+            ->join('contacto', 'persona.idPersona', '=', 'contacto.idPersona')
+            ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
+                    'persona.nombre', 'persona.rfc', 'persona.telefono', 'contacto.ext',
+                    'contacto.nombre AS nombreContacto',
+                    'contacto.telefono AS telefonoContacto', 'contacto.email')
+            ->where('cliente.idPersona', '=', $id)
+            ->get();
+
+            return view('clienteMoral.show', ['institucion' => $institucion]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -92,20 +116,28 @@ class ClienteMoralController extends Controller
      */
     public function edit($id)
     {
-        $institucion = DB::table('persona')
-        ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
-        ->join('contacto', 'persona.idPersona', '=', 'contacto.idPersona')
-        ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
-                'persona.nombre', 'persona.rfc', 'persona.telefono', 'contacto.ext',
-                'contacto.nombre AS nombreContacto',
-                'contacto.telefono AS telefonoContacto', 'contacto.email')
-        ->where('cliente.idPersona', '=', $id)
-        ->get();
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
 
-        //return $institucion;
-        
-        
-        return view('clienteMoral.edit', ['institucion' => $institucion]);
+            $institucion = DB::table('persona')
+            ->join('cliente', 'persona.idPersona', '=', 'cliente.idPersona')
+            ->join('contacto', 'persona.idPersona', '=', 'contacto.idPersona')
+            ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
+                    'persona.nombre', 'persona.rfc', 'persona.telefono', 'contacto.ext',
+                    'contacto.nombre AS nombreContacto',
+                    'contacto.telefono AS telefonoContacto', 'contacto.email')
+            ->where('cliente.idPersona', '=', $id)
+            ->get();
+
+            //return $institucion;
+            
+            
+            return view('clienteMoral.edit', ['institucion' => $institucion]);
+
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 
     /**
@@ -138,9 +170,16 @@ class ClienteMoralController extends Controller
      */
     public function destroy($id)
     {
+        if(auth()->user()->idRol == 2 ||  auth()->user()->idRol == 3 ){
           
-        $data = DB::select("UPDATE cliente  SET estatus = 0 WHERE idCliente = $id");
-        
-        return redirect()->route('clienteMoral.index')->with('status', 'Todo bien camariata');
+            $data = DB::select("UPDATE cliente  SET estatus = 0 WHERE idCliente = $id");
+            
+            return redirect()->route('clienteMoral.index')->with('status', 'Todo bien camariata');
+            
+        }else{
+
+            abort(401, 'Esta Accion no esta autorizada');
+
+        }
     }
 }
