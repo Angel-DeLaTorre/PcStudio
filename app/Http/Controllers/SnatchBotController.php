@@ -20,7 +20,7 @@ class SnatchBotController extends Controller
                     ->where('idCategoria', '=', $url)
                     ->get();
         
-        return view('Producto.busqueda', compact('productos'));
+        return view('producto.busqueda', compact('productos'));
         //print_r($u);
     }
 }
