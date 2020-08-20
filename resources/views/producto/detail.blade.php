@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
 <div class="card container">
     <div class="card-body row" id="detalleProducto">
         <div class="galeria col-lg-5">
@@ -53,33 +54,45 @@
         </div>
         <div class="acciones col-lg-3">
             <div class=" ml-1">
+            
                 @if ($item->descuentoVenta > 0)
                     {{$nuevoCosto = ($item->precioVenta - ($item->descuentoVenta * $item->precioVenta) / 100)}}
                     <p class="costo"><del>${{number_format($item->precioVenta,2)}}</del></p>
                     <p class="costo oferta">${{number_format($nuevoCosto)}}</p>
                     <p class="costo oferta">Precio de oferta</p>
+                    <input type="hidden" id="txtPrecio" value="{{$nuevoCosto}}">
                 @else
                     <p class="costo">${{number_format($item->precioVenta)}}'</p>
+                    <input type="hidden" id="txtPrecio" value="{{$item->precioVenta}}">
                 @endif
 
                 @if ($rol == true)
                     @if ($item->cantidad <= 0)
                         <h4 class="agotado">Agotado :(</h4></br>
                     @else
-                        <form class="form-group mt-3" method="POST" action="/indexProducto" enctype="multipart/form-data">
+                        <form class="form-group mt-3" method="POST" action="/indexProducto" enctype="multipart/form-data" onsubmit="return formSubmit(this);">
                             @csrf
                             <input type="hidden" name="idProducto" id="idProducto" value="{{$item->idProducto}}" />
                             <input type="hidden" name="ruta" id="ruta" value="/detail/{{$item->idProducto}}" />
                             <div class="form-group">
                                 <label for="cantidad">Cantidad: </label>
-                                <select name="cantidad" id="cantidad" class="form-control col-lg-6">
+                                <select name="cantidad" id="cantidad" class="form-control col-lg-10" onchange="mostrarSeleccionado();">
+                                <option value="">Seleccione cantidad</option>
                                     @for($i = 1; $i <= $item->cantidad; $i++)
                                         <option value="{{$i}}">{{$i}}</option>
                                     @endfor
                                 </select>
                             </div>
-                            <input type="submit" value="Agregar al carrito" class="btn btn-outline-primary">
-                            <br><br>
+                            <input type="submit" onclick="alertaCompra();" value="Agregar al carrito" class="btn btn-outline-primary" >
+                        </form>
+                        
+                        <form action="/datosDestino" method="POST" >
+                            {{csrf_field()}}
+                            @csrf
+                            <input type="hidden" name="txtSubtotal[]" id="txtSubtotal" value="">
+                            <input type="hidden" name="txtIdProducto[]" id="txtIdProducto" value="{{$item->idProducto}}">
+                            <input type="hidden" name="txtCantidad[]" id="txtCantidad" value="">
+                            <input type="submit" class="btn btn-outline-primary  mb-3" value="Realizar compra" >
                         </form>
                     @endif
                 @endif    
@@ -130,3 +143,40 @@
         }
     </style>
 @endsection
+
+@section('script')
+
+    <script>
+        function formSubmit(form) {
+            //document.getElementById("submitNew");
+            setTimeout(function() {
+                form.submit();
+            }, 3000);  // 3 seconds
+            return false;
+        }
+        function alertaCompra(){
+            Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Su producto ha sido añadido correctamente',
+            showConfirmButton: false,
+            timer: 2500
+            })
+        }
+        
+
+        function mostrarSeleccionado(){
+            var combo= document.getElementById("cantidad");
+            var selected = combo.options[combo.selectedIndex].text;
+
+            document.getElementById('txtCantidad').value = "";
+            var cant = document.getElementById('txtCantidad').value = selected;
+
+            var precio = document.getElementById("txtPrecio").value;
+            var subt = (cant * precio);
+            document.getElementById('txtSubtotal').value = "";
+            var subtotal = document.getElementById('txtSubtotal').value = subt;
+        }
+</script>
+
+@stop

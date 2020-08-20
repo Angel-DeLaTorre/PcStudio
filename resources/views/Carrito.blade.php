@@ -156,9 +156,7 @@
 <script type="text/javascript">
     function ShowSelected()
 		{
-		/* Para obtener el valor 
-		var cod = document.getElementById("cantidad").value;
-		alert(cod);*/
+		/* Para obtener el valor */
 		var suma = 0;
 		for (let i = 0; i <= document.getElementById('j').value; i++) {
 				/* Para obtener el texto*/

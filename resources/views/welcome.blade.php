@@ -15,6 +15,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
