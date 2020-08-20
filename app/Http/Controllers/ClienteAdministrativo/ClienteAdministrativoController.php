@@ -80,7 +80,7 @@ class ClienteAdministrativoController extends Controller
 
             $clienteAdministrativo = DB::table('cliente')
                 ->join('persona', 'cliente.idPersona', '=', 'persona.idPersona')
-                ->select('cliente.idCliente','cliente.codigoCliente', 'persona.idPersona',
+                ->select('cliente.idCliente', 'persona.idPersona',
                         'persona.nombre', 'persona.apellidoPaterno', 'persona.apellidoMaterno',
                         'persona.fechaNacimiento', 'persona.telefono')
                 ->where('cliente.idCliente', '=', $id)
@@ -106,7 +106,13 @@ class ClienteAdministrativoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data = DB::select('call  sp_actualizarCliente(?, ?, ?, ?, ?, ?, ?)',
+        array($id , $request->name, $request->apellidoP,$request->apellidoM,
+            $request->fecha,$request->telefono, $request->rfc));
+
+        return redirect()->route('clienteAdministrativo.index')->with('status', 'Se actualizaron tus datos correctamente');  
+
     }
 
     /**

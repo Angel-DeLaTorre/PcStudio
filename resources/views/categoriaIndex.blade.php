@@ -18,7 +18,6 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Fecha Actualización</th>
-                        <th scope="col">Fecha Creación</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -31,7 +30,6 @@
                                 {{ $item->descripcion }}
                             </td>
                             <td>{{ $item->updated_at }}</td>
-                            <td>{{ $item->created_at }}</td>
 
                             <td>
                                 <a href="{{ route('editCategoria', $item->idCategoria) }}"><i
