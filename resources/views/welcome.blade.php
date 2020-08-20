@@ -170,7 +170,7 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline col-lg-6 col-md-3 my-2 my-lg-0" id="searchForm">
+            <form class="form-inline col-lg-6 col-md-3 my-2 my-lg-0" id="searchForm" action="{{ route('buscarEnTienda') }}">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar en toda la tienda"
                     aria-label="Search" id="busqueda" name="busqueda">
                 <button class="button is-outlined" type="submit">
