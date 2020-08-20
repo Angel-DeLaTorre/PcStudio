@@ -61,8 +61,8 @@
                                 <div class="column">
                                     <img src="{{ url($url) }}" alt="{{ $item->titulo }}" width="150px"
                                         style="display: block;
-                                                                                                            margin-left: auto;
-                                                                                                            margin-right: auto;">
+                                                                                                                margin-left: auto;
+                                                                                                                margin-right: auto;">
                                 </div>
                                 <div class="column">
                                     <h6 class="subtitle">{{ $item->titulo }}</h6>
@@ -81,8 +81,9 @@
                 </div>
             @endforeach
         @else
-            <h1 class="title">No haz realizado ningún pedido, te invitamos a <strong style="color: #00D1B2">explorar nuestro
-                    catalogo de productos</strong>.</h1>
+            <h1 class="title">No haz realizado ningún pedido, te invitamos a <a href="{{ url('/') }}"><strong
+                        style="color: #00D1B2">explorar nuestro
+                        catalogo de productos</strong></a>.</h1>
         @endif
     </div>
 @endsection
