@@ -155,10 +155,7 @@ class ClienteMoralController extends Controller
                 $request->nombreContacto, $request->telContacto, $request->ext, 
                 $request->emailContacto));        
  
-         $resultado = $data[0];
-         
-        
-         return redirect()->route('clienteMoral.index')->with('status', $resultado);         
+         return redirect()->route('clienteMoral.index')->with('status', 'Datos actualizados correctamente');         
      
     }
 
