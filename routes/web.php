@@ -136,4 +136,4 @@ Route::get('/Envios/EnviosUsuario/{idUsuario}', 'EnviosController@enviosPorUsuar
 Route::get('/DetalleCompra', 'ComprasController@indexDetalleCompra')->name('indexEnvios');
 
 //Para buscar en toda la tienda
-Route::get('/Productos/Buscar', 'Producto\ProductoController@buscarTodaLaTienda')->name('buscarEnTienda');
+Route::get('/Buscar', 'Producto\ProductoController@buscarTodaLaTienda')->name('buscarEnTienda');
