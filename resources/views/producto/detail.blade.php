@@ -65,7 +65,7 @@
                         <p class="costo oferta">Precio de oferta</p>
                         <input type="hidden" id="txtPrecio" value="{{ $nuevoCosto }}">
                     @else
-                        <p class="costo">${{ number_format($item->precioVenta) }}'</p>
+                        <p class="costo">${{ number_format($item->precioVenta) }} MXN</p>
                         <input type="hidden" id="txtPrecio" value="{{ $item->precioVenta }}">
                     @endif
 
