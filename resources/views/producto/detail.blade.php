@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-
+<body onload="mostrarSeleccionado()">
     <div class="card container">
         <div class="card-body row" id="detalleProducto">
             <div class="galeria col-lg-5">
@@ -82,15 +82,10 @@
                                     <label for="cantidad">Cantidad: </label>
                                     <select name="cantidad" id="cantidad" class="form-control col-lg-10"
                                         onchange="mostrarSeleccionado();">
-                                        <option value="">Seleccione cantidad</option>
-                                        @if ($item->cantidad > 0)
-                                            <option value="1" selected>1</option>
-                                            @for ($i = 2; $i <= $item->cantidad; $i++)
-                                                <option value="{{ $i }}">{{ $i }}</option>
-                                            @endfor
-                                        @else
-
-                                        @endif
+                                        <option value="1" selected>1</option>
+                                        @for ($i = 2; $i <= $item->cantidad; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
                                     </select>
                                 </div>
                                 <input type="submit" onclick="alertaCompra();" value="Agregar al carrito"
@@ -114,6 +109,7 @@
 
         </div>
     </div>
+</body>
 @endsection
 
 @section('style')
@@ -165,6 +161,10 @@
 @section('script')
 
     <script>
+
+        function myFunction(){
+
+        }
         function formSubmit(form) {
             //document.getElementById("submitNew");
             setTimeout(function() {
