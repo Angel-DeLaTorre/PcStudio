@@ -51,8 +51,6 @@ class ComprasController extends Controller
 
         $detalleCompra = session('DetalleCompra');
         
-        //echo auth()->user()->id;
-        //print_r($direcciones);
         return view('DatosEnvio', ['listaPersonaPedido' => $listaPersonaPedido], compact('detalleCompra','direcciones'));
     }
 
