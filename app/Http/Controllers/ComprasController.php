@@ -39,17 +39,18 @@ class ComprasController extends Controller
             ->limit(1)
             ->get();
         $direcciones = DB::table('direccion')
-        ->join('cliente', 'direccion.idPersona', '=', 'direccion.idPersona')
+        ->join('cliente', 'cliente.idPersona', '=', 'direccion.idPersona')
         ->join('persona', 'persona.idPersona', '=', 'cliente.idPersona')
         ->join('users', 'users.id', '=', 'cliente.idUsuario')
-        ->select('direccion.idDireccion','direccion.codigoPostal','direccion.calle',
+        ->select('direccion.idDireccion','direccion.codigoPostal','direccion.calle','cliente.idUsuario',
                 'direccion.colonia','direccion.estado','direccion.municipio', 
                 'direccion.descripcion','direccion.numero','direccion.numeroExterno','cliente.idCliente',
                 'persona.telefono','persona.nombre','persona.apellidoPaterno','persona.apellidoMaterno')
-        ->where('users.id','=',auth()->user()->id)
+        ->where('cliente.idUsuario','=',auth()->user()->id)
         ->get(); 
 
         $detalleCompra = session('DetalleCompra');
+        
         return view('DatosEnvio', ['listaPersonaPedido' => $listaPersonaPedido], compact('detalleCompra','direcciones'));
     }
 
