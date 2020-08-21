@@ -25,11 +25,11 @@ class EnviosController extends Controller
     {
         //Encontramos el proveedor con un determinado id
         $detalle = DB::select('select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, com.estatus,
-        dC.cantidad
- from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
- inner join producto p on dC.idProducto = p.idProducto
- inner join imagenProducto iP on p.idProducto = iP.idProducto
- where com.idCompra = ?;', array($idCompra));
+            dC.cantidad
+     from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
+     inner join producto p on dC.idProducto = p.idProducto
+     inner join imagenProducto iP on p.idProducto = iP.idProducto
+     where com.idCompra = ?;', array($idCompra));
 
         return view('Envios.EnviosDetalle', compact('detalle'));
     }
@@ -54,7 +54,7 @@ class EnviosController extends Controller
     //GET pedidos del usuario
     public function enviosPorUsuario($idUsuario)
     {
-        $idCompras = DB::select('select idCompra from compra where idCliente = (select cliente.idCliente from cliente where idUsuario = ?);', array($idUsuario));
+        $idCompras = DB::select('select idCompra from compra where idCliente = (select cliente.idCliente from cliente where idUsuario = ?) order by idCompra desc;', array($idUsuario));
         $detalle = array();
         foreach ($idCompras as $compra) {
             $detalleCompra = DB::select('select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, com.estatus,
