@@ -55,11 +55,11 @@
                             </div>
                             <div class="column">Cantidad: <strong>{{ $item->cantidad }}</strong></div>
                             <div class="column">
-                                <h1 class="title is-5">$ {{ $item->cantidad * $item->precioVenta }}</h1>
+                                <h1 class="title is-5">$ {{ number_format($item->cantidad * $item->precioVenta, 2) }}</h1>
                             </div>
                         </div>
                     @endforeach
-                    <h1 class="title" style="float: left;">Total: $ {{ $total }} MXN</h1>
+                    <h1 class="title" style="float: left;">Total: $ {{ number_format($total, 2) }} MXN</h1>
                 </div>
                 <div class="card-footer" style="">
                     <div class="columns">

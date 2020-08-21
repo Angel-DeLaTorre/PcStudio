@@ -26,14 +26,14 @@
                             $nuevoCosto = $producto->precioVenta - ($producto->descuentoVenta * $producto->precioVenta) /
                             100;
                             echo '<h3><del>$' .
-                                    $producto->precioVenta .
+                                    number_format($producto->precioVenta, 2) .
                                     '</del></h3>' .
                             '<h3 class="text-danger ml-2">
                                 $' .
-                                $nuevoCosto .
+                                number_format($nuevoCosto, 2) .
                                 ' ¡Precio de oferta!</h3>';
                             } else {
-                            echo '<h3>$' . $producto->precioVenta . '</h3>';
+                            echo '<h3>$' . number_format($producto->precioVenta, 2) . ' MXN</h3>';
                             }
                             if ($producto->cantidad <= 0) { echo '<h3 class="ml-4 text-danger">Agotado</h3>' ; } ?> </div>
                         </div>
