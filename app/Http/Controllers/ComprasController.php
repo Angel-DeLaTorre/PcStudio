@@ -65,7 +65,7 @@ class ComprasController extends Controller
         }
 
         session(['DetalleCompra' => $detalleCompra]);
-        //print_r($txtIdProducto);
+        //print_r(count($IdProducto));
         return  redirect('/datosDestino');
     }
 

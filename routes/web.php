@@ -46,7 +46,7 @@ Route::resource('direccion', 'Direccion\DireccionController');
 
 //Rutas de Usuarios
 Route::get('/clienteMoral/Delete/{idCliente}', 'ClienteMoral\ClienteMoralController@destroy')->name('deleteCliente')->middleware('auth');
-Route::resource('clienteMoral', 'ClienteMoral\clienteMoralController')->middleware('auth');
+Route::resource('clienteMoral', 'ClienteMoral\ClienteMoralController')->middleware('auth');
 
 
 //Rutas de Empleados
@@ -134,3 +134,6 @@ Route::put('/Envios/Update/{idCompra}', 'EnviosController@update')->name('update
 Route::get('/Envios/EnviosUsuario/{idUsuario}', 'EnviosController@enviosPorUsuario')->name('enviosPorUsuario');
 
 Route::get('/DetalleCompra', 'ComprasController@indexDetalleCompra')->name('indexEnvios');
+
+//Para buscar en toda la tienda
+Route::get('/Buscar', 'Producto\ProductoController@buscarTodaLaTienda')->name('buscarEnTienda');

@@ -7,17 +7,16 @@ use Carbon\Traits\Converter;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Builder\Property;
+use PhpParser\Node\Expr\Cast\Array_;
 
 class EnviosController extends Controller
 {
     //
     public function index()
     {
-        $compras = DB::select('select c.idCompra, c.fechaCompra ,concat(p.nombre, " ", p.apellidoPaterno) as nombreEmpleado, concat(p2.nombre, " ", p2.apellidoPaterno) as nombreCliente, c.estatus
-                                from compra c inner join empleado e on c.idEmpleado = e.idEmpleado
-                                inner join persona p on e.idPersona = p.idPersona
-                                inner join cliente cl on c.idCliente = cl.idCliente
-                                inner join persona p2 on cl.idPersona = p2.idPersona;');
+        $compras = DB::select('select co.idCompra, concat(p.nombre, " ", p.apellidoPaterno) as nombreCliente, co.fechaCompra
+        from compra co inner join cliente cl on co.idCliente = cl.idCliente
+                       inner join persona p on cl.idPersona = p.idPersona;');
 
         return view('Envios.EnviosIndex', ['compras' => $compras]);
     }
@@ -25,14 +24,12 @@ class EnviosController extends Controller
     public function Detalle($idCompra)
     {
         //Encontramos el proveedor con un determinado id
-        $detalle = DB::select('select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, concat(per.nombre, " ", per.apellidoPaterno, " ", per.apellidoMaterno) as nombreCliente, concat(per2.nombre, " ", per2.apellidoPaterno, " ", per2.apellidoMaterno) as nombreEmpleado, com.estatus,
-        dC.cantidad
- from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
- inner join producto p on dC.idProducto = p.idProducto
- inner join persona per on per.idPersona = (select cliente.idPersona from cliente where cliente.idCliente = com.idCliente)
- inner join persona per2 on per2.idPersona = (select empleado.idPersona from empleado where empleado.idEmpleado = com.idEmpleado)
- inner join imagenProducto iP on p.idProducto = iP.idProducto
- where com.idCompra = ?;', array($idCompra));
+        $detalle = DB::select('select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, com.estatus,
+            dC.cantidad
+     from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
+     inner join producto p on dC.idProducto = p.idProducto
+     inner join imagenProducto iP on p.idProducto = iP.idProducto
+     where com.idCompra = ?;', array($idCompra));
 
         return view('Envios.EnviosDetalle', compact('detalle'));
     }
@@ -57,12 +54,18 @@ class EnviosController extends Controller
     //GET pedidos del usuario
     public function enviosPorUsuario($idUsuario)
     {
-        $detalle = DB::select('select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, com.estatus,
-        dC.cantidad
- from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
- inner join producto p on dC.idProducto = p.idProducto
- inner join imagenProducto iP on p.idProducto = iP.idProducto 
- where com.idCliente = (select cliente.idCliente from cliente where idUsuario = ?);', array($idUsuario));
-        return view('Envios.EnviosPorUsuario', compact('detalle'));
+        $idCompras = DB::select('select idCompra from compra where idCliente = (select cliente.idCliente from cliente where idUsuario = ?) order by idCompra desc;', array($idUsuario));
+        $detalle = array();
+        foreach ($idCompras as $compra) {
+            $detalleCompra = DB::select('select com.idCompra, p.titulo, iP.imagenUrl ,p.precioVenta, com.estatus,
+            dC.cantidad
+     from compra com inner join detalleCompra dC on com.idCompra = dC.idCompra
+     inner join producto p on dC.idProducto = p.idProducto
+     inner join imagenProducto iP on p.idProducto = iP.idProducto
+     where com.idCompra = ?;', array($compra->idCompra));
+            array_push($detalle, $detalleCompra);
+        }
+
+        return view('Envios.EnviosPorUsuario', compact('detalle', 'idCompras'));
     }
 }
